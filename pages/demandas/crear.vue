@@ -192,7 +192,7 @@
 <script setup lang="ts">
 import type { PageMeta } from '#app';
 
-definePageMeta({ auth: true, roles: ['Admin', 'CommunityPartner'] } satisfies PageMeta);
+definePageMeta({ auth: true, roles: ['Admin', 'CommunityPartner'] } );
 definePrivateAreaSeo({ title: 'Crear Demanda' });
 
 const role = useAuthRole();

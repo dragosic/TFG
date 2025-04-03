@@ -1,4 +1,4 @@
-import { ViewUser } from './User';
+import type { ViewUser } from './User';
 
 /**
  * The view for authentication purposes, this view contains the user's password

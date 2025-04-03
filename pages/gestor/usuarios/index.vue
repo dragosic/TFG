@@ -115,7 +115,7 @@
 import type { PageMeta } from '#app';
 import type { ViewUser } from '~/server/utils/database/services/types/views/User';
 
-definePageMeta({ auth: true, roles: ['Admin'] } satisfies PageMeta);
+definePageMeta({ auth: true, roles: ['Admin'] } );
 definePrivateAreaSeo({ title: 'Gestor de Usuarios' });
 
 const skip = ref(0);

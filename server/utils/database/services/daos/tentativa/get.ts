@@ -9,14 +9,14 @@ import { Matching } from '../../types/Matching';
 import { MatchingArea } from '../../types/MatchingArea';
 import { MatchingAreaServicioTitulacion } from '../../types/MatchingAreaServicioTitulacion';
 import { NecesidadSocial } from '../../types/NecesidadSocial';
-import { FormattedIniciativa, formatIniciativa, formatNecesidadSocial, type FormattedNecesidadSocial } from './_shared';
+import { type FormattedIniciativa, formatIniciativa, formatNecesidadSocial, type FormattedNecesidadSocial } from './_shared';
 
 export interface GetIniciativaResult extends FormattedIniciativa {
 	areas: readonly AreaServicio_Iniciativa.Value['id_area'][];
 }
 export async function obtenerIniciativa(id: number): Promise<GetIniciativaResult> {
 	const entry = ensureDatabaseEntry(
-		await qb(Iniciativa.Name)
+		qb(Iniciativa.Name)
 			.where({ id })
 			.select(
 				Iniciativa.Key('*'),

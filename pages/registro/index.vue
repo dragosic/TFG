@@ -232,11 +232,12 @@ async function performRequest() {
 				: { ...base, data: getInternalCommunityPartnerData() };
 
 	try {
-		await $fetch('/api/users', { method: 'POST', body });
-		await router.push(auth.redirectTo.value);
-	} catch (e: any) {
-		error.value = String(e.statusMessage ?? e.message ?? e);
-	}
+        await $fetch('/api/auth/logout', { method: 'POST' }); // Ruta de logout
+        await $fetch('/api/users', { method: 'POST', body });
+        await router.push(auth.redirectTo.value);
+    } catch (e) {
+        error.value = String(e.statusMessage ?? e.message ?? e);
+    }
 }
 
 function getExternalProfessorData() {

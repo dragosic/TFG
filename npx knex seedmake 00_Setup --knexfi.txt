@@ -1,0 +1,11 @@
+npx knex seed:make 00_Setup --knexfile knexfile.ts
+npx knex seed:make 01_AddNewRoles --knexfile knexfile.ts
+npx knex seed:make 02_AddUserVIews--knexfile knexfile.ts
+npx knex seed:make 03_AddNotificationViews --knexfile knexfile.ts
+npx knex seed:make 04_AddPartenershipViews --knexfile knexfile.ts
+npx knex seed:make 05_AddOfferViews--knexfile knexfile.ts
+npx knex seed:make 06_MakeUserAvatarNullable --knexfile knexfile.ts
+npx knex seed:make 07_FixForeignKeys --knexfile.ts
+npx knex seed:make 08_FixNewsletter --knexfile knexfile.ts
+
+docker exec -it mariadb mysql -uroot -p

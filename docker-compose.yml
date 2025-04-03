@@ -1,4 +1,4 @@
-version: '3.9'
+
 
 services:
     aps:
@@ -12,7 +12,7 @@ services:
             - '3000:3000'
         restart: always
         environment:
-            NITRO_AUTH_PASSWORD: 'replace-me-with-a-secure-32-character-password'
+            NITRO_AUTH_PASSWORD: '8og4PcM7uTW8quJroff5/PczaVlP9VurnSNa3ShHxF'
             NITRO_DB_HOST: 'host.docker.internal'
             NITRO_DB_PORT: '3306'
             NITRO_DB_USER: 'aps'
@@ -31,7 +31,7 @@ services:
             MARIADB_USER: 'aps'
             MARIADB_PASSWORD: 'aps'
             MARIADB_DATABASE: 'aps'
-            MARIADB_ROOT_PASSWORD: 'root-aps'
+            MARIADB_ROOT_PASSWORD: 'root'
         healthcheck:
             test: ['CMD', 'healthcheck.sh', '--su-mysql', '--connect', '--innodb_initialized']
             start_period: 1m

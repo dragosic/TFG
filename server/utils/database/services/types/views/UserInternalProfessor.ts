@@ -1,5 +1,5 @@
 import type { AreaConocimiento_Profesor } from '../AreaConocimiento_Profesor';
-import { TitulacionLocal_Profesor } from '../TitulacionLocal_Profesor';
+import type { TitulacionLocal_Profesor } from '../TitulacionLocal_Profesor';
 import type { ViewUser } from './User';
 
 export namespace ViewUserInternalProfessor {

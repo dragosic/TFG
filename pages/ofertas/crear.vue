@@ -137,7 +137,7 @@
 <script setup lang="ts">
 import type { PageMeta } from '#app';
 
-definePageMeta({ auth: true, roles: ['InternalProfessor', 'ExternalProfessor', 'CommunityPartner', 'Admin'] } satisfies PageMeta);
+definePageMeta({ auth: true, roles: ['InternalProfessor', 'ExternalProfessor', 'CommunityPartner', 'Admin'] } );
 
 const { data: serviceAreaEntries, error: serviceAreasError } = await useFetch('/api/ofertas/areas-servicio', { method: 'GET' });
 

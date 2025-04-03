@@ -1,11 +1,11 @@
-import { AnuncioServicio } from '../AnuncioServicio';
-import { AreaServicio } from '../AreaServicio';
+import type { AnuncioServicio } from '../AnuncioServicio';
+import type { AreaServicio } from '../AreaServicio';
 import type { DemandaServicio } from '../DemandaServicio';
-import { NecesidadSocial } from '../NecesidadSocial';
+import type { NecesidadSocial } from '../NecesidadSocial';
 import type { SocioComunitario } from '../SocioComunitario';
-import { TitulacionLocal } from '../TitulacionLocal';
-import { Usuario } from '../Usuario';
-import { AsRaw, makeKeyFunction } from '../base/Shared';
+import type { TitulacionLocal } from '../TitulacionLocal';
+import type { Usuario } from '../Usuario';
+import { type AsRaw, makeKeyFunction } from '../base/Shared';
 
 export namespace ViewDemand {
 	export const Name = 'view_demand';

@@ -1,5 +1,5 @@
 import type { AnuncioServicio } from './AnuncioServicio';
-import { Usuario } from './Usuario';
+import type { Usuario } from './Usuario';
 import {
 	makeKeyFunction,
 	type Defaults,

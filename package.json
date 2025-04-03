@@ -16,14 +16,18 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
+		"@nuxt/kit": "^3.16.1",
+		"@nuxt/nitro": "^0.10.0",
+		"@vue/devtools-core": "^7.7.2",
 		"bcryptjs": "^2.4.3",
 		"keyword-extractor": "^0.0.28",
 		"knex": "patch:knex@npm%3A3.1.0#~/.yarn/patches/knex-npm-3.1.0-87fad39c7a.patch",
-		"mysql2": "^3.9.7"
+		"mysql2": "^3.12.0",
+		"typeorm": "^0.3.20"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^1.2.1",
-		"@nuxt/devtools": "1.3.1",
+		"@nuxt/devtools": "^2.3.1",
 		"@nuxtjs/tailwindcss": "^6.12.0",
 		"@prettier/plugin-xml": "^3.4.1",
 		"@sapphire/prettier-config": "^2.0.0",
@@ -42,7 +46,7 @@
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"lint-staged": "^15.2.2",
-		"nuxt": "^3.11.2",
+		"nuxt": "^3.16.1",
 		"nuxt-icon": "^0.6.10",
 		"nuxt-security": "^2.0.0-beta.5",
 		"prettier": "^3.2.5",

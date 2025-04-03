@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type { PageMeta } from '#app';
 
-definePageMeta({ auth: true, roles: ['Admin'] } satisfies PageMeta);
+definePageMeta({ auth: true, roles: ['Admin'] } );
 
 const endpoint = asTypeParameterizedRoute(`/api/users/${useRouteNumber('id')}`);
 const { data: user, error } = await useFetch(endpoint, { method: 'GET' });

@@ -17,7 +17,7 @@
 				</label>
 
 				<label class="label cursor-pointer">
-					<span class="label-text">Remember me</span>
+					<span class="label-text">Recordarme</span>
 					<input type="checkbox" v-model="remember" class="checkbox" />
 				</label>
 
@@ -44,7 +44,6 @@ const auth = useAuth();
 const router = useRouter();
 async function performLogin() {
 	try {
-		// @ts-ignore Type recursion limit
 		auth.session.value = await $fetch('/api/auth/login', {
 			method: 'POST',
 			body: { email: email.value, password: password.value }

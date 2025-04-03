@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import type { PageMeta } from '#app';
 
-definePageMeta({ auth: true } satisfies PageMeta);
+definePageMeta({ auth: true });
 
 const userId = useAuthUserId();
 const role = useAuthRole();

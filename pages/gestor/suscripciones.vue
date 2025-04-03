@@ -96,7 +96,7 @@
 import type { PageMeta } from '#app';
 import type { FormattedNewsletter } from '~/server/utils/database/services/daos/comunicacion/_shared';
 
-definePageMeta({ auth: true, roles: ['Admin'] } satisfies PageMeta);
+definePageMeta({ auth: true, roles: ['Admin'] } );
 definePrivateAreaSeo({ title: 'Gestor de Suscripciones' });
 
 const skip = ref(0);

@@ -1,5 +1,5 @@
 import {
-	Unique,
+	type Unique,
 	makeKeyFunction,
 	type AutoIncrement,
 	type Defaults,

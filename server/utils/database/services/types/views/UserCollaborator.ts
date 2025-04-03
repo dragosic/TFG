@@ -1,4 +1,4 @@
-import { Colaborador } from '../Colaborador';
+import type { Colaborador } from '../Colaborador';
 import type { ViewUser } from './User';
 
 export namespace ViewUserCollaborator {
