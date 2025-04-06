@@ -1,7 +1,6 @@
 <template></template>
 
 <script setup lang="ts">
-import type { PageMeta } from '#app';
 
 definePageMeta({ 
   auth: true, 

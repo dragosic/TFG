@@ -3,7 +3,8 @@ import { Mensaje } from '../../types/Mensaje';
 import { Newsletter } from '../../types/Newsletter';
 import { Upload } from '../../types/Upload';
 import { sharedUpdateAndReturn } from '../shared';
-import { FormattedNewsletter, FormattedUpload, formatNewsletter, formatUpload } from './_shared';
+import type { FormattedNewsletter, FormattedUpload} from './_shared';
+import { formatNewsletter, formatUpload } from './_shared';
 
 export async function actualizarUpload(data: Upload): Promise<FormattedUpload> {
 	const entry = await sharedUpdateAndReturn({

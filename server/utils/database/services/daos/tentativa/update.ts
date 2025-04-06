@@ -2,7 +2,8 @@ import { isNullishOrEmpty } from '@sapphire/utilities';
 import { AreaServicio_Iniciativa } from '../../types/AreaServicio_Iniciativa';
 import { Iniciativa } from '../../types/Iniciativa';
 import { sharedUpdateAndReturn } from '../shared';
-import { FormattedIniciativa, formatIniciativa } from './_shared';
+import type { FormattedIniciativa} from './_shared';
+import { formatIniciativa } from './_shared';
 import type { CreateIniciativaOptions } from './insert';
 
 export async function actualizarIniciativa(id: number, data: CreateIniciativaOptions): Promise<FormattedIniciativa> {

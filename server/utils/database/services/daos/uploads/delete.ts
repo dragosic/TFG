@@ -1,6 +1,6 @@
-import type { Knex } from 'knex';
 import { rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import type { Knex } from 'knex';
 import { Upload } from '../../types/Upload';
 import { getLocalFileUploadRoot } from './_shared';
 

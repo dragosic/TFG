@@ -46,7 +46,7 @@ export async function obtenerDemandaPorNecesidadSocial(id: number): Promise<Form
 }
 
 export async function obtenerDemandaServicio(id: number): Promise<ViewDemand.Value> {
-	const entry = ensureDatabaseEntry(await qb(ViewDemand.Name).where({ id: id }).first());
+	const entry = ensureDatabaseEntry(await qb(ViewDemand.Name).where({ id }).first());
 	return parseViewDemandJsonStringProperties(entry);
 }
 

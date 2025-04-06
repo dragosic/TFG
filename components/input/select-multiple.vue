@@ -10,7 +10,7 @@
 		>
 			<li v-for="entry of entries" class="form-control">
 				<label class="label cursor-pointer justify-normal gap-4">
-					<input type="checkbox" :value="entry.value" v-model="selected" class="checkbox" />
+					<input v-model="selected" type="checkbox" :value="entry.value" class="checkbox" />
 					<span class="label-text">{{ entry.name }}</span>
 				</label>
 			</li>

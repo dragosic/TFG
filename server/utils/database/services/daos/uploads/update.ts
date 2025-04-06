@@ -1,7 +1,7 @@
-import type { Knex } from 'knex';
 import { randomUUID } from 'node:crypto';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import type { Knex } from 'knex';
 import { Upload } from '../../types/Upload';
 import { getLocalFileUploadRoot } from './_shared';
 import { deleteUpload } from './delete';

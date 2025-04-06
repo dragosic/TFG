@@ -5,7 +5,7 @@ import { AreaServicio_AnuncioServicio } from '../../types/AreaServicio_AnuncioSe
 import { Asignatura } from '../../types/Asignatura';
 import { OfertaServicio } from '../../types/OfertaServicio';
 import { ProfesorInterno_Oferta } from '../../types/ProfesorInterno_Oferta';
-import { ViewServiceOffer } from '../../types/views/ServiceOffer';
+import type { ViewServiceOffer } from '../../types/views/ServiceOffer';
 
 export type AnuncioServicioCreateData = Pick<AnuncioServicio.Value, 'titulo' | 'descripcion' | 'imagen'> & { areasServicio: readonly number[] };
 async function crearAnuncio(anuncio: AnuncioServicioCreateData, trx: Knex.Transaction): Promise<AnuncioServicio.Value> {

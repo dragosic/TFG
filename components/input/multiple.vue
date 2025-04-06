@@ -4,13 +4,13 @@
 			<span v-for="element of selected" :key="element" class="badge badge-ghost">{{ element }}</span>
 		</div>
 		<input
-			v-model.trim="value"
-			@keydown="onKeyDown"
 			ref="input"
+			v-model.trim="value"
 			type="text"
 			class="grow border-0 px-0 focus:ring-0"
 			:maxlength="maxElementLength"
 			:placeholder="placeholder"
+			@keydown="onKeyDown"
 		/>
 	</label>
 	<alert v-if="error" type="warning" title="Atención">

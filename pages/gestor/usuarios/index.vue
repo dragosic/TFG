@@ -112,7 +112,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PageMeta } from '#app';
 import type { ViewUser } from '~/server/utils/database/services/types/views/User';
 
 definePageMeta({ auth: true, roles: ['Admin'] } );

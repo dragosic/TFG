@@ -1,9 +1,9 @@
 import { isNullishOrEmpty } from '@sapphire/utilities';
-import { OfertaDemanda_Tags } from '../../types/OfertaDemanda_Tags';
-import { Quarter } from '../../types/OfertaServicio';
+import type { OfertaDemanda_Tags } from '../../types/OfertaDemanda_Tags';
+import type { Quarter } from '../../types/OfertaServicio';
 import { Tag } from '../../types/Tag';
 import { ViewServiceOffer } from '../../types/views/ServiceOffer';
-import { SearchParameters } from '../shared';
+import type { SearchParameters } from '../shared';
 import { parseViewServiceOfferJsonStringProperties } from './_shared';
 
 export async function obtenerOfertaServicio(id: number): Promise<ViewServiceOffer.Value> {

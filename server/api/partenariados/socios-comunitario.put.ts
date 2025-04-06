@@ -47,7 +47,7 @@ export default eventHandler(async (event) => {
 		demandaId = demanda.id;
 	}
 
-	let partenariadoId = await maybeObtenerIdPartenariado({ id_demanda: demandaId, id_oferta: body.oferta });
+	const partenariadoId = await maybeObtenerIdPartenariado({ id_demanda: demandaId, id_oferta: body.oferta });
 	const partenariado =
 		partenariadoId === null
 			? await crearPartenariado({
@@ -58,7 +58,7 @@ export default eventHandler(async (event) => {
 					profesores: body.profesores,
 					id_demanda: demandaId,
 					id_oferta: body.oferta,
-					estado: estado
+					estado
 				})
 			: await actualizarPartenariado({
 					id: partenariadoId,
@@ -69,7 +69,7 @@ export default eventHandler(async (event) => {
 					profesores: body.profesores,
 					id_demanda: demandaId,
 					id_oferta: body.oferta,
-					estado: estado
+					estado
 				});
 
 	if (definedDemanda) {

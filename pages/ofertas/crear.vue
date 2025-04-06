@@ -1,6 +1,6 @@
 <template>
 	<h1 class="mb-4 text-3xl font-semibold">Crear Oferta</h1>
-	<form @submit.prevent="performRequest" class="w-full max-w-screen-md">
+	<form class="w-full max-w-screen-md" @submit.prevent="performRequest">
 		<div class="rounded-lg bg-base-200 p-4 drop-shadow-lg">
 			<label class="form-control w-full">
 				<div class="label">
@@ -135,7 +135,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PageMeta } from '#app';
 
 definePageMeta({ auth: true, roles: ['InternalProfessor', 'ExternalProfessor', 'CommunityPartner', 'Admin'] } );
 

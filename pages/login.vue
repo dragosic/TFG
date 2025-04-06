@@ -18,7 +18,7 @@
 
 				<label class="label cursor-pointer">
 					<span class="label-text">Recordarme</span>
-					<input type="checkbox" v-model="remember" class="checkbox" />
+					<input v-model="remember" type="checkbox" class="checkbox" />
 				</label>
 
 				<input type="submit" value="Iniciar Sesión" class="btn btn-info mt-4 w-full text-info-content" />

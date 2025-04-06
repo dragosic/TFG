@@ -8,7 +8,7 @@ import { OfertaAceptada } from '../../types/OfertaAceptada';
 import { OfertaServicio } from '../../types/OfertaServicio';
 import { Partenariado } from '../../types/Partenariado';
 import { PartenariadoRellenado } from '../../types/PartenariadoRellenado';
-import { ViewNotification } from '../../types/views/Notification';
+import type { ViewNotification } from '../../types/views/Notification';
 import { finishPendingNotification } from './update';
 
 export interface CreateNotificationOptions extends Omit<ViewNotification.Value, 'id' | 'data'> {}

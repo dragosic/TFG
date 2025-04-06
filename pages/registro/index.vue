@@ -126,7 +126,7 @@
 				<editor-profile-external-professor
 					v-model:university="professorUniversity"
 					v-model:faculty="professorFaculty"
-					v-model:knowledgeAreas="professorKnowledgeAreas"
+					v-model:knowledge-areas="professorKnowledgeAreas"
 				/>
 			</template>
 			<template v-else-if="type === 'CommunityPartner'">

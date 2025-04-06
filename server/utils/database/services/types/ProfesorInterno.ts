@@ -1,7 +1,6 @@
 import type { DatosPersonalesInterno } from './DatosPersonalesInterno';
 import type { Profesor } from './Profesor';
-import type { Universidad } from './Universidad';
-import { makeKeyFunction, type ForeignKey, type GetCreateType, type GetType, type PrimaryKey, type VarChar } from './base/Shared';
+import { makeKeyFunction, type ForeignKey, type GetCreateType, type GetType, type PrimaryKey } from './base/Shared';
 
 export interface ProfesorInterno {
 	/** Foreign key of {@linkcode Profesor.id} */

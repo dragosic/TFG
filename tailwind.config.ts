@@ -3,7 +3,7 @@ import { formatRgb, interpolate, rgb, wcagContrast } from 'culori';
 import type { Config } from 'tailwindcss';
 
 export default <Partial<Config>>{
-	// eslint-disable-next-line ts/no-require-imports
+	 
 	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('daisyui')],
 	darkMode: 'class',
 	daisyui: {

@@ -15,7 +15,7 @@ export default eventHandler(async (event) => {
 	const query = await getValidatedQuery(event, SchemaQuery.parse);
 
 	let format: 'png' | 'webp';
-	let dotIndex = id.indexOf('.');
+	const dotIndex = id.indexOf('.');
 	if (dotIndex !== -1) {
 		format = FormatSchema.parse(id.substring(dotIndex + 1));
 		id = id.substring(0, dotIndex);

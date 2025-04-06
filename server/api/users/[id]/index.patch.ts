@@ -130,7 +130,7 @@ async function sharedReadBody<T>(event: H3Event, schema: z.ZodType<T>): Promise<
 }
 
 async function sharedReplacePassword<T extends z.infer<typeof baseSchemaBody>>(user: ViewUserPrivileged.Value, isSelf: boolean, body: T): Promise<T> {
-	let password: string | undefined = undefined;
+	let password: string | undefined;
 	if (!isNullishOrEmpty(body.password)) {
 		if (isSelf) {
 			if (isNullishOrEmpty(body.currentPassword)) {

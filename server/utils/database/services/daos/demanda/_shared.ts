@@ -1,6 +1,6 @@
 import type { AnuncioServicio } from '../../types/AnuncioServicio';
 import type { DemandaServicio } from '../../types/DemandaServicio';
-import { ViewDemand } from '../../types/views/Demand';
+import type { ViewDemand } from '../../types/views/Demand';
 
 export interface FormattedDemanda extends ReturnType<typeof formatDemanda> {}
 export function formatDemanda(entry: AnuncioServicio.Value & DemandaServicio.Value) {

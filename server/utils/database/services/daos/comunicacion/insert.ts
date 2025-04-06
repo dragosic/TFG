@@ -8,7 +8,8 @@ import { Newsletter } from '../../types/Newsletter';
 import { Upload } from '../../types/Upload';
 import { Upload_AnuncioServicio } from '../../types/Upload_AnuncioServicio';
 import { Upload_Colaboracion } from '../../types/Upload_Colaboracion';
-import { FormattedNewsletter, FormattedUpload, formatNewsletter, formatUpload } from './_shared';
+import type { FormattedUpload} from './_shared';
+import { formatUpload } from './_shared';
 
 //Crear nuevo mensaje
 export async function crearMensajeAnuncio(data: Mensaje.CreateData, anuncioId: number): Promise<Mensaje.Value> {

@@ -93,7 +93,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PageMeta } from '#app';
 import type { FormattedNewsletter } from '~/server/utils/database/services/daos/comunicacion/_shared';
 
 definePageMeta({ auth: true, roles: ['Admin'] } );

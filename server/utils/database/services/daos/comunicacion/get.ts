@@ -7,8 +7,9 @@ import { Newsletter } from '../../types/Newsletter';
 import { Upload } from '../../types/Upload';
 import { Upload_AnuncioServicio } from '../../types/Upload_AnuncioServicio';
 import { Upload_Colaboracion } from '../../types/Upload_Colaboracion';
-import { SearchParameters } from '../shared';
-import { FormattedNewsletter, FormattedUpload, formatNewsletter } from './_shared';
+import type { SearchParameters } from '../shared';
+import type { FormattedNewsletter, FormattedUpload} from './_shared';
+import { formatNewsletter } from './_shared';
 
 //Devolver mensaje correspondiente
 export async function obtenerMensaje(id: number): Promise<Mensaje.Value> {

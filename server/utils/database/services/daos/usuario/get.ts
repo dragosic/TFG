@@ -10,7 +10,7 @@ import { ViewUserExternalProfessor } from '../../types/views/UserExternalProfess
 import { ViewUserExternalStudent } from '../../types/views/UserExternalStudent';
 import { ViewUserInternalProfessor } from '../../types/views/UserInternalProfessor';
 import { ViewUserInternalStudent } from '../../types/views/UserInternalStudent';
-import { SearchParameters } from '../shared';
+import type { SearchParameters } from '../shared';
 import { parseViewUserExternalProfessorJsonStringProperties, parseViewUserJsonStringProperties } from './_shared';
 
 export async function maybeGetUsuarioSinRolPorEmail(email: string): Promise<ViewUser.Value | null> {

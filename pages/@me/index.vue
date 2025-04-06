@@ -5,7 +5,7 @@
 		{{ error.statusMessage ?? error.message ?? error }}
 	</alert>
 
-	<form v-else-if="user" @submit.prevent="performRequest" class="w-full">
+	<form v-else-if="user" class="w-full" @submit.prevent="performRequest">
 		<!-- User Data -->
 		<div class="mt-8 flex w-full flex-col items-center gap-4 rounded-lg bg-base-200 p-4 drop-shadow-lg md:flex-row">
 			<!-- Information -->
@@ -141,12 +141,12 @@
 					<input type="text" class="input input-bordered w-full" disabled="true" :value="UserRoleMapping[user.role]" autocomplete="off" />
 				</label>
 
-				<editor-profile-internal-professor v-if="user.role === 'InternalProfessor'" v-model:knowledgeAreas="knowledgeAreas" />
+				<editor-profile-internal-professor v-if="user.role === 'InternalProfessor'" v-model:knowledge-areas="knowledgeAreas" />
 				<editor-profile-external-professor
 					v-else-if="user.role === 'ExternalProfessor'"
 					v-model:university="university"
 					v-model:faculty="faculty"
-					v-model:knowledgeAreas="knowledgeAreas"
+					v-model:knowledge-areas="knowledgeAreas"
 				/>
 				<editor-profile-internal-student v-else-if="user.role === 'InternalStudent'" v-model:degree="degreeId" />
 				<editor-profile-external-student

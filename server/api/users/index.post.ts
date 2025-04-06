@@ -40,7 +40,7 @@ export default eventHandler(async (event) => {
 	const body = await readValidatedBody(event, schemaBody.parse);
 
 	// Comprueba si el correo ya está registrado
-	let existeEmail = await maybeGetUsuarioSinRolPorEmail(body.email);
+	const existeEmail = await maybeGetUsuarioSinRolPorEmail(body.email);
 	if (existeEmail) {
 		throw createError({ statusCode: 400, statusMessage: 'El correo ya está registrado' });
 	}

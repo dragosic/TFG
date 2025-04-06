@@ -1,8 +1,8 @@
 import { isNullish, isNullishOrEmpty } from '@sapphire/utilities';
 import { Nota } from '../../types/Nota';
-import { Partenariado } from '../../types/Partenariado';
+import type { Partenariado } from '../../types/Partenariado';
 import { ViewPartnership } from '../../types/views/Partnership';
-import { SearchParameters } from '../shared';
+import type { SearchParameters } from '../shared';
 import { formatNota, type FormattedNota } from './_shared';
 
 export async function obtenerNota(id: number): Promise<FormattedNota> {
