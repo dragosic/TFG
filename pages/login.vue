@@ -32,27 +32,27 @@
 </template>
 
 <script setup lang="ts">
-const { organization } = useRuntimeConfig().public;
+	const { organization } = useRuntimeConfig().public;
 
-const email = ref('');
-const password = ref('');
-const remember = ref(false);
+	const email = ref('');
+	const password = ref('');
+	const remember = ref(false);
 
-const error = refAutoReset<string>('', 25000);
+	const error = refAutoReset<string>('', 25000);
 
-const auth = useAuth();
-const router = useRouter();
-async function performLogin() {
-	try {
-		auth.session.value = await $fetch('/api/auth/login', {
-			method: 'POST',
-			body: { email: email.value, password: password.value }
-		});
-		await router.push(auth.redirectTo.value);
-	} catch (e: any) {
-		error.value = String(e.statusMessage ?? e.message ?? e);
+	const auth = useAuth();
+	const router = useRouter();
+	async function performLogin() {
+		try {
+			auth.session.value = await $fetch('/api/auth/login', {
+				method: 'POST',
+				body: { email: email.value, password: password.value }
+			});
+			await router.push(auth.redirectTo.value);
+		} catch (e: any) {
+			error.value = String(e.statusMessage ?? e.message ?? e);
+		}
 	}
-}
 </script>
 
 <style scoped>
