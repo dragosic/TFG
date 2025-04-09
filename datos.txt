@@ -1,0 +1,18 @@
+"entries": [ { "id": 1, "city": "Madrid", "purpose": "Apoyo educativo para niños desfavorecidos", "periodDefinitionStart": "2025-03-05T23:00:00.000Z", "periodDefinitionEnd": "2025-05-04T22:00:00.000Z", "periodEjecutionStart": "2025-03-20T23:00:00.000Z", "periodEjecutionEnd": "2025-03-20T23:00:00.000Z", "periodDeadline": "2025-05-06T22:00:00.000Z", "temporaryObservations": "Se necesita disponibilidad por las tardes", "beneficiaryCommunity": "Niños en situación de vulnerabilidad BAJA", "title": "Servicio de Diseño Gráfico", "description": "Ofrecemos diseño gráfico profesional para empresas y emprendedores.", "createdAt": "2025-04-05T14:02:36.000Z", "updatedAt": "2025-04-05T14:02:36.000Z", "image": "prueba1.jpg", "socialNeedId": 1, "socialNeedName": "nombre", "creatorId": 1, "creatorName": "socio1", "creatorMission": "", "creatorSector": "", "creatorUrl": "", "creatorAvatar": "", "serviceAreas": "[\"Programacion\"]", "degrees": "[\"Pepe\"]" }, 
+
+{ "id": 2, "city": "Madrid", "purpose": "Apoyo educativo para niños superdotados", "periodDefinitionStart": "2025-03-05T23:00:00.000Z", "periodDefinitionEnd": "2025-05-04T22:00:00.000Z", "periodEjecutionStart": "2025-03-20T23:00:00.000Z", "periodEjecutionEnd": "2025-03-20T23:00:00.000Z", "periodDeadline": "2025-05-06T22:00:00.000Z", "temporaryObservations": "Se necesita disponibilidad por las mañanas", "beneficiaryCommunity": "Niños en situación de vulnerabilidad MEDIA", "title": "Consultoría en Marketing Digital", "description": "Asesoramos en estrategias digitales para potenciar tu negocio en redes sociales.", "createdAt": "2025-04-05T14:02:36.000Z", "updatedAt": "2025-04-05T14:02:36.000Z", "image": "prueba2.jpg", "socialNeedId": 2, "socialNeedName": "nombre2", "creatorId": 2, "creatorName": "socio2", "creatorMission": "", "creatorSector": "", "creatorUrl": "", "creatorAvatar": "", "serviceAreas": "[\"Calculo\"]", "degrees": "[\"Luis\"]" }, 
+
+{ "id": 3, , , , , , , , , , , , "createdAt": "2025-04-05T14:02:36.000Z", "updatedAt": "2025-04-05T14:02:36.000Z", "image": "prueba3.jpg", "socialNeedId": 3, , , , , , , , , } ] }
+
+
+<label for="beneficiaryCommunity" class="block">Comunidad Beneficiaria</label>
+
+
+iniciativas:
+{ "entries": [ { "id": 1, "title": "Ingenieria informatica", "description": "Descripcion1", "studentId": 1, "demandId": 1, "socialNeed": 1 }, { "id": 2, "title": "Ingenieria quimica", "description": "Descripcion2", "studentId": 2, "demandId": 2, "socialNeed": 2 }, { "id": 3, "title": "ADE", "description": "Descripcion3", "studentId": 3, "demandId": 3, "socialNeed": 3 } ], "total": 3 }
+
+
+Problema actual con: 
+degrees -> array de numeros
+socialNeed -> numero
+serviceArea -> array de numeros

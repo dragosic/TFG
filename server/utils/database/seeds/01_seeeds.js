@@ -151,6 +151,36 @@ export async function seed(knex) {
   
   
 
+        await knex('anuncio_servicio').insert([
+          {
+            id: 1,
+            titulo: "Servicio de Diseño Gráfico",
+            descripcion: "Ofrecemos diseño gráfico profesional para empresas y emprendedores.",
+            imagen: 'prueba1.jpg',
+            created_at: knex.fn.now(),
+            updated_at: knex.fn.now(),
+            dummy: 0
+          },
+          {
+            id: 2,
+            titulo: "Consultoría en Marketing Digital",
+            descripcion: "Asesoramos en estrategias digitales para potenciar tu negocio en redes sociales.",
+            imagen: 'prueba2.jpg',
+            created_at: knex.fn.now(),
+            updated_at: knex.fn.now(),
+            dummy: 0
+          },
+          {
+            id: 3,
+            titulo: "Desarrollo de Aplicaciones Web",
+            descripcion: "Creamos aplicaciones web a medida con las últimas tecnologías.",
+            imagen: 'prueba3.jpg',
+            created_at: knex.fn.now(),
+            updated_at: knex.fn.now(),
+            dummy: 0
+          }
+        ]).onConflict('id') // Si el 'id' ya existe...
+        .merge();         // ...actualiza el registro
   // oferta_servicio_seed.js
 
 /**
@@ -193,36 +223,6 @@ export async function seed(knex) {
         
   
 
-        await knex('anuncio_servicio').insert([
-          {
-            id: 1,
-            titulo: "Servicio de Diseño Gráfico",
-            descripcion: "Ofrecemos diseño gráfico profesional para empresas y emprendedores.",
-            imagen: 'prueba1.jpg',
-            created_at: knex.fn.now(),
-            updated_at: knex.fn.now(),
-            dummy: 0
-          },
-          {
-            id: 2,
-            titulo: "Consultoría en Marketing Digital",
-            descripcion: "Asesoramos en estrategias digitales para potenciar tu negocio en redes sociales.",
-            imagen: 'prueba2.jpg',
-            created_at: knex.fn.now(),
-            updated_at: knex.fn.now(),
-            dummy: 0
-          },
-          {
-            id: 3,
-            titulo: "Desarrollo de Aplicaciones Web",
-            descripcion: "Creamos aplicaciones web a medida con las últimas tecnologías.",
-            imagen: 'prueba3.jpg',
-            created_at: knex.fn.now(),
-            updated_at: knex.fn.now(),
-            dummy: 0
-          }
-        ]).onConflict('id') // Si el 'id' ya existe...
-        .merge();         // ...actualiza el registro
       
 
 
@@ -823,70 +823,8 @@ export async function seed(knex) {
     
 
 
-
-// cache_seed.js
-
-/**
- * Seeder para la tabla 'cache'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'cache'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-
-      await knex('cache').insert([
-        {
-          key: 'site_settings',
-          value: JSON.stringify({ theme: 'dark', language: 'es' }), // Convierte el objeto a string
-          expiration: Math.floor((new Date().getTime() + 7 * 24 * 60 * 60 * 1000) / 1000) // 7 días desde ahora
-        },
-        {
-          key: 'user_123_token',
-          value: JSON.stringify({ token: 'abcdef123456', expires_in: 3600 }), // Convierte el objeto a string
-          expiration: Math.floor((new Date().getTime() + 60 * 60 * 1000) / 1000) // 1 hora desde ahora
-        },
-        {
-          key: 'homepage_cache',
-          value: '<html><body>Contenido en caché</body></html>', // Cadena de texto
-          expiration: Math.floor((new Date().getTime() + 30 * 60 * 1000) / 1000) // 30 minutos desde ahora
-        }
-      ]).onConflict('key') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
+         // ...actualiza el registro
     
-
-
-
-// cache_locks_seed.js
-
-/**
- * Seeder para la tabla 'cache_locks'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'cache_locks'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-
-      await knex('cache_locks').insert([
-        {
-          key: 'lock_process_1',
-          owner: 'system',
-          expiration: Math.floor((new Date().getTime() + 10 * 60 * 1000) / 1000) // Convertimos a timestamp, +10 minutos
-        },
-        {
-          key: 'lock_process_2',
-          owner: 'user_123',
-          expiration: Math.floor((new Date().getTime() + 5 * 60 * 1000) / 1000) // Convertimos a timestamp, +5 minutos
-        },
-        {
-          key: 'lock_process_3',
-          owner: 'admin',
-          expiration: Math.floor((new Date().getTime() + 15 * 60 * 1000) / 1000) // Convertimos a timestamp, +15 minutos
-        }
-      ]).onConflict('key') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
-
-
 
 // demandarespalda_seed.js
 
@@ -1090,96 +1028,6 @@ export async function seed(knex) {
         }
       ]).onConflict('id_estudiante') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
-    
-
-
-
-// failed_jobs_seed.js
-
-/**
- * Seeder para la tabla 'failed_jobs'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'failed_jobs'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-
-
-      await knex('failed_jobs').insert([
-        {
-          id: 1,
-          uuid: 1,
-          connection: '',
-          queue: '',
-          payload: '',
-          exception: '',
-          failed_at: knex.fn.now()
-        },
-        {
-          id: 2,
-          uuid: 2,
-          connection: '',
-          queue: '',
-          payload: '',
-          exception: '',
-          failed_at: knex.fn.now()
-        },
-        {
-          id: 3,
-          uuid: 3,
-          connection: '',
-          queue: '',
-          payload: '',
-          exception: '',
-          failed_at: knex.fn.now()
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
-
-
-
-// jobs_seed.js
-
-/**
- * Seeder para la tabla 'jobs'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'jobs'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-      await knex('jobs').insert([
-        {
-          id: 1,
-          queue: '',
-          payload: '',
-          attempts: 0,
-          reserved_at: 1,
-          available_at: 1,
-          created_at: 1
-        },
-        {
-          id: 2,
-          queue: '',
-          payload: '',
-          attempts: 0,
-          reserved_at: 2,
-          available_at: 2,
-          created_at: 2
-        },
-        {
-          id: 3,
-          queue: '',
-          payload: '',
-          attempts: 0,
-          reserved_at: 3,
-          available_at: 3,
-          created_at: 3
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
-
 
 
 // iniciativa_seed.js
@@ -1218,53 +1066,7 @@ export async function seed(knex) {
         }
       ]).onConflict('id') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
-    
-
-
-      await knex('mail').insert([
-        {
-          id: 1,
-          mail_to: "pepito@email.com",
-          type: '',
-          mail_name: '',
-          mail_from: '',
-          subject: '',
-          html: "",
-          _to: '',
-          usuario: 'pepe',
-          createdAt: knex.raw("NOW() - INTERVAL 15 DAY"),
-          updatedAt: knex.raw("NOW() - INTERVAL 13 DAY")
-        },
-        {
-          id: 2,
-          mail_to: "pepito1@email.com",
-          type: '',
-          mail_name: '',
-          mail_from: '',
-          subject: '',
-          html: "",
-          _to: '',
-          usuario: 'luis',
-          createdAt: knex.raw("NOW() - INTERVAL 13 DAY"),
-          updatedAt: knex.raw("NOW() - INTERVAL 11 DAY")
-        },
-        {
-          id: 3,
-          mail_to: "pepito2@email.com",
-          type: '',
-          mail_name: '',
-          mail_from: '',
-          subject: '',
-          html: "",
-          _to: '',
-          usuario: 'oscar',
-          createdAt: knex.raw("NOW() - INTERVAL 11 DAY"),
-          updatedAt: knex.raw("NOW() - INTERVAL 9 DAY")
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();           // ...actualiza el registro
-    
-
+  
 
 
 // matching_seed.js
@@ -1450,39 +1252,7 @@ export async function seed(knex) {
           id_colaboracion: 3
         }
       ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
-
-
-
-// migraciones_seed.js
-
-/**
- * Seeder para la tabla 'migrations'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'migrations'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-      await knex('migrations').insert([
-        {
-          id: 1,
-          migration: 'nombre',
-          batch: 1
-        },
-        {
-          id: 2,
-          migration: 'nombre',
-          batch: 2
-        },
-        {
-          id: 3,
-          migration: 'nombre',
-          batch: 3
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
+      .merge();         // ...actualiza el registro    
 
 
 
@@ -1699,40 +1469,6 @@ export async function seed(knex) {
       ]).onConflict('idNotificacion') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
     
-
-
-
-// password_reset_tokens_seed.js
-
-/**
- * Seeder para la tabla 'password_reset_tokens'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'password_reset_tokens'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-      await knex('password_reset_tokens').insert([
-        {
-          email: 'email1@ejemplo.com',
-          token: '',
-          created_at: knex.raw("NOW() - INTERVAL 1 DAY")
-        },
-        {
-          email: 'email2@ejemplo.com',
-          token: '',
-          created_at: knex.raw("NOW() - INTERVAL 5 DAY")
-        },
-        {
-          email: 'email3@ejemplo.com',
-          token: '',
-          created_at: knex.raw("NOW() - INTERVAL 11 DAY")
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
-    
-
-
-
 // previo_partenariado_seed.js
 
 /**
@@ -1933,46 +1669,7 @@ export async function seed(knex) {
         }
       ]).onConflict('id_titulacion') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
-    
-
-
-
-/**
- * Seeder para la tabla 'sessions'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'sessions'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
-
-      await knex('sessions').insert([
-        {
-          id: 'session_1',
-          user_id: 1,
-          ip_address: '192.168.1.1',
-          user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/88.0.4324.150 Safari/537.36',
-          payload: '{"data":"ejemplo1"}',
-          last_activity: Math.floor(Date.now() / 1000) - (15 * 24 * 60 * 60) // 15 días atrás en segundos
-        },
-        {
-          id: 'session_2',
-          user_id: 2,
-          ip_address: '192.168.1.2',
-          user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15',
-          payload: '{"data":"ejemplo2"}',
-          last_activity: Math.floor(Date.now() / 1000) - (10 * 24 * 60 * 60) // 10 días atrás en segundos
-        },
-        {
-          id: 'session_3',
-          user_id: 3,
-          ip_address: '192.168.1.3',
-          user_agent: 'Mozilla/5.0 (Linux; Android 10; SM-G970F) AppleWebKit/537.36 Chrome/87.0.4280.141 Mobile Safari/537.36',
-          payload: '{"data":"ejemplo3"}',
-          last_activity: Math.floor(Date.now() / 1000) - (5 * 24 * 60 * 60) // 5 días atrás en segundos
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();           // ...actualiza el registro
-    
+        
 
 
 
