@@ -1,6 +1,7 @@
 /**
  * Seeder para las tablas 'usuario' y 'notificaciones'
  */
+import bcrypt from 'bcryptjs';
 
 export async function seed(knex) {
   await knex('usuario').insert([
@@ -22,6 +23,79 @@ export async function seed(knex) {
     },
     {
       id: 3,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 4,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 5,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 6,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 7,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 8,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 9,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    ,
+    {
+      id: 20,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 21,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 22,
       origin_login: '',
       origin_img: '',
       createdAt: knex.fn.now(),
@@ -70,33 +144,74 @@ export async function seed(knex) {
  * Se utiliza Knex.js para interactuar con la base de datos.
  */
  
-        await knex('datos_personales_interno').insert([
-          {
-            id: 1,
-            correo: 'ejemploo1@ejemplo.com',
-            password: '1234',
-            apellidos: 'Apellido1 Apellido1',
-            nombre: 'Nombre1',
-            telefono: 123456789
-          },
-          {
-            id: 2,
-            correo: 'ejemploo2@ejemplo.com',
-            password: '1234',
-            apellidos: 'Apellido2 Apellid2',
-            nombre: 'Nombre1',
-            telefono: 223456789
-          },
-          {
-            id: 3,
-            correo: 'ejemploo3@ejemplo.com',
-            password: '1234',
-            apellidos: 'Apellido3 Apellido3',
-            nombre: 'Nombree3',
-            telefono: 323456789
-          }
-        ]).onConflict('id') // Si el 'id' ya existe...
-        .merge();         // ...actualiza el registro
+
+
+  const saltRounds = 10;
+
+  const usuarios = [
+    {
+      id: 1,
+      correo: 'interno1@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido1 Apellido1',
+      nombre: 'Nombre1',
+      telefono: 123456789
+    },
+    {
+      id: 2,
+      correo: 'interno2@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido2 Apellid2',
+      nombre: 'Nombre1',
+      telefono: 223456789
+    },
+    {
+      id: 3,
+      correo: 'interno3@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido3 Apellido3',
+      nombre: 'Nombree3',
+      telefono: 323456789
+    },
+    {
+      id: 4,
+      correo: 'tutor1@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido1 Apellido1',
+      nombre: 'Nombre1',
+      telefono: 123456789
+    },
+    {
+      id: 5,
+      correo: 'tutor2@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido2 Apellid2',
+      nombre: 'Nombre1',
+      telefono: 223456789
+    },
+    {
+      id: 6,
+      correo: 'tutor3@ejemplo.com',
+      password: '12345678',
+      apellidos: 'Apellido3 Apellido3',
+      nombre: 'Nombree3',
+      telefono: 323456789
+    }
+  ];
+
+  // Hashear contraseñas antes de insertar
+  const usuariosConHash = await Promise.all(
+    usuarios.map(async (usuario) => {
+      const hash = await bcrypt.hash(usuario.password, saltRounds);
+      return { ...usuario, password: hash };
+    })
+  );
+
+  // Insertar en la base de datos con Knex
+  await knex('datos_personales_interno')
+    .insert(usuariosConHash)
+    .onConflict('id')
+    .merge();
    
   
   
@@ -116,7 +231,10 @@ export async function seed(knex) {
         await knex('profesor').insert([
           { id: 1 },
           { id: 2 },
-          { id: 3 }
+          { id: 3 },
+          { id: 7 },
+          { id: 8 },
+          { id: 9 }
         ]).onConflict('id') // Si el 'id' ya existe...
         .merge();         // ...actualiza el registro
   
@@ -144,6 +262,18 @@ export async function seed(knex) {
           {
             id: 3,
             datos_personales_Id: 3
+          },
+          {
+            id: 4,
+            datos_personales_Id: 4
+          },
+          {
+            id: 5,
+            datos_personales_Id: 5
+          },
+          {
+            id: 6,
+            datos_personales_Id: 6
           }
         ]).onConflict('id') // Si el 'id' ya existe...
         .merge();         // ...actualiza el registro
@@ -262,36 +392,70 @@ export async function seed(knex) {
  * Se utiliza Knex.js para interactuar con la base de datos.
  */
 
-
-      await knex('datos_personales_externo').insert([
+      const usuarios_ext = [
         {
-          id: 1,
-          correo: 'ejemplo1@ejemplo.com',
-          password: '1234',
+          id: 7,
+          correo: 'externo1@ejemplo.com',
+          password: '12345678',
           apellidos: 'Apellido1 Apellido2',
           nombre: 'Nombre1',
           telefono: 123456789
         },
         {
-          id: 2,
-          correo: 'ejemplo2@ejemplo.com',
-          password: '1234',
+          id: 8,
+          correo: 'externo2@ejemplo.com',
+          password: '12345678',
           apellidos: 'Apellido3 Apellido2',
           nombre: 'Nombre1',
           telefono: 223456789
         },
         {
-          id: 3,
-          correo: 'ejemplo3@ejemplo.com',
-          password: '1234',
+          id: 9,
+          correo: 'externo3@ejemplo.com',
+          password: '12345678',
           apellidos: 'Apellido3 Apellido3',
           nombre: 'Nombre1',
           telefono: 323456789
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
+        },
+        {
+          id: 20,
+          correo: 's1@aps.es',
+          password: '12345678',
+          apellidos: 'Apellido1 Apellido2',
+          nombre: 'Nombre1',
+          telefono: 123456789
+        },
+        {
+          id: 21,
+          correo: 's2@aps.es',
+          password: '12345678',
+          apellidos: 'Apellido3 Apellido2',
+          nombre: 'Nombre1',
+          telefono: 223456789
+        },
+        {
+          id: 22,
+          correo: 's3@aps.es',
+          password: '12345678',
+          apellidos: 'Apellido3 Apellido3',
+          nombre: 'Nombre1',
+          telefono: 323456789
+        },
+      ];
     
-
+      // Hashear contraseñas antes de insertar
+      const usuarios_extConHash = await Promise.all(
+        usuarios_ext.map(async (usuario) => {
+          const hash = await bcrypt.hash(usuario.password, saltRounds);
+          return { ...usuario, password: hash };
+        })
+      );
+    
+      // Insertar en la base de datos con Knex
+      await knex('datos_personales_externo')
+        .insert(usuarios_extConHash)
+        .onConflict('id')
+        .merge();
 
 // socio_comunitario_seed.js
 
@@ -307,7 +471,7 @@ export async function seed(knex) {
           id: 1,
           sector: '',
           nombre_socioComunitario: 'socio1',
-          datos_personales_Id: 1,
+          datos_personales_Id: 20,
           url: '',
           mision: ''
         },
@@ -315,7 +479,7 @@ export async function seed(knex) {
           id: 2,
           sector: '',
           nombre_socioComunitario: 'socio2',
-          datos_personales_Id: 2,
+          datos_personales_Id: 21,
           url: '',
           mision: ''
         },
@@ -323,7 +487,7 @@ export async function seed(knex) {
           id: 3,
           sector: '',
           nombre_socioComunitario: 'socio3',
-          datos_personales_Id: 3,
+          datos_personales_Id: 22,
           url: '',
           mision: ''
         }
@@ -1520,19 +1684,19 @@ export async function seed(knex) {
           id: 1,
           universidad: 1,
           facultad: 'Turismo',
-          datos_personales_id: 1
+          datos_personales_id: 7
         },
         {
           id: 2,
           universidad: 2,
           facultad: 'Informatica',
-          datos_personales_id: 2
+          datos_personales_id: 8
         },
         {
           id: 3,
           universidad: 3,
           facultad: 'Economicas',
-          datos_personales_id: 3
+          datos_personales_id: 9
         }
       ]).onConflict('id') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
@@ -1551,17 +1715,9 @@ export async function seed(knex) {
 
       await knex('profesor_colaboracion').insert([
         {
-          id_profesor: 1,
+          id_profesor: 7,
           id_colaboracion: 1
         },
-        {
-          id_profesor: 2,
-          id_colaboracion: 2
-        },
-        {
-          id_profesor: 3,
-          id_colaboracion: 3
-        }
       ]).onConflict('id_profesor') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
     
@@ -1682,21 +1838,15 @@ export async function seed(knex) {
  * Se utiliza Knex.js para interactuar con la base de datos.
  */
 
-      await knex('tutor').insert([
-        {
-          id: 1,
-          datos_personales_Id: 1
-        },
-        {
-          id: 2,
-          datos_personales_Id: 2  
-        },
-        {
-          id: 3,
-          datos_personales_Id: 3
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
+await knex('tutor')
+.insert([
+  { id: 1, datos_personales_Id: 4 },
+  { id: 2, datos_personales_Id: 5 },
+  { id: 3, datos_personales_Id: 6 }
+])
+.onConflict(['id', 'datos_personales_Id']) // clave compuesta
+.merge();
+
     
 
 

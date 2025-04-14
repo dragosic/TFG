@@ -23,8 +23,7 @@
 
 				<input type="submit" value="Iniciar Sesión" class="btn btn-info mt-4 w-full text-info-content" />
 			</form>
-		</div>
-
+		</div> 
 		<alert v-if="error" type="danger" title="Error">
 			{{ error }}
 		</alert>

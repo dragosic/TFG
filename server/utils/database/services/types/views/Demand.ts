@@ -18,7 +18,7 @@ export namespace ViewDemand {
 		periodDefinitionStart: DemandaServicio.Value['periodo_definicion_ini'];
 		periodDefinitionEnd: DemandaServicio.Value['periodo_definicion_fin'];
 		periodExecutionStart: DemandaServicio.Value['periodo_ejecucion_ini'];
-		periodExecutionEnd: DemandaServicio.Value['periodo_ejecucion_ini'];
+		periodExecutionEnd: DemandaServicio.Value['periodo_ejecucion_fin'];
 		periodDeadline: DemandaServicio.Value['fecha_fin'];
 		temporaryObservations: DemandaServicio.Value['observaciones_temporales'];
 		beneficiaryCommunity: DemandaServicio.Value['comunidad_beneficiaria'];

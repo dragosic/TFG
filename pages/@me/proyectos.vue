@@ -109,7 +109,7 @@
 					<label class="input input-bordered flex items-center gap-2">
 						<label class="block">Inicio Ejecución</label>
 						<input
-						v-model="periodEjecutionStart"
+						v-model="periodExecutionStart"
 						type="date"
 						class="input grow"
 						placeholder="Inicio Ejecución"
@@ -120,7 +120,7 @@
 					<label class="input input-bordered flex items-center gap-2">
 						<label class="block">Fin Ejecución</label>
 						<input
-						v-model="periodEjecutionEnd"
+						v-model="periodExecutionEnd"
 						type="date"
 						class="input grow"
 						placeholder="Fin Ejecución"
@@ -241,12 +241,12 @@
 				>
 					<!-- Imagen del proyecto -->
 					<img :src="`/${entry.image}`" alt="Imagen de la demanda" class="w-20 h-20 mr-4" />
-
 					<!-- Información del proyecto -->
 					<div class="flex-1">
 						<h4 class="text-xl font-semibold">{{ entry.title }}</h4>
 						<p class="text-gray-600">{{ entry.description }}</p>
 						<p class="text-sm text-gray-500">Beneficiarios: {{ entry.beneficiaryCommunity }}</p>
+						<p class="text-sm text-gray-500">Periodo de Definicion: {{ new Date(entry.periodDefinitionStart).toLocaleDateString() }} - {{ new Date(entry.periodDefinitionEnd).toLocaleDateString() }}</p>
 						<p class="text-sm text-gray-500">Periodo de Ejecución: {{ new Date(entry.periodEjecutionStart).toLocaleDateString() }} - {{ new Date(entry.periodEjecutionEnd).toLocaleDateString() }}</p>
 						<p class="text-sm text-gray-500">Observaciones: {{ entry.temporaryObservations }}</p>
 					</div>
@@ -263,6 +263,7 @@
 				</div>
 			</ul>
 			<!-- Formulario para la necesidad social -->
+			{{ ns }}
 			<form @submit.prevent="checkOrCreateSocialNeed">
 				<!-- Campo para el nombre de la necesidad social -->
 				<div class="input-group">
@@ -283,7 +284,7 @@
 					<button type="submit" class="btn btn-success">Añadir necesidad social</button>
 				</div>
 			</form>
-
+			{{ t }}
 			<!-- Formulario para la Titulacion -->
 			<form @submit.prevent="checkOrTitulacion">
 				<!-- Campo para el nombre de la titulacion -->
@@ -299,7 +300,6 @@
 						required
 					/>
 				</div>
-				
 				<!-- Botón para comprobar si la necesidad social está registrada -->
 				<div class="mb-2 mt-2">
 					<button type="submit" class="btn btn-success">Añadir nueva titulacion</button>
@@ -349,7 +349,7 @@
 		}
 	};
 
-
+	const { data: oferta } = await useFetch('/api/ofertas', { method: 'GET' });
 	// Simulamos que obtenemos los proyectos del servidor.
 	const { data: demandas } = await useFetch('/api/demandas', { method: 'GET' });
 	const { data: servicios } = await useFetch('/api/ofertas/areas-servicio', { method: 'GET' });
@@ -364,8 +364,8 @@
 	
 	const periodDefinitionStart = ref('');
 	const periodDefinitionEnd = ref('');
-	const periodEjecutionStart = ref('');
-	const periodEjecutionEnd = ref('');
+	const periodExecutionStart = ref('');
+	const periodExecutionEnd = ref('');
 	const periodDeadline = ref('');
 	const temporaryObservations = ref('');
 	const serviceAreas = ref<number[]>([]);
@@ -383,6 +383,18 @@
 				error.value = 'Por favor, selecciona al menos una titulación.';
 				return;  // Detener la ejecución si no se selecciona ninguna área
 			}
+			if (!periodDefinitionStart.value || !periodDefinitionEnd.value) {
+				error.value = 'Faltan fechas en la definición del periodo.';
+				return;
+			}
+			console.log("Valores que se envían:");
+			console.log({
+				periodDefinitionStart: periodDefinitionStart.value,
+				periodDefinitionEnd: periodDefinitionEnd.value,
+				periodExecutionStart: periodExecutionStart.value,
+				periodExecutionEnd: periodExecutionEnd.value,
+				periodDeadline: periodDeadline.value,
+			});
 			await $fetch('/api/demandas', {
 				method: 'POST',
 				body: {
@@ -394,15 +406,15 @@
 					beneficiaryCommunity: beneficiaryCommunity.value,
 					periodDefinitionStart: periodDefinitionStart.value,
 					periodDefinitionEnd: periodDefinitionEnd.value,
-					periodEjecutionStart: periodEjecutionStart.value,
-					periodEjecutionEnd: periodEjecutionEnd.value,
+					periodExecutionStart: periodExecutionStart.value,
+					periodExecutionEnd: periodExecutionEnd.value,
 					periodDeadline: periodDeadline.value,
 					temporaryObservations: temporaryObservations.value,
 					serviceAreas: serviceAreas.value,
 					degrees: titulaciones.value
 				}	
 			});
-			location.reload();  // Esto recargará la página completa
+			//location.reload();  // Esto recargará la página completa
 		} catch (e: any){
 			error.value = String(e.statusMessage ?? e.message ?? e);
 		}
