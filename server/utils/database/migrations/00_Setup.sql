@@ -773,6 +773,7 @@ ALTER TABLE `titulacionlocal_profesor`
 ALTER TABLE `titulacion_local`
   ADD PRIMARY KEY (`id`);
 
+
 --
 -- Indices de la tabla `universidad`
 --
@@ -1118,6 +1119,12 @@ ALTER TABLE `profesor_externo`
 ALTER TABLE `profesor_interno`
   ADD CONSTRAINT `FKEY_Profesor_interno` FOREIGN KEY (`id`) REFERENCES `profesor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_datos_internos` FOREIGN KEY (`datos_personales_Id`) REFERENCES `datos_personales_interno` (`id`) ON DELETE CASCADE;
+
+---
+---
+---
+
+
 
 --
 -- Filtros para la tabla `proyecto`
