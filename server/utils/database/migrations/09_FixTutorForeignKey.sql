@@ -12,12 +12,6 @@ ADD PRIMARY KEY (`id`);
 ALTER TABLE tutor
 ADD CONSTRAINT unique_datos_personales UNIQUE (`datos_personales_Id`);
 
--- FK a profesor
-ALTER TABLE tutor
-ADD CONSTRAINT fk_tutor_profesor
-FOREIGN KEY (`id`) REFERENCES profesor(`id`)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
 -- FK a datos_personales_interno
 ALTER TABLE tutor
 ADD CONSTRAINT fk_tutor_datos_personales
@@ -38,6 +32,22 @@ ADD PRIMARY KEY (`id_oferta`, `nombre`);
 ALTER TABLE asignatura
 ADD CONSTRAINT fk_asignatura_oferta
 FOREIGN KEY (`id_oferta`) REFERENCES oferta_servicio(`id`)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+UNLOCK TABLES;
+
+
+-- ===== COLABORADOR =====
+LOCK TABLES `colaborador` WRITE;
+
+-- Añadir PK a id (si no está)
+ALTER TABLE colaborador
+ADD PRIMARY KEY (`id`);
+
+-- FK a datos_personales_externo 
+ALTER TABLE colaborador
+ADD CONSTRAINT fk_colaborador_datos_personales
+FOREIGN KEY (`datos_personales_Id`) REFERENCES datos_personales_externo(`id`)
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 UNLOCK TABLES;

@@ -6,7 +6,8 @@ import {
 	borrarOficinaAPS,
 	borrarProfesorExterno,
 	borrarProfesorInterno,
-	borrarSocioComunitario
+	borrarSocioComunitario,
+	borrarCollaborator                                                                                            
 } from '~/server/utils/database/services/daos/usuario/delete';
 import { obtenerUsuarioSinRolPorId } from '~/server/utils/database/services/daos/usuario/get';
 
@@ -44,6 +45,9 @@ export default eventHandler(async (event) => {
 			break;
 		case 'ApSOffice':
 			await borrarOficinaAPS(id);
+			break;
+		case 'Collaborator':
+			await borrarCollaborator(id);
 			break;
 		default:
 			throw new Error('Unreachable');

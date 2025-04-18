@@ -109,6 +109,31 @@ export async function seed(knex) {
       updatedAt: knex.fn.now(),
       terminos_aceptados: 1
     },
+    
+    {
+      id: 14,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 15,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 16,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
     {
       id: 20,
       origin_login: '',
@@ -127,6 +152,56 @@ export async function seed(knex) {
     },
     {
       id: 22,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    
+    {
+      id: 155,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 156,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 157,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    
+    {
+      id: 160,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 161,
+      origin_login: '',
+      origin_img: '',
+      createdAt: knex.fn.now(),
+      updatedAt: knex.fn.now(),
+      terminos_aceptados: 1
+    },
+    {
+      id: 162,
       origin_login: '',
       origin_img: '',
       createdAt: knex.fn.now(),
@@ -224,9 +299,9 @@ export async function seed(knex) {
       id: 6,
       correo: 'tutor3@ejemplo.com',
       password: '12345678',
-      apellidos: 'Apellido3 Apellido3',
-      nombre: 'Nombree3',
-      telefono: 323456789
+      apellidos: 'Apellido2 Apellid2',
+      nombre: 'Nombre1',
+      telefono: 223456789
     },
     {
       id: 10,
@@ -247,6 +322,54 @@ export async function seed(knex) {
     {
       id: 12,
       correo: 'oaps3@aps.es',
+      password: '12345678',
+      apellidos: 'APS 3',
+      nombre: 'Oficina',
+      telefono: 323456789
+    },
+    {
+      id: 14,
+      correo: 'profInt1@aps.es',
+      password: '12345678',
+      apellidos: 'APS 1',
+      nombre: 'Oficina',
+      telefono: 123456789
+    },
+    {
+      id: 15,
+      correo: 'profInt2@aps.es',
+      password: '12345678',
+      apellidos: 'APS 2',
+      nombre: 'Oficina',
+      telefono: 223456789
+    },
+    {
+      id: 16,
+      correo: 'profInt3@aps.es',
+      password: '12345678',
+      apellidos: 'APS 3',
+      nombre: 'Oficina',
+      telefono: 323456789
+    },
+    {
+      id: 155,
+      correo: 'estInter1@aps.es',
+      password: '12345678',
+      apellidos: 'APS 1',
+      nombre: 'Oficina',
+      telefono: 123456789
+    },
+    {
+      id: 156,
+      correo: 'estInter2@aps.es',
+      password: '12345678',
+      apellidos: 'APS 2',
+      nombre: 'Oficina',
+      telefono: 223456789
+    },
+    {
+      id: 157,
+      correo: 'estInter3@aps.es',
       password: '12345678',
       apellidos: 'APS 3',
       nombre: 'Oficina',
@@ -289,7 +412,10 @@ export async function seed(knex) {
           { id: 3 },
           { id: 7 },
           { id: 8 },
-          { id: 9 }
+          { id: 9 },
+          { id: 14 },
+          { id: 15 },
+          { id: 16 }
         ]).onConflict('id') // Si el 'id' ya existe...
         .ignore();         // ...actualiza el registro
   
@@ -307,16 +433,16 @@ export async function seed(knex) {
         // Luego, inserta los registros
         await knex('profesor_interno').insert([
           {
-            id: 4,
-            datos_personales_Id: 4
+            id: 14,
+            datos_personales_Id: 14
           },
           {
-            id: 5,
-            datos_personales_Id: 5
+            id: 15,
+            datos_personales_Id: 15
           },
           {
-            id: 6,
-            datos_personales_Id: 6
+            id: 16,
+            datos_personales_Id: 16
           }
         ]).onConflict('id') // Si el 'id' ya existe...
         .ignore();         // ...actualiza el registro
@@ -365,34 +491,34 @@ export async function seed(knex) {
 
 
 
-            // Luego, inserta los registros
-            await knex('oferta_servicio').insert([
-                {
-                    id: 1,
-                    cuatrimestre: 2,
-                    anio_academico: 3,
-                    fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
-                    observaciones_temporales: 'ninguna',
-                    creador: 1
-                },
-                {
-                    id: 2,
-                    cuatrimestre: 2,
-                    anio_academico: 3,
-                    fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
-                    observaciones_temporales: 'ninguna',
-                    creador: 2
-                },
-                {
-                    id: 3,
-                    cuatrimestre: 1,
-                    anio_academico: 3,
-                    fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
-                    observaciones_temporales: 'ninguna',
-                    creador: 2
-                }
-            ]).onConflict('id') // Si el 'id' ya existe...
-            .merge();         // ...actualiza el registro
+  // Luego, inserta los registros
+  await knex('oferta_servicio').insert([
+      {
+          id: 1,
+          cuatrimestre: 2,
+          anio_academico: 3,
+          fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
+          observaciones_temporales: 'ninguna',
+          creador: 4
+      },
+      {
+          id: 2,
+          cuatrimestre: 2,
+          anio_academico: 3,
+          fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
+          observaciones_temporales: 'ninguna',
+          creador: 5
+      },
+      {
+          id: 3,
+          cuatrimestre: 1,
+          anio_academico: 3,
+          fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
+          observaciones_temporales: 'ninguna',
+          creador: 6
+      }
+  ]).onConflict('id') // Si el 'id' ya existe...
+  .merge();         // ...actualiza el registro
         
   
 
@@ -492,6 +618,30 @@ export async function seed(knex) {
           nombre: 'Nombre1',
           telefono: 323456789
         },
+        {
+          id: 160,
+          correo: 'estExt1@aps.es',
+          password: '12345678',
+          apellidos: 'APS 1',
+          nombre: 'Oficina',
+          telefono: 123456789
+        },
+        {
+          id: 161,
+          correo: 'estExt2@aps.es',
+          password: '12345678',
+          apellidos: 'APS 2',
+          nombre: 'Oficina',
+          telefono: 223456789
+        },
+        {
+          id: 162,
+          correo: 'estExt3@aps.es',
+          password: '12345678',
+          apellidos: 'APS 3',
+          nombre: 'Oficina',
+          telefono: 323456789
+        }
       ];
     
       // Hashear contraseñas antes de insertar
@@ -846,17 +996,17 @@ export async function seed(knex) {
 
 
       await knex('areaconocimiento_profesor').insert([
-        {
+        { 
           id_area: 1,
-          id_profesor: 1
+          id_profesor: 7
         },
-        {
+        { 
           id_area: 2,
-          id_profesor: 2
+          id_profesor: 8
         },
-        {
+        {  
           id_area: 3,
-          id_profesor: 3
+          id_profesor: 9
         }
       ]).onConflict('id_area') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
@@ -876,9 +1026,12 @@ export async function seed(knex) {
 
 
       await knex('estudiante').insert([
-        { id: 1 },
-        { id: 2 },
-        { id: 3 }
+        { id: 155 },
+        { id: 156 },
+        { id: 157 },
+        { id: 160 },
+        { id: 161 },
+        { id: 162 }
       ]).onConflict('id') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
     
@@ -1125,22 +1278,22 @@ export async function seed(knex) {
 
       await knex('estudiante_externo').insert([
         {
-          id: 1,
+          id: 160,
           universidad: 1,
           titulacion: 'Ingenieria Informatica',
-          datos_personales_Id: 1
+          datos_personales_Id: 160
         },
         {
-          id: 2,
+          id: 161,
           universidad: 2,
           titulacion: 'ADE',
-          datos_personales_Id: 2
+          datos_personales_Id: 161
         },
         {
-          id: 3,
+          id: 162,
           universidad: 3,
           titulacion: 'Ingenieria Quimica',
-          datos_personales_Id: 3
+          datos_personales_Id: 162
         }
       ]).onConflict('id') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
@@ -1189,19 +1342,19 @@ export async function seed(knex) {
 
       await knex('estudiante_interno').insert([
         {
-          id: 1,
+          id: 155,
           titulacion_local: 1,
-          datos_personales_Id: 1
+          datos_personales_Id: 155
         },
         {
-          id: 2,
+          id: 156,
           titulacion_local: 2,
-          datos_personales_Id: 2
+          datos_personales_Id: 156
         },
         {
-          id: 3,
+          id: 157,
           titulacion_local: 3,
-          datos_personales_Id: 3
+          datos_personales_Id: 157
         }
       ]).onConflict('id') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
@@ -1240,15 +1393,15 @@ export async function seed(knex) {
 
       await knex('estudiante_proyecto').insert([
         {
-          id_estudiante: 1,
+          id_estudiante: 155,
           id_proyecto: 1
         },
         {
-          id_estudiante: 2,
+          id_estudiante: 156,
           id_proyecto: 2
         },
         {
-          id_estudiante: 3,
+          id_estudiante: 157,
           id_proyecto: 3
         }
       ]).onConflict('id_estudiante') // Si el 'id' ya existe...
@@ -1526,20 +1679,20 @@ export async function seed(knex) {
 
       await knex('notas').insert([
         {
-          id: 1,
-          id_estudiante: 1,
+          id: 155,
+          id_estudiante: 155,
           id_proyecto: 1,
           nota: 7.0
         },
         {
-          id: 2,
-          id_estudiante: 2,
+          id: 156,
+          id_estudiante: 156,
           id_proyecto: 2,
           nota: 4.0
         },
         {
-          id: 3,
-          id_estudiante: 3,
+          id: 157,
+          id_estudiante: 157,
           id_proyecto: 3,
           nota: 5.0
         }
@@ -1768,9 +1921,9 @@ export async function seed(knex) {
 // profesor_colaboracion_seed.js
 
 /**
- * Seeder para la tabla 'profesor_interno'
+ * Seeder para la tabla 'profesor_colaboracion'
  *
- * Este seeder inserta datos de ejemplo en la tabla 'profesor_interno'.
+ * Este seeder inserta datos de ejemplo en la tabla 'profesor_colaboracion'.
  * Se utiliza Knex.js para interactuar con la base de datos.
  */
 
@@ -1797,8 +1950,7 @@ export async function seed(knex) {
 
 await knex('profesorinterno_oferta').insert([
   { id_profesor: 4, id_oferta: 1 },
-  { id_profesor: 5, id_oferta: 2 },
-  { id_profesor: 6, id_oferta: 3 }
+  { id_profesor: 5, id_oferta: 2 }
 ]).onConflict(['id_profesor', 'id_oferta']).ignore(); // <-- cambia esto también
 
 
@@ -1877,10 +2029,6 @@ await knex('profesorinterno_oferta').insert([
         {
           id_titulacion: 2,
           id_profesor: 5
-        },
-        {
-          id_titulacion: 3,
-          id_profesor: 6
         }
       ]).onConflict(['id_titulacion','id_profesor']) // Si el 'id' ya existe...
       .ignore();         // ...actualiza el registro
@@ -1897,12 +2045,12 @@ await knex('profesorinterno_oferta').insert([
  * Se utiliza Knex.js para interactuar con la base de datos.
  */
 
-await knex('tutor').insert([
-  { id: 4, datos_personales_Id: 4 },
-  { id: 5, datos_personales_Id: 5 },
-  { id: 6, datos_personales_Id: 6 }
-]).onConflict(['id', 'datos_personales_Id'])
-.ignore();
+  await knex('tutor').insert([
+    { id: 4, datos_personales_Id: 4 },
+    { id: 5, datos_personales_Id: 5 },
+    { id: 6, datos_personales_Id: 6 }
+  ]).onConflict('id')
+  .merge();
 
     
 
