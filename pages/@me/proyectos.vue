@@ -349,7 +349,6 @@
 		}
 	};
 
-	const { data: oferta } = await useFetch('/api/ofertas', { method: 'GET' });
 	// Simulamos que obtenemos los proyectos del servidor.
 	const { data: demandas } = await useFetch('/api/demandas', { method: 'GET' });
 	const { data: servicios } = await useFetch('/api/ofertas/areas-servicio', { method: 'GET' });

@@ -12,6 +12,12 @@ ADD PRIMARY KEY (`id`);
 ALTER TABLE tutor
 ADD CONSTRAINT unique_datos_personales UNIQUE (`datos_personales_Id`);
 
+-- FK a profesor
+ALTER TABLE tutor
+ADD CONSTRAINT fk_tutor_profesor
+FOREIGN KEY (id) REFERENCES profesor(id)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
 -- FK a datos_personales_interno
 ALTER TABLE tutor
 ADD CONSTRAINT fk_tutor_datos_personales

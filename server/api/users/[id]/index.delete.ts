@@ -7,7 +7,7 @@ import {
 	borrarProfesorExterno,
 	borrarProfesorInterno,
 	borrarSocioComunitario,
-	borrarCollaborator                                                                                            
+	borrarCollaborator                                                                              
 } from '~/server/utils/database/services/daos/usuario/delete';
 import { obtenerUsuarioSinRolPorId } from '~/server/utils/database/services/daos/usuario/get';
 

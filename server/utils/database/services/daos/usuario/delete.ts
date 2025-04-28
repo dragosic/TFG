@@ -171,8 +171,30 @@ export async function borrarCollaborator(id: number): Promise<boolean> {
 
 		return (
 			(await sharedDeleteEntryTable(Colaborador.Name, id, trx)) &&
-			(await sharedDeleteEntryTable(DatosPersonalesExterno.Name, datosPersonalesId, trx)) &&
+			(await sharedDeleteEntryTable(ProfesorInterno.Name, id, trx)) &&
+			(await sharedDeleteEntryTable(DatosPersonalesInterno.Name, datosPersonalesId, trx)) &&
+			(await sharedDeleteEntryTable(Profesor.Name, id, trx)) &&
 			(await sharedDeleteEntryTable(Usuario.Name, id, trx))
 		);
 	});
 }
+
+// export async function borrarTutor(id: number): Promise<boolean> {
+// 	return await qb.transaction(async (trx) => {
+// 		const tutor = await trx(Tutor.Name)
+// 			.select('datos_personales_Id')
+// 			.where('id', id)
+// 			.first();
+
+// 		if (!tutor) return false;
+
+// 		const datosPersonalesId = tutor.datos_personales_Id;
+
+// 		return (
+// 			(await sharedDeleteEntryTable(Tutor.Name, id, trx)) &&
+// 			(await sharedDeleteEntryTable(DatosPersonalesInterno.Name, datosPersonalesId, trx)) &&
+// 			(await sharedDeleteEntryTable(Usuario.Name, id, trx))
+// 		);
+// 	});
+
+// }

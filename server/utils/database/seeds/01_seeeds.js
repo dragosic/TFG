@@ -7,7 +7,7 @@ export async function seed(knex) {
   await knex('usuario').insert([
     {
       id: 1,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -15,7 +15,7 @@ export async function seed(knex) {
     },
     {
       id: 2,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -23,7 +23,7 @@ export async function seed(knex) {
     },
     {
       id: 3,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -31,7 +31,7 @@ export async function seed(knex) {
     },
     {
       id: 4,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -39,7 +39,7 @@ export async function seed(knex) {
     },
     {
       id: 5,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -47,7 +47,7 @@ export async function seed(knex) {
     },
     {
       id: 6,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -55,7 +55,7 @@ export async function seed(knex) {
     },
     {
       id: 7,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -63,7 +63,7 @@ export async function seed(knex) {
     },
     {
       id: 8,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -71,7 +71,7 @@ export async function seed(knex) {
     },
     {
       id: 9,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -79,7 +79,7 @@ export async function seed(knex) {
     },
     {
       id: 10,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -87,7 +87,7 @@ export async function seed(knex) {
     },
     {
       id: 11,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -95,7 +95,7 @@ export async function seed(knex) {
     },
     {
       id: 12,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -103,7 +103,7 @@ export async function seed(knex) {
     },
     {
       id: 13,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -112,7 +112,7 @@ export async function seed(knex) {
     
     {
       id: 14,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -120,7 +120,7 @@ export async function seed(knex) {
     },
     {
       id: 15,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -128,7 +128,7 @@ export async function seed(knex) {
     },
     {
       id: 16,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -136,7 +136,7 @@ export async function seed(knex) {
     },
     {
       id: 20,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -144,7 +144,7 @@ export async function seed(knex) {
     },
     {
       id: 21,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -152,7 +152,7 @@ export async function seed(knex) {
     },
     {
       id: 22,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -161,7 +161,7 @@ export async function seed(knex) {
     
     {
       id: 155,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -169,7 +169,7 @@ export async function seed(knex) {
     },
     {
       id: 156,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -177,7 +177,7 @@ export async function seed(knex) {
     },
     {
       id: 157,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -186,7 +186,7 @@ export async function seed(knex) {
     
     {
       id: 160,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -194,7 +194,7 @@ export async function seed(knex) {
     },
     {
       id: 161,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -202,7 +202,7 @@ export async function seed(knex) {
     },
     {
       id: 162,
-      origin_login: '',
+      origin_login: 'seed',
       origin_img: '',
       createdAt: knex.fn.now(),
       updatedAt: knex.fn.now(),
@@ -259,49 +259,25 @@ export async function seed(knex) {
       id: 1,
       correo: 'interno1@ejemplo.com',
       password: '12345678',
-      apellidos: 'Apellido1 Apellido1',
-      nombre: 'Nombre1',
+      apellidos: '1',
+      nombre: 'Admin',
       telefono: 123456789
     },
     {
       id: 2,
       correo: 'interno2@ejemplo.com',
       password: '12345678',
-      apellidos: 'Apellido2 Apellid2',
-      nombre: 'Nombre1',
+      apellidos: '2',
+      nombre: 'Admin',
       telefono: 223456789
     },
     {
       id: 3,
       correo: 'interno3@ejemplo.com',
       password: '12345678',
-      apellidos: 'Apellido3 Apellido3',
-      nombre: 'Nombree3',
+      apellidos: '3',
+      nombre: 'Admin',
       telefono: 323456789
-    },
-    {
-      id: 4,
-      correo: 'tutor1@ejemplo.com',
-      password: '12345678',
-      apellidos: 'Apellido1 Apellido1',
-      nombre: 'Nombre1',
-      telefono: 123456789
-    },
-    {
-      id: 5,
-      correo: 'tutor2@ejemplo.com',
-      password: '12345678',
-      apellidos: 'Apellido2 Apellid2',
-      nombre: 'Nombre1',
-      telefono: 223456789
-    },
-    {
-      id: 6,
-      correo: 'tutor3@ejemplo.com',
-      password: '12345678',
-      apellidos: 'Apellido2 Apellid2',
-      nombre: 'Nombre1',
-      telefono: 223456789
     },
     {
       id: 10,
@@ -331,48 +307,48 @@ export async function seed(knex) {
       id: 14,
       correo: 'profInt1@aps.es',
       password: '12345678',
-      apellidos: 'APS 1',
-      nombre: 'Oficina',
+      apellidos: 'Interno 1',
+      nombre: 'Profesor',
       telefono: 123456789
     },
     {
       id: 15,
       correo: 'profInt2@aps.es',
       password: '12345678',
-      apellidos: 'APS 2',
-      nombre: 'Oficina',
+      apellidos: 'Interno 2',
+      nombre: 'Profesor',
       telefono: 223456789
     },
     {
       id: 16,
       correo: 'profInt3@aps.es',
       password: '12345678',
-      apellidos: 'APS 3',
-      nombre: 'Oficina',
+      apellidos: 'Interno 3',
+      nombre: 'Profesor',
       telefono: 323456789
     },
     {
       id: 155,
       correo: 'estInter1@aps.es',
       password: '12345678',
-      apellidos: 'APS 1',
-      nombre: 'Oficina',
+      apellidos: 'Interno 1',
+      nombre: 'Estudiante',
       telefono: 123456789
     },
     {
       id: 156,
       correo: 'estInter2@aps.es',
       password: '12345678',
-      apellidos: 'APS 2',
-      nombre: 'Oficina',
+      apellidos: 'Interno 2',
+      nombre: 'Estudiante',
       telefono: 223456789
     },
     {
       id: 157,
       correo: 'estInter3@aps.es',
       password: '12345678',
-      apellidos: 'APS 3',
-      nombre: 'Oficina',
+      apellidos: 'Interno 3',
+      nombre: 'Estudiante',
       telefono: 323456789
     }
   ];
@@ -410,9 +386,13 @@ export async function seed(knex) {
           { id: 1 },
           { id: 2 },
           { id: 3 },
+          { id: 4 },
+          { id: 5 },
+          { id: 6 },
           { id: 7 },
           { id: 8 },
           { id: 9 },
+          { id: 13 },
           { id: 14 },
           { id: 15 },
           { id: 16 }
@@ -432,6 +412,10 @@ export async function seed(knex) {
 
         // Luego, inserta los registros
         await knex('profesor_interno').insert([
+          {
+            id: 13,
+            datos_personales_Id: 13
+          },
           {
             id: 14,
             datos_personales_Id: 14
@@ -480,15 +464,7 @@ export async function seed(knex) {
           }
         ]).onConflict('id') // Si el 'id' ya existe...
         .merge();         // ...actualiza el registro
-  // oferta_servicio_seed.js
-
-/**
- * Seeder para la tabla 'oferta_servicio'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'oferta_servicio'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
+  
 
 
   // Luego, inserta los registros
@@ -499,7 +475,7 @@ export async function seed(knex) {
           anio_academico: 3,
           fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
           observaciones_temporales: 'ninguna',
-          creador: 4
+          creador: 14
       },
       {
           id: 2,
@@ -507,7 +483,7 @@ export async function seed(knex) {
           anio_academico: 3,
           fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
           observaciones_temporales: 'ninguna',
-          creador: 5
+          creador: 15
       },
       {
           id: 3,
@@ -515,7 +491,7 @@ export async function seed(knex) {
           anio_academico: 3,
           fecha_limite: knex.raw('DATE(NOW() + interval 30 day)'), // Convertir a tipo DATE
           observaciones_temporales: 'ninguna',
-          creador: 6
+          creador: 16
       }
   ]).onConflict('id') // Si el 'id' ya existe...
   .merge();         // ...actualiza el registro
@@ -563,27 +539,51 @@ export async function seed(knex) {
 
       const usuarios_ext = [
         {
+          id: 4,
+          correo: 'tutor1@ejemplo.com',
+          password: '12345678',
+          apellidos: 'CA 1',
+          nombre: 'Tutor',
+          telefono: 123456789
+        },
+        {
+          id: 5,
+          correo: 'tutor2@ejemplo.com',
+          password: '12345678',
+          apellidos: 'CA 2',
+          nombre: 'Tutor',
+          telefono: 223456789
+        },
+        {
+          id: 6,
+          correo: 'tutor3@ejemplo.com',
+          password: '12345678',
+          apellidos: 'CA 3',
+          nombre: 'Tutor',
+          telefono: 223456789
+        },
+        {
           id: 7,
           correo: 'externo1@ejemplo.com',
           password: '12345678',
-          apellidos: 'Apellido1 Apellido2',
-          nombre: 'Nombre1',
+          apellidos: 'Externo 1',
+          nombre: 'Profesor',
           telefono: 123456789
         },
         {
           id: 8,
           correo: 'externo2@ejemplo.com',
           password: '12345678',
-          apellidos: 'Apellido3 Apellido2',
-          nombre: 'Nombre1',
+          apellidos: 'Externo 2',
+          nombre: 'Profesor',
           telefono: 223456789
         },
         {
           id: 9,
           correo: 'externo3@ejemplo.com',
           password: '12345678',
-          apellidos: 'Apellido3 Apellido3',
-          nombre: 'Nombre1',
+          apellidos: 'Externo 3',
+          nombre: 'Profesor',
           telefono: 323456789
         },
         {
@@ -598,48 +598,48 @@ export async function seed(knex) {
           id: 20,
           correo: 's1@aps.es',
           password: '12345678',
-          apellidos: 'Apellido1 Apellido2',
-          nombre: 'Nombre1',
+          apellidos: '1',
+          nombre: 'Socio',
           telefono: 123456789
         },
         {
           id: 21,
           correo: 's2@aps.es',
           password: '12345678',
-          apellidos: 'Apellido3 Apellido2',
-          nombre: 'Nombre1',
+          apellidos: '2',
+          nombre: 'Socio',
           telefono: 223456789
         },
         {
           id: 22,
           correo: 's3@aps.es',
           password: '12345678',
-          apellidos: 'Apellido3 Apellido3',
-          nombre: 'Nombre1',
+          apellidos: '3',
+          nombre: 'Socio',
           telefono: 323456789
         },
         {
           id: 160,
           correo: 'estExt1@aps.es',
           password: '12345678',
-          apellidos: 'APS 1',
-          nombre: 'Oficina',
+          apellidos: 'Externo 1',
+          nombre: 'Estudiante',
           telefono: 123456789
         },
         {
           id: 161,
           correo: 'estExt2@aps.es',
           password: '12345678',
-          apellidos: 'APS 2',
-          nombre: 'Oficina',
+          apellidos: 'Externo 2',
+          nombre: 'Estudiante',
           telefono: 223456789
         },
         {
           id: 162,
           correo: 'estExt3@aps.es',
           password: '12345678',
-          apellidos: 'APS 3',
-          nombre: 'Oficina',
+          apellidos: 'Externo 3',
+          nombre: 'Estudiante',
           telefono: 323456789
         }
       ];
@@ -698,20 +698,12 @@ export async function seed(knex) {
 
 
 
-// demanda_servicio_seed.js
-
-/**
- * Seeder para la tabla 'demanda_servicio'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'demanda_servicio'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
 
 
       await knex('demanda_servicio').insert([
         {
           id: 1,
-          creador: 1,
+          creador: 20,
           ciudad: "Madrid",
           finalidad: "Apoyo educativo para niños desfavorecidos",
           periodo_definicion_ini: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 19).replace('T', ' '),
@@ -725,7 +717,7 @@ export async function seed(knex) {
         },
         {
           id: 2,
-          creador: 2,
+          creador: 21,
           ciudad: "Madrid",
           finalidad: "Apoyo educativo para niños superdotados",
           periodo_definicion_ini: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 19).replace('T', ' '),
@@ -739,7 +731,7 @@ export async function seed(knex) {
         },
         {
           id: 3,
-          creador: 3,
+          creador: 22,
           ciudad: "Madrid",
           finalidad: "Apoyo educativo para niños en adolescencia",
           periodo_definicion_ini: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 19).replace('T', ' '),
@@ -1189,19 +1181,7 @@ export async function seed(knex) {
       ]).onConflict('id_oferta') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
     
-
-
-         // ...actualiza el registro
-    
-
-// demandarespalda_seed.js
-
-/**
- * Seeder para la tabla 'demandarespalda'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'demandarespalda'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
+  
 
   await knex('colaborador').insert([
     {
@@ -1646,19 +1626,19 @@ export async function seed(knex) {
       await knex('newsletter').insert([
         {
           id: 1,
-          mail_to: 'nombre',
+          mail_to: 's1@aps.es',
           created_at: knex.fn.now(), // Utiliza la fecha y hora actual
           updated_at: knex.fn.now() // Utiliza la fecha y hora actual
         },
         {
           id: 2,
-          mail_to: 'nombre1',
+          mail_to: 's2@aps.es',
           created_at: knex.fn.now(), // Utiliza la fecha y hora actual
           updated_at: knex.fn.now() // Utiliza la fecha y hora actual
         },
         {
           id: 3,
-          mail_to: 'nombre2',
+          mail_to: 's3@aps.es',
           created_at: knex.fn.now(), // Utiliza la fecha y hora actual
           updated_at: knex.fn.now() // Utiliza la fecha y hora actual
         }
@@ -1882,18 +1862,25 @@ export async function seed(knex) {
       .merge();         // ...actualiza el registro
     
 
-
-
-// profesor_externo_seed.js
-
-/**
- * Seeder para la tabla 'profesor_externo'
- *
- * Este seeder inserta datos de ejemplo en la tabla 'profesor_externo'.
- * Se utiliza Knex.js para interactuar con la base de datos.
- */
-
       await knex('profesor_externo').insert([
+        {
+          id: 4,
+          universidad: 3,
+          facultad: 'Turismo',
+          datos_personales_id: 5
+        },
+        {
+          id: 5,
+          universidad: 3,
+          facultad: 'Informatica',
+          datos_personales_id: 5
+        },
+        {
+          id: 6,
+          universidad: 3,
+          facultad: 'Economicas',
+          datos_personales_id: 6
+        },
         {
           id: 7,
           universidad: 1,
@@ -1929,7 +1916,7 @@ export async function seed(knex) {
 
       await knex('profesor_colaboracion').insert([
         {
-          id_profesor: 7,
+          id_profesor: 14,
           id_colaboracion: 1
         },
       ]).onConflict('id_profesor') // Si el 'id' ya existe...
