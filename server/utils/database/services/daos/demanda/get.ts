@@ -52,30 +52,94 @@ export async function obtenerDemandaServicio(id: number): Promise<ViewDemand.Val
 
 interface DemandasFiltro extends SearchParameters {
 	query?: string;
-	socialNeed?: string[];
-	creator?: string;
-	serviceAreas?: string[];
+	socialNeed?: string | string[];
+	creatorId?: number | number[];
+	serviceAreas?: string | string[];
+	city?: string | string[]; 
+	degree?: string | string[];
+	periodExecutionStart?: string;
+	periodExecutionEnd?: string;
+	periodDefinitionStart?: string;
+	periodDefinitionEnd?: string;
 }
 
 export interface GetAllDemandasServicioResult extends ViewDemand.Value {}
 export async function obtenerTodasDemandasServicio(options: DemandasFiltro): Promise<GetAllDemandasServicioResult[]> {
 	return await qb(ViewDemand.Name)
 		.modify((queryBuilder) => {
+			console.log("ciudades:", options.creatorId);
+			console.log("Opciones:", options);
 			if (!isNullishOrEmpty(options.query)) {
-				queryBuilder.whereLike(ViewDemand.Key('title'), `%${options.query}%`);
+				queryBuilder
+					.where('title', 'like', `%${options.query}%`)
+					.orWhere('beneficiaryCommunity', 'like', `%${options.query}%`)
+					.orWhere('description', 'like', `%${options.query}%`)
+					.orWhere('creatorName', 'like', `%${options.query}%`)
+					.orWhere('creatorMission', 'like', `%${options.query}%`);
+
 			}
 			if (!isNullishOrEmpty(options.socialNeed)) {
-				queryBuilder.whereIn(ViewDemand.Key('socialNeedName'), options.socialNeed);
+				const socialNeeds = Array.isArray(options.socialNeed)
+					? options.socialNeed
+					: [options.socialNeed];
+				queryBuilder.whereIn(ViewDemand.Key('socialNeedId'), socialNeeds);
 			}
-			if (!isNullishOrEmpty(options.creator)) {
-				queryBuilder.whereLike(ViewDemand.Key('creatorName'), `%${options.creator}%`);
+			if (!isNullishOrEmpty(options.creatorId)) {
+				const ids = Array.isArray(options.creatorId)
+				  ? options.creatorId
+				  : [options.creatorId]; 
+			  
+				queryBuilder.whereIn(ViewDemand.Key('creatorId'), ids);
 			}
+			if (!isNullishOrEmpty(options.degree)) {
+				const degrees = Array.isArray(options.degree)
+					? options.degree
+					: [options.degree];
+			
+				degrees.forEach((degree, index) => {
+					if (index === 0) {
+						queryBuilder.where(ViewDemand.Key('degrees'), 'like', `%${degree}%`);
+					} else {
+						queryBuilder.orWhere(ViewDemand.Key('degrees'), 'like', `%${degree}%`);
+					}
+				});
+			}
+			
 			if (!isNullishOrEmpty(options.serviceAreas)) {
-				queryBuilder
-					.join(AreaServicio_AnuncioServicio.Name, AreaServicio_AnuncioServicio.Key('id_anuncio'), '=', ViewDemand.Key('id'))
-					.join(AreaServicio.Name, AreaServicio.Key('id'), '=', AreaServicio_AnuncioServicio.Key('id_area'))
-					.whereIn(AreaServicio.Key('nombre'), options.serviceAreas);
+				const areas = Array.isArray(options.serviceAreas)
+					? options.serviceAreas
+					: [options.serviceAreas];
+			
+				areas.forEach((areas, index) => {
+					if (index === 0) {
+						queryBuilder.where(ViewDemand.Key('serviceAreas'), 'like', `%${areas}%`);
+					} else {
+						queryBuilder.orWhere(ViewDemand.Key('serviceAreas'), 'like', `%${areas}%`);
+					}
+				});
 			}
+			
+			if (!isNullishOrEmpty(options.city)) {
+				const cities = Array.isArray(options.city)
+					? options.city
+					: [options.city];
+				queryBuilder.whereIn(ViewDemand.Key('city'), cities);
+			}
+			
+			if (!isNullishOrEmpty(options.periodExecutionStart)) {
+				queryBuilder.where(ViewDemand.Key('periodExecutionStart'), '>=', options.periodExecutionStart);
+			}
+			if (!isNullishOrEmpty(options.periodExecutionEnd)) {
+				queryBuilder.where(ViewDemand.Key('periodExecutionEnd'), '<=', options.periodExecutionEnd);
+			}
+			if (!isNullishOrEmpty(options.periodDefinitionStart)) {
+				queryBuilder.where(ViewDemand.Key('periodDefinitionStart'), '>=', options.periodDefinitionStart);
+			}
+			if (!isNullishOrEmpty(options.periodDefinitionEnd)) {
+				queryBuilder.where(ViewDemand.Key('periodDefinitionEnd'), '<=', options.periodDefinitionEnd);
+			}
+			
+			
 		})
 		.limit(options.limit ?? 100)
 		.offset(options.offset ?? 0);

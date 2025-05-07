@@ -15,9 +15,100 @@ iniciativas:
 Problema actual con: 
 degrees -> array de numeros
 socialNeed -> numero
-serviceArea -> array de numeros
+serviceArea -> array de números
+
+roles:
+role: "Admin" | "InternalProfessor" | "ExternalProfessor" | "InternalStudent" | "ExternalStudent" | "ApSOffice" | "CommunityPartner" | "Tutor" | "Collaborator"
 
 
 
 profesores externos diria:
 [ { "id": 4, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Tutor", "lastName": "CA 2", "phone": 223456789, "email": "tutor2@ejemplo.com", "role": "ExternalProfessor", "university": 3, "faculty": "Turismo", "knowledgeAreas": [] }, { "id": 5, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Tutor", "lastName": "CA 2", "phone": 223456789, "email": "tutor2@ejemplo.com", "role": "ExternalProfessor", "university": 3, "faculty": "Informatica", "knowledgeAreas": [] }, { "id": 6, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Tutor", "lastName": "CA 3", "phone": 223456789, "email": "tutor3@ejemplo.com", "role": "ExternalProfessor", "university": 3, "faculty": "Economicas", "knowledgeAreas": [] }, { "id": 7, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Profesor", "lastName": "Externo 1", "phone": 123456789, "email": "externo1@ejemplo.com", "role": "ExternalProfessor", "university": 1, "faculty": "Turismo", "knowledgeAreas": [ 1 ] }, { "id": 8, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Profesor", "lastName": "Externo 2", "phone": 223456789, "email": "externo2@ejemplo.com", "role": "ExternalProfessor", "university": 2, "faculty": "Informatica", "knowledgeAreas": [ 2 ] }, { "id": 9, "createdAt": "2025-04-24T14:13:04.000Z", "avatar": "", "firstName": "Profesor", "lastName": "Externo 3", "phone": 323456789, "email": "externo3@ejemplo.com", "role": "ExternalProfessor", "university": 3, "faculty": "Economicas", "knowledgeAreas": [ 3 ] }, { "id": 150, "createdAt": "2025-03-25T18:54:45.000Z", "avatar": null, "firstName": "Elena", "lastName": "Jiménez", "phone": 601123450, "email": "profesor5@escuela.com", "role": "ExternalProfessor", "university": 2, "faculty": "Turismo", "knowledgeAreas": [ 1 ] } ]
+//___________________________________________________________________________________________________________________//
+
+{ "entries": [ { "id": 1, "city": "Madrid", "purpose": "Apoyo educativo para niños desfavorecidos", "periodDefinitionStart": "2025-03-29T23:00:00.000Z", "periodDefinitionEnd": "2025-05-28T22:00:00.000Z", "periodExecutionStart": "2025-04-13T22:00:00.000Z", "periodExecutionEnd": "2025-04-13T22:00:00.000Z", "periodDeadline": "2025-05-30T22:00:00.000Z", "temporaryObservations": "Se necesita disponibilidad por las tardes", "beneficiaryCommunity": "Niños en situación de vulnerabilidad BAJA", "title": "Servicio de Diseño Gráfico", "description": "Ofrecemos diseño gráfico profesional para empresas y emprendedores.", "createdAt": "2025-04-29T16:42:01.000Z", "updatedAt": "2025-04-29T16:42:01.000Z", "image": "prueba1.jpg", "socialNeedId": 1, "socialNeedName": "nombre", "creatorId": 20, "creatorName": "socio1", "creatorMission": "", "creatorSector": "", "creatorUrl": "", "creatorAvatar": "", "serviceAreas": "[\"Programacion\"]", "degrees": "[\"Pepe\"]" }, 
+
+{ "id": 2, "city": "Madrid", "purpose": "Apoyo educativo para niños superdotados", "periodDefinitionStart": "2025-03-29T23:00:00.000Z", "periodDefinitionEnd": "2025-05-28T22:00:00.000Z", "periodExecutionStart": "2025-04-13T22:00:00.000Z", "periodExecutionEnd": "2025-04-13T22:00:00.000Z", "periodDeadline": "2025-05-30T22:00:00.000Z", "temporaryObservations": "Se necesita disponibilidad por las mañanas", "beneficiaryCommunity": "Niños en situación de vulnerabilidad MEDIA", "title": "Consultoría en Marketing Digital", "description": "Asesoramos en estrategias digitales para potenciar tu negocio en redes sociales.", "createdAt": "2025-04-29T16:42:01.000Z", "updatedAt": "2025-04-29T16:42:01.000Z", "image": "prueba2.jpg", "socialNeedId": 2, "socialNeedName": "nombre2", "creatorId": 21, "creatorName": "socio2", "creatorMission": "", "creatorSector": "", "creatorUrl": "", "creatorAvatar": "", "serviceAreas": "[\"Calculo\"]", "degrees": "[\"Luis\"]" }, 
+
+{ "id": 3, "city": "Madrid", "purpose": "Apoyo educativo para niños en adolescencia", "periodDefinitionStart": "2025-03-29T23:00:00.000Z", "periodDefinitionEnd": "2025-05-28T22:00:00.000Z", "periodExecutionStart": "2025-04-13T22:00:00.000Z", "periodExecutionEnd": "2025-04-13T22:00:00.000Z", "periodDeadline": "2025-05-30T22:00:00.000Z", "temporaryObservations": "Se necesita disponibilidad por las noches", "beneficiaryCommunity": "Niños en situación de vulnerabilidad ALTA", "title": "Desarrollo de Aplicaciones Web", "description": "Creamos aplicaciones web a medida con las últimas tecnologías.", "createdAt": "2025-04-29T16:42:01.000Z", "updatedAt": "2025-04-29T16:42:01.000Z", "image": "prueba3.jpg", "socialNeedId": 3, "socialNeedName": "nombre3", "creatorId": 22, "creatorName": "socio3", "creatorMission": "", "creatorSector": "", "creatorUrl": "", "creatorAvatar": "", "serviceAreas": "[\"Algebra\"]", "degrees": "[\"Alfredo\"]" }, 
+
+{ "id": 144, "city": "FASDFA", "purpose": "SDFASDFASD", "periodDefinitionStart": null, "periodDefinitionEnd": null, "periodExecutionStart": null, "periodExecutionEnd": null, "periodDeadline": null, "temporaryObservations": null, "beneficiaryCommunity": "AFSDFASDF", "title": "asdf", "description": "asdf", "createdAt": "2025-04-30T16:14:54.000Z", "updatedAt": "2025-04-30T16:14:54.000Z", "image": null, "socialNeedId": 28, "socialNeedName": "asdfsd", "creatorId": 151, "creatorName": "Instituto Ejemplo 1", "creatorMission": "Fomentar la educación inclusiva", "creatorSector": "Educación", "creatorUrl": "https://www.ine.es/", "creatorAvatar": "a7bdc773-75b5-4a27-8057-a688548eb33b", "serviceAreas": "[\"Programacion\",\"Calculo\"]", "degrees": "[\"Pepe\",\"Luis\"]" } ] }
+//___________________________________________________________________________________________________________________//
+socio comunitario: explican necesidad
+ofertas y demandas
+socios explican su necesidad
+profesor dicen la oferta que tienen
+3 caminos -socio ve una oferta y contesta
+-profesor ve una demanda y 
+-algoritmo de matching
+
+en el partenariado
+
+
+búsquedas con filtros lo primero
+
+
+estudiantes solo cuando hay proyectos, estamos en partenariados (ofertas y demandas, búsquedas con filtros)
+nortificaciones (cuando un socio ve una oferta que le interesa, el proceso para comunicarse)
+No es lo mismo cuando un socio 
+Profesor define partenariado SIEMPRE(crean ofertas) un aviso
+socios comnunitarios nooooo crean ofertas (crean demandas)
+
+barra de busqueda
+formularios
+notificaciones
+
+profesor externo es una sublcase de colaborador
+
+Lo mas importante es la especificación
+
+//_________________________________________________Paginas hechas___________________________________//
+demandas, añadirlas al menu
+proyectos
+admin usuarios, funcionando,
+proyectos,partenariados,ofertas
+Bug de editar usuarios
+seeds,
+Cuando se cierra sesión debería cancelarte la vista a la pagina o llevarte a la principal o algo
+
+
+
+
+//Ñ______________________________________POR AQUI_______________________________________________________//
+<!-- Áreas de Servicio -->
+			<div class="mb-4">
+				<p class="font-semibold mb-1">Áreas de Servicio</p>
+				<div class="flex flex-col gap-2">
+					<label
+					v-for="servicio in entry.serviceAreas"
+					:key="servicio.id"
+					class="flex items-center gap-2"
+					>
+					<input
+						type="checkbox"
+						:value="servicio.id"
+					/>
+					{{ servicio.nombre }}
+					</label>
+				</div>
+			</div>
+
+
+			<!-- Titulaciones requeridas -->
+			<div class="mb-4">
+				<p class="font-semibold mb-1">Titulaciones</p>
+				<div class="flex flex-col gap-2">
+					<label
+					v-for="titulos in entry.degrees"
+					:key="titulos.id"
+					class="flex items-center gap-2"
+					>
+					<input
+						type="checkbox"
+						:value="titulos.id"
+					/>
+					{{ titulos.nombre }}
+					</label>
+				</div>
+			</div>
+

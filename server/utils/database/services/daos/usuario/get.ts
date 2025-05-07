@@ -11,7 +11,7 @@ import { ViewUserExternalStudent } from '../../types/views/UserExternalStudent';
 import { ViewUserInternalProfessor } from '../../types/views/UserInternalProfessor';
 import { ViewUserInternalStudent } from '../../types/views/UserInternalStudent';
 import type { SearchParameters } from '../shared';
-import { parseViewUserExternalProfessorJsonStringProperties, parseViewUserJsonStringProperties } from './_shared';
+import { parseViewUserExternalProfessorJsonStringProperties, parseViewUserJsonStringProperties, parseViewUserInternalProfessorJsonStringProperties } from './_shared';
 
 export async function maybeGetUsuarioSinRolPorEmail(email: string): Promise<ViewUser.Value | null> {
 	return parseViewUserJsonStringProperties(await qb(ViewUser.Name).where({ email }).first()) ?? null;
@@ -64,10 +64,16 @@ export async function obtenerSociosComunitarios(): Promise<ViewUserCommunityPart
 	return await qb(ViewUserCommunityPartner.Name);
 }
 
-export async function obtenerProfesoresInternos(): Promise<ViewUserExternalProfessor.Value[]> {
+export async function obtenerProfesoresInternos(): Promise<ViewUserInternalProfessor.Value[]> {
+	const entries = await qb(ViewUserInternalProfessor.Name);
+	return entries.map((entry) => parseViewUserInternalProfessorJsonStringProperties(entry));
+}
+
+export async function obtenerProfesoresExternos(): Promise<ViewUserExternalProfessor.Value[]> {
 	const entries = await qb(ViewUserExternalProfessor.Name);
 	return entries.map((entry) => parseViewUserExternalProfessorJsonStringProperties(entry));
 }
+  
 
 export async function obtenerProfesorInterno(id: number): Promise<ViewUserInternalProfessor.Value | null> {
 	return (await qb(ViewUserInternalProfessor.Name).where({ id }).first()) ?? null;
@@ -88,19 +94,38 @@ export async function obtenerEstudianteExterno(id: number): Promise<ViewUserExte
 
 export interface SearchUsersOptions extends SearchParameters {
 	query?: string;
+	roles?: string[];
 }
 export async function searchUsers(options: SearchUsersOptions): Promise<ViewUser.Value[]> {
 	const entries = (await qb(ViewUser.Name)
-		.modify((query) => {
+		.modify((queryBuilder) => {
 			if (!isNullishOrEmpty(options.query)) {
-				query
+				queryBuilder
 					.where('firstName', 'like', `%${options.query}%`) //
 					.orWhere('lastName', 'like', `%${options.query}%`)
 					.orWhere('email', 'like', `%${options.query}%`);
 			}
+			
+			console.log("roles:", options.roles);
+
+			// if (!isNullishOrEmpty(options.roles)) {
+			// 	queryBuilder
+			// 	.where('city', options.roles);
+			// }
+			// if (options.roles && options.roles.length > 0) {
+			// 	queryBuilder.andWhere((builder) => {
+			// 		if(options.roles!.length === 1) {
+			// 			builder.orWhereRaw(`JSON_EXTRACT(data, '$.role') = ?`, [options.roles![0]]);
+			// 		}
+			// 		for (const role of options.roles!) {
+			// 			builder.orWhereRaw(`JSON_UNQUOTE(JSON_EXTRACT(data, '$.role')) = ?`, [role]);
+			// 		}
+			// 	});
+			// }
 		})
 		.limit(options.limit ?? 100)
 		.offset(options.offset ?? 0)
 		.orderBy('createdAt')) as ViewUser.RawValue[];
+
 	return entries.map((entry) => parseViewUserJsonStringProperties(entry));
 }

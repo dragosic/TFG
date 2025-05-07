@@ -999,6 +999,35 @@ export async function seed(knex) {
         {  
           id_area: 3,
           id_profesor: 9
+        },
+        { 
+          id_area: 1,
+          id_profesor: 4
+        },
+        { 
+          id_area: 2,
+          id_profesor: 5
+        },
+        {  
+          id_area: 3,
+          id_profesor: 6
+        },
+        { 
+          id_area: 1,
+          id_profesor: 14
+        },
+        { 
+          id_area: 1,
+          id_profesor: 15
+        },
+        {  
+          id_area: 3,
+          id_profesor: 16
+        },
+        
+        {  
+          id_area: 2,
+          id_profesor: 16
         }
       ]).onConflict('id_area') // Si el 'id' ya existe...
       .merge();         // ...actualiza el registro
@@ -1293,15 +1322,15 @@ export async function seed(knex) {
 
       await knex('titulacion_local').insert([
         {
-          id: 1,
+          id: 111,
           nombre: 'ADE'
         },
         {
-          id: 2,
+          id: 112,
           nombre: 'GII'
         },
         {
-          id: 3,
+          id: 113,
           nombre: 'GIC'
         }
       ]).onConflict('id') // Si el 'id' ya existe...
@@ -1323,17 +1352,17 @@ export async function seed(knex) {
       await knex('estudiante_interno').insert([
         {
           id: 155,
-          titulacion_local: 1,
+          titulacion_local: 111,
           datos_personales_Id: 155
         },
         {
           id: 156,
-          titulacion_local: 2,
+          titulacion_local: 112,
           datos_personales_Id: 156
         },
         {
           id: 157,
-          titulacion_local: 3,
+          titulacion_local: 113,
           datos_personales_Id: 157
         }
       ]).onConflict('id') // Si el 'id' ya existe...
@@ -2010,12 +2039,28 @@ await knex('profesorinterno_oferta').insert([
 
       await knex('titulacionlocal_profesor').insert([
         {
-          id_titulacion: 1,
+          id_titulacion: 111,
           id_profesor: 4
         },
         {
-          id_titulacion: 2,
+          id_titulacion: 112,
           id_profesor: 5
+        },
+        {
+          id_titulacion: 111,
+          id_profesor: 6
+        },
+        {
+          id_titulacion: 112,
+          id_profesor: 14
+        },
+        {
+          id_titulacion: 111,
+          id_profesor: 15
+        },
+        {
+          id_titulacion: 113,
+          id_profesor: 16
         }
       ]).onConflict(['id_titulacion','id_profesor']) // Si el 'id' ya existe...
       .ignore();         // ...actualiza el registro

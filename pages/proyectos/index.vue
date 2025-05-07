@@ -30,11 +30,6 @@
 				</div>
 			</div>
 
-
-			<!-- Info -->
-			<div class="text-xs text-gray-500 mt-2">
-				{{ data?.entries.length ?? 0 }} resultados / Total {{ data?.count ?? 0 }}
-			</div>
 			<!-- Área de Conocimiento -->
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2">Área de conocimiento</h3>
@@ -117,6 +112,10 @@
 		<!-- Aquí iría tu tabla y todo lo demás -->
 		<div class="rounded-lg shadow p-4 bg-white">
 		<h2 class="text-lg font-semibold mb-4">Listado de proyectos</h2>
+		<!-- Info -->
+		<div class="text-xs text-gray-500 mt-2">
+			{{ data?.entries.length ?? 0 }} resultados / Total {{ data?.count ?? 0 }}
+		</div>
 			<div v-if="data" class="w-full overflow-x-auto">
 				<table class="table">
 					<!-- head -->
@@ -126,7 +125,7 @@
 							<th>Entidad</th>
 							<th>Estudiantes</th>
 							<th>Proyecto</th>
-							<th>Acciones</th>
+							<th v-if="auth.session.value?.role === 'Admin'">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -168,8 +167,8 @@
 								</div>
 								<div><strong>Fecha de Fin:</strong> {{ new Date(entry.demandEndDate).toLocaleDateString() }}</div>
 							</td>
-							<th>
-								<div v-if="auth.session.value?.role === 'Admin'" class="join">
+							<th v-if="auth.session.value?.role === 'Admin'">
+								<div  class="join">
 									<nuxt-link :href="isSelf(entry.id) ? '/@me' : `/gestor/usuarios/${entry.id}`" class="btn btn-ghost join-item">
 										<Icon name="material-symbols:edit-rounded" aria-label="Editar" class="h-6 w-6" />
 									</nuxt-link>

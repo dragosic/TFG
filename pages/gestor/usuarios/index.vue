@@ -34,13 +34,34 @@
 				<div class="rounded-lg shadow p-4 bg-white">
 					<h3 class="text-md font-semibold mb-2">Roles</h3>
 					<div class="flex flex-col gap-2">
-						<label><input type="checkbox" value="Gestor" /> Gestor</label>
-						<label><input type="checkbox" value="Profesor" /> Profesor</label>
-						<label><input type="checkbox" value="Estudiante" /> Estudiante</label>
-						<label><input type="checkbox" value="Oficina ApS" /> Oficina ApS</label>
-						<label><input type="checkbox" value="Socio comunitario" /> Socio comunitario</label>
-						<label><input type="checkbox" value="Tutor" /> Tutor</label>
-						<label><input type="checkbox" value="Colaborador" /> Colaborador</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Gestor"  />
+							Gestor
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Profesor"  />
+							Profesor
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Estudiante" />
+							Estudiante
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Oficina ApS"  />
+							Oficina ApS
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Socio comunitario" />
+							Socio comunitario
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Tutor"  />
+							Tutor
+						</label>
+						<label>
+							<input v-model="selectedRoles" type="checkbox" value="Colaborador"  />
+							Colaborador
+						</label>
 					</div>
 				</div>
 			</label>
@@ -103,44 +124,44 @@
 					</table>
 				</div>
 
-			<dialog ref="dialogElement" class="modal" @click="onDialogClick">
-				<div class="modal-box">
-					<h3 class="text-lg font-bold">¡Atención!</h3>
-					<p class="py-4">Esta acción es permanente, ¿desea proceder al borrado del usuario?</p>
-					<div v-if="deleting" class="rounded-xl bg-base-200 p-4 drop-shadow-lg">
-						<div class="flex items-center gap-4">
-							<div class="mask mask-circle h-12 w-12 shrink-0">
-								<avatar :src="deleting.avatar" :size="64" />
+				<dialog ref="dialogElement" class="modal" @click="onDialogClick">
+					<div class="modal-box">
+						<h3 class="text-lg font-bold">¡Atención!</h3>
+						<p class="py-4">Esta acción es permanente, ¿desea proceder al borrado del usuario?</p>
+						<div v-if="deleting" class="rounded-xl bg-base-200 p-4 drop-shadow-lg">
+							<div class="flex items-center gap-4">
+								<div class="mask mask-circle h-12 w-12 shrink-0">
+									<avatar :src="deleting.avatar" :size="64" />
+								</div>
+								<div class="grid gap-1">
+									<span class="font-semibold"> {{ deleting.firstName }} {{ deleting.lastName }} </span>
+									<span class="badge badge-ghost badge-sm">{{ deleting.email }}</span>
+								</div>
 							</div>
-							<div class="grid gap-1">
-								<span class="font-semibold"> {{ deleting.firstName }} {{ deleting.lastName }} </span>
-								<span class="badge badge-ghost badge-sm">{{ deleting.email }}</span>
-							</div>
-						</div>
 
-						<ul class="mt-4">
-							<li>
-								<span class="font-semibold">Rol</span>:
-								{{ UserRoleMapping[deleting.role] }}
-							</li>
-							<li>
-								<span class="font-semibold">Fecha de Creación</span>:
-								{{ useDateTimeFormat(deleting.createdAt) }}
-							</li>
-							<li>
-								<span class="font-semibold">Teléfono</span>:
-								{{ deleting.phone }}
-							</li>
-						</ul>
+							<ul class="mt-4">
+								<li>
+									<span class="font-semibold">Rol</span>:
+									{{ UserRoleMapping[deleting.role] }}
+								</li>
+								<li>
+									<span class="font-semibold">Fecha de Creación</span>:
+									{{ useDateTimeFormat(deleting.createdAt) }}
+								</li>
+								<li>
+									<span class="font-semibold">Teléfono</span>:
+									{{ deleting.phone }}
+								</li>
+							</ul>
+						</div>
+						<div class="modal-action">
+							<form method="dialog">
+								<button class="btn btn-error rounded-r-none" @click="onConfirmDelete">Borrar</button>
+								<button class="btn rounded-l-none" @click="onConfirmCancel">Cerrar</button>
+							</form>
+						</div>
 					</div>
-					<div class="modal-action">
-						<form method="dialog">
-							<button class="btn btn-error rounded-r-none" @click="onConfirmDelete">Borrar</button>
-							<button class="btn rounded-l-none" @click="onConfirmCancel">Cerrar</button>
-						</form>
-					</div>
-				</div>
-			</dialog>
+				</dialog>
 			</div>
 		</main>
 	</div>
@@ -156,20 +177,62 @@ const skip = ref(0);
 const limit = ref(25);
 const query = ref('');
 
-const { data, error } = useFetch('/api/users', { method: 'GET', query: { query, skip, limit } });
+const rolMap: Record<string, string> = {
+	'Gestor': 'Admin',
+	'Profesor': 'InternalProfessor',
+	'Estudiante': 'InternalStudent',
+	'Oficina ApS': 'ApSOffice',
+	'Socio comunitario': 'CommunityPartner',
+	'Tutor': 'Tutor',
+	'Colaborador': 'Collaborator',
+};
 
+const selectedRoles = ref<string[]>([]);
 
-watch([query, skip, limit], ([newQuery, newSkip, newLimit]) => {
-	console.log("query:", newQuery);
-	console.log("skip:", newSkip);
-	console.log("limit:", newLimit);
-	console.log("datos:", data.value);
-	console.log("datos:", data.value?.users.length);
-	
-	if (data.value?.total != null && data.value?.users.length < 25) {
-		skip.value = 0;
-	}
+const rol = computed(() => {
+  const mappedRoles = selectedRoles.value.map(label => rolMap[label]);
+  const filteredRoles = mappedRoles.filter(Boolean);
+  return filteredRoles;
 });
+
+onMounted(() => {
+  rol.value.push('');
+});
+
+
+const { data, error } = useFetch('/api/users', {
+  method: 'GET',
+  query: {
+    query: query.value,
+    skip: skip.value,
+    limit: limit.value,
+    roles: rol.value.length > 0 ? rol.value : undefined
+  }
+});
+
+watch([query, skip, limit, rol], async () => {
+  try {
+    const params = new URLSearchParams();
+    params.set('query', query.value);
+    params.set('skip', skip.value.toString());
+    params.set('limit', limit.value.toString());
+
+    // Añade cada rol como parámetro individual
+    for (const r of rol.value) {
+      params.append('roles', r);
+    }
+
+    const res = await $fetch(`/api/users?${params.toString()}`, {
+      method: 'GET',
+    });
+
+    data.value = res;
+  } catch (err) {
+    error.value = err;
+    console.error('Error en fetch reactivo:', err);
+  }
+});
+
 
 
 const skipPreviousDisabled = computed(() => skip.value === 0);

@@ -69,56 +69,116 @@
 		</div>
   
 		<!-- Campos dinámicos según tipo -->
+		<!-- Estudiante Interno -->
+		<template v-if="form.type === 'InternalStudent'">
+			{{ user }}
+			<label class="form-control w-full">
+				<div class="label">
+					<span class="label-text">Carrera</span>
+				</div>
+				<template v-for="titulacion in titulaciones.data" :key="titulacion.id">
+					<template v-if="titulacion.id === user.degree">
+						<input v-model="titulacion.nombre" type="text" class="input input-bordered w-full" />
+					</template>
+				</template>
+			</label>
+		</template>
+
+
 		<!-- Estudiante Externo -->
 		<template v-if="form.type === 'ExternalStudent'">
-		  <label class="form-control w-full">
-			<div class="label">
-			  <span class="label-text">Universidad</span>
-			</div>
-			<input v-model="form.university" type="text" class="input input-bordered w-full" />
-		  </label>
-  
-		  <label class="form-control w-full">
-			<div class="label">
-			  <span class="label-text">Carrera</span>
-			</div>
-			<input v-model="form.degree" type="text" class="input input-bordered w-full" />
-		  </label>
+			<label class="form-control w-full">
+				<div class="label">
+				<span class="label-text">Universidad</span>
+				</div>
+
+				<template v-for="titulacion in titulaciones.data" :key="titulacion.id">
+					<template v-if="titulacion.id === user.university">
+						<input v-model="titulacion.nombre" type="text" class="input input-bordered w-full" />
+					</template>
+				</template>
+			</label>
+
+			<label class="form-control w-full">
+				<div class="label">
+				<span class="label-text">Carrera</span>
+				</div>
+				<input v-model="user.degree" type="text" class="input input-bordered w-full" />
+			</label>
 		</template>
-  
-		<!-- Profesor Externo -->
-		<template v-else-if="form.type === 'ExternalProfessor'">1
-			<template v-for="profe in profesores" :key="profe.id">
+
+
+		<!-- Profesor Interno -->
+		<template v-else-if="form.type === 'InternalProfessor'">
+			
+			<template v-for="profe in profesoresInt" :key="profe.id">
 				<template v-if="profe.id === form.id">
 					<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Universidad</span>
-					</div>
-					<input v-model="profe.university" type="text" class="input input-bordered w-full" />
-					</label>
-
-					<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Facultad</span>
-					</div>
-					<input v-model="profe.faculty" type="text" class="input input-bordered w-full" />
-					</label>
-
-					<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Área conocimiento</span>
-					</div>
-
-					<!-- SOLO UN V-FOR: combinamos area y areaProf directamente -->
-					<template v-for="area in areaCon" :key="area.id">
-						<template v-if="profe.knowledgeAreas.includes(area.id)">
-						<input v-model="area.nombre" type="text" class="input input-bordered w-full" />
+						<div class="label">
+							<span class="label-text">Carrera</span>
+						</div>
+						<template v-for="grados in titulaciones.data" :key="grados.id">
+							<template v-if="profe.degrees.includes(grados.id) ">
+								<input v-model="grados.nombre" type="text" class="input input-bordered w-full" />
+							</template>
 						</template>
-					</template>
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Área conocimiento</span>
+						</div>
+
+						<!-- SOLO UN V-FOR: combinamos area y areaProf directamente -->
+						<template v-for="area in areaCon" :key="area.id">
+							<template v-if="profe.knowledgeAreas.includes(area.id)">
+								<input v-model="area.nombre" type="text" class="input input-bordered w-full" />
+							</template>
+						</template>
 					</label>
 				</template>
 			</template>
 		</template>
+
+
+		<!-- Profesor Externo -->
+		<template v-else-if="form.type === 'ExternalProfessor'">
+			{{ profesoresExt }}
+			<template v-for="profe in profesoresExt" :key="profe.id">
+				<template v-if="profe.id === form.id">
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Universidad</span>
+						</div>
+						<template v-for="titulacion in titulaciones.data" :key="titulacion.id">
+							<template v-if="titulacion.id === profe.university">
+								<input v-model="titulacion.nombre" type="text" class="input input-bordered w-full" />
+							</template>
+						</template>
+					</label>
+
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Facultad</span>
+						</div>
+						<input v-model="profe.faculty" type="text" class="input input-bordered w-full" />
+					</label>
+
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Área conocimiento</span>
+						</div>
+
+						<!-- SOLO UN V-FOR: combinamos area y areaProf directamente -->
+						<template v-for="area in areaCon" :key="area.id">
+							<template v-if="profe.knowledgeAreas.includes(area.id)">
+								<input v-model="area.nombre" type="text" class="input input-bordered w-full" />
+							</template>
+						</template>
+					</label>
+				</template>
+			</template>
+		</template>
+
   
 		<!-- Socio Comunitario -->
 		<template v-else-if="form.type === 'CommunityPartner'">
@@ -158,6 +218,8 @@
 		<!-- Tutor -->
 
 		<!-- Colaborador -->
+
+		
 
 		<!-- Avatar -->
 		<div ref="avatarContainerElement" class="relative h-48 w-48 shrink-0">
@@ -228,10 +290,16 @@
   
   const { data: socios } = await useFetch('/api/users/socios', { method: 'GET' });
   
-  const { data: profesores } = await useFetch('/api/users/profesores', { method: 'GET' });
+  const { data: profesoresExt } = await useFetch('/api/users/profesoresExt', { method: 'GET' });
+
+  const { data: profesoresInt } = await useFetch('/api/users/profesoresInt', { method: 'GET' });
 
   const { data: areaCon } = useFetch('/api/knowledge-areas', { method: 'GET'});
  
+
+  const { data: titulaciones } = useFetch('/api/titulacion', { method: 'GET'});
+
+
   const form = reactive({
 	id: 0,
 	firstName: '',
@@ -256,8 +324,8 @@
 		email: user.value.email,
 		phone: user.value.phone,
 		type: user.value.role,
-		university: user.value.data?.university ?? '',
-		degree: user.value.data?.degree ?? '',
+		degree: user.value.degree,
+		university: user.value.university,
 		faculty: user.value.data?.faculty ?? '',
 		sector: user.value.data?.sector ?? '',
 		url: user.value.data?.url ?? '',
@@ -286,8 +354,8 @@
 		  mission: form.mission,
 		}
 	  };
-	  await $fetch(endpoint, { method: 'PUT', body });
-	  alert('Cambios guardados correctamente.');
+	//   await $fetch(endpoint, { method: 'PUT', body });
+	//   alert('Cambios guardados correctamente.');
 	} catch (e) {
 	  console.error(e);
 	  alert('Error al guardar los cambios.');

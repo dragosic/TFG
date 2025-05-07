@@ -3,6 +3,7 @@ import type { DatosPersonalesInterno } from '../../types/DatosPersonalesInterno'
 import type { Usuario } from '../../types/Usuario';
 import type { ViewUser } from '../../types/views/User';
 import type { ViewUserExternalProfessor } from '../../types/views/UserExternalProfessor';
+import type { ViewUserInternalProfessor } from '../../types/views/UserInternalProfessor';
 
 /**
  * Fixes the `user` property of a `ViewUser` entry from a JSON string to an object. This function is required as the
@@ -49,3 +50,21 @@ export function formatUser<User extends ViewUser.ValueUserType>(
 }
 
 export type BaseUserData = Usuario.Value & (DatosPersonalesInterno.Value | DatosPersonalesExterno.Value);
+
+
+export function parseViewUserInternalProfessorJsonStringProperties(
+	entry: ViewUserInternalProfessor.Value
+): ViewUserInternalProfessor.Value;
+export function parseViewUserInternalProfessorJsonStringProperties(
+	entry: ViewUserInternalProfessor.Value | undefined
+): ViewUserInternalProfessor.Value | undefined;
+export function parseViewUserInternalProfessorJsonStringProperties(
+	entry: ViewUserInternalProfessor.Value | undefined
+): ViewUserInternalProfessor.Value | undefined {
+	if (!entry) return entry;
+
+	return {
+		...entry,
+		degrees: typeof entry.degrees === 'string' ? JSON.parse(entry.degrees) : entry.degrees
+	};
+}
