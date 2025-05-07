@@ -94,7 +94,7 @@ export async function obtenerEstudianteExterno(id: number): Promise<ViewUserExte
 
 export interface SearchUsersOptions extends SearchParameters {
 	query?: string;
-	roles?: string[];
+	roles?: string | string[]; 
 }
 export async function searchUsers(options: SearchUsersOptions): Promise<ViewUser.Value[]> {
 	const entries = (await qb(ViewUser.Name)
@@ -107,7 +107,19 @@ export async function searchUsers(options: SearchUsersOptions): Promise<ViewUser
 			}
 			
 			console.log("roles:", options.roles);
-
+			if (!isNullishOrEmpty(options.roles)) {
+				const roles = Array.isArray(options.roles)
+					? options.roles
+					: [options.roles];
+			
+					roles.forEach((roles, index) => {
+					if (index === 0) {
+						queryBuilder.where(ViewUser.Key('data'), 'like', `%${roles}%`);
+					} else {
+						queryBuilder.orWhere(ViewUser.Key('data'), 'like', `%${roles}%`);
+					}
+				});
+			}
 			// if (!isNullishOrEmpty(options.roles)) {
 			// 	queryBuilder
 			// 	.where('city', options.roles);

@@ -13,6 +13,7 @@ import type { ViewUserTutor } from './UserTutorCA';
 
 export namespace ViewUser {
 	export const Name = 'view_user';
+	export const Key = makeKeyFunction(Name);
 	export type BaseValue<User extends object> = User & {
 		id: Usuario.Value['id'];
 		createdAt: Usuario.Value['createdAt'];

@@ -6,7 +6,7 @@ import { SearchQuery } from '~/server/utils/validators/shared';
 const schemaQuery = z //
 	.object({ 
 		query: z.string().trim().optional(),
-		roles: z.array(z.string()).optional()
+		roles: z.union([z.string(), z.array(z.string())]).optional()
 	})
 	.merge(SearchQuery);
 

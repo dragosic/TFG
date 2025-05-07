@@ -185,7 +185,7 @@
 							<th>Creador</th>
 							<th>Area servicio</th>
 							<th>Grado</th>
-							<th v-if="auth.session.value?.role === 'Admin'">Acciones</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -200,19 +200,23 @@
 							<td>{{ entry.creatorIdName }}</td>
 							<td>{{ JSON.parse(entry.serviceAreas).join(', ') }}</td>
 							<td>{{ JSON.parse(entry.degrees).join(', ') }}</td>
-
-							<th v-if="auth.session.value?.role === 'Admin'">
-								<div  class="join">
+							
+							<th>
+								<div class="join">
+									<nuxt-link :href="`/demandas/${entry.id}`" class="btn btn-ghost join-item">
+										<Icon name="material-symbols:visibility" aria-label="Ver demanda" class="h-6 w-6" />
+									</nuxt-link>
+									<template v-if="auth.session.value?.role === 'Admin'">
 									<nuxt-link :href="isSelf(entry.id) ? '/@me' : `/gestor/usuarios/${entry.id}`" class="btn btn-ghost join-item">
 										<Icon name="material-symbols:edit-rounded" aria-label="Editar" class="h-6 w-6" />
 									</nuxt-link>
 									<button
 										class="btn btn-ghost join-item text-error disabled:bg-transparent"
-										:disabled="isSelf(entry.id)"
 										@click="onDelete(entry as any)"
 									>
 										<Icon name="material-symbols:delete-forever-rounded" aria-label="Borrar" class="h-6 w-6" />
 									</button>
+									</template>
 								</div>
 							</th>
 						</tr>
