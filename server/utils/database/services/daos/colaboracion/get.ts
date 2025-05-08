@@ -20,19 +20,74 @@ export async function maybeObtenerIdPartenariado(data: Pick<Partenariado.Value, 
 
 export interface GetAllPartnershipsFilter extends SearchParameters {
 	title?: string;
-	acceptsExternals?: ViewPartnership.Value['acceptsExternals'];
-	status?: ViewPartnership.Value['status'];
+	status?: string | string[];
 	manager?: ViewPartnership.Value['managerId'];
-	cities?: ViewPartnership.Value['demandCity'][];
+	offerCreatorId?: number | number[];
+	offerQuarter?: number | number[];
+	acceptsExternals?: number | number[];
+	demandCity?: string | string[];
+	demandDefinitionPeriodStart?: string | string[];
+	demandDefinitionPeriodEnd?: string | string[];
+	demandExecutionPeriodStart?: string | string[];
+	demandExecutionPeriodEnd?: string | string[];
+	demandEndDate?: string | string[];
 }
 export async function getAllPartnerships(options: GetAllPartnershipsFilter): Promise<ViewPartnership.Value[]> {
 	return await qb(ViewPartnership.Name) //
-		.modify((query) => {
-			if (!isNullishOrEmpty(options.title)) query.andWhereLike('title', `%${options.title}%`);
-			if (!isNullish(options.acceptsExternals)) query.andWhere('acceptsExternals', options.acceptsExternals);
-			if (!isNullish(options.status)) query.andWhere('status', options.status);
-			if (!isNullish(options.manager)) query.andWhere('managerId', options.manager);
-			if (!isNullishOrEmpty(options.cities)) query.whereIn('demandCity', options.cities);
+		.modify((queryBuilder) => {
+			if (!isNullishOrEmpty(options.title)){
+				queryBuilder
+					.where('title', `%${options.title}%`)
+					.orWhere('description', 'like', `%${options.title}%`)
+					.orWhere('status', 'like', `%${options.title}%`)
+					.orWhere('students', 'like', `%${options.title}%`)
+					.orWhere('professors', 'like', `%${options.title}%`)
+					.orWhere('demandCity', 'like', `%${options.title}%`)
+					.orWhere('offerCreatorName', 'like', `%${options.title}%`)
+
+			} 
+			console.log('acceptsExternals', options.acceptsExternals);
+
+			console.log(' ', options)
+			if (options.acceptsExternals !== undefined && options.acceptsExternals !== -1) {
+				if (options.acceptsExternals === 1) {
+					queryBuilder.where(ViewPartnership.Key('acceptsExternals'), true);
+				} else if (options.acceptsExternals === 0) {
+					queryBuilder.where(ViewPartnership.Key('acceptsExternals'), false);
+				}
+				console.log('queryBuilder', queryBuilder.toSQL().sql);
+				console.log('queryBuilder', queryBuilder.toSQL().bindings);
+			}
+			
+			if (!isNullishOrEmpty(options.offerCreatorId)) {
+				const ids = Array.isArray(options.offerCreatorId)
+					? options.offerCreatorId
+					: [options.offerCreatorId]; 
+				
+				queryBuilder.whereIn(ViewPartnership.Key('offerCreatorId'), ids);
+			}
+			if (!isNullishOrEmpty(options.offerQuarter)) {
+				const ids = Array.isArray(options.offerQuarter)
+					? options.offerQuarter
+					: [options.offerQuarter]; 
+				
+				queryBuilder.whereIn(ViewPartnership.Key('offerQuarter'), ids);
+			}
+			if (!isNullishOrEmpty(options.status)) {
+				const cities = Array.isArray(options.status)
+					? options.status
+					: [options.status];
+
+				queryBuilder.whereIn(ViewPartnership.Key('status'), cities);
+			}
+			if (!isNullishOrEmpty(options.manager)) queryBuilder.andWhere('managerId', options.manager);
+			if (!isNullishOrEmpty(options.demandCity)) {
+				const cities = Array.isArray(options.demandCity)
+					? options.demandCity
+					: [options.demandCity];
+
+				queryBuilder.whereIn(ViewPartnership.Key('demandCity'), cities);
+			}
 		})
 		.limit(options.limit ?? 100)
 		.offset(options.offset ?? 0);
