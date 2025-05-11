@@ -46,17 +46,10 @@ export async function getAllPartnerships(options: GetAllPartnershipsFilter): Pro
 					.orWhere('offerCreatorName', 'like', `%${options.title}%`)
 
 			} 
-			console.log('acceptsExternals', options.acceptsExternals);
-
-			console.log(' ', options)
+			
 			if (options.acceptsExternals !== undefined && options.acceptsExternals !== -1) {
-				if (options.acceptsExternals === 1) {
-					queryBuilder.where(ViewPartnership.Key('acceptsExternals'), true);
-				} else if (options.acceptsExternals === 0) {
-					queryBuilder.where(ViewPartnership.Key('acceptsExternals'), false);
-				}
-				console.log('queryBuilder', queryBuilder.toSQL().sql);
-				console.log('queryBuilder', queryBuilder.toSQL().bindings);
+				if (options.acceptsExternals === 1) queryBuilder.where(ViewPartnership.Key('acceptsExternals'), true);
+				else if (options.acceptsExternals === 0) queryBuilder.where(ViewPartnership.Key('acceptsExternals'), false);
 			}
 			
 			if (!isNullishOrEmpty(options.offerCreatorId)) {

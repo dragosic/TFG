@@ -138,44 +138,64 @@
 				Fechas
 			</h2>
 
-			<div class="grid md:grid-cols-2 md:gap-2">
-				<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Comienzo del periodo para definir el proyecto</span>
-					</div>
-					<input v-model="periodDefinitionStart" type="datetime-local" autocomplete="off" class="input input-bordered w-full" />
-				</label>
-
-				<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Fin del periodo para definir el proyecto</span>
-					</div>
-					<input v-model="periodDefinitionEnd" type="datetime-local" autocomplete="off" class="input input-bordered w-full" />
-				</label>
-			</div>
-
-			<div class="grid md:grid-cols-2 md:gap-2">
-				<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Comienzo del periodo para realizar el proyecto</span>
-					</div>
-					<input v-model="periodExecutionStart" type="datetime-local" autocomplete="off" class="input input-bordered w-full" />
-				</label>
-
-				<label class="form-control w-full">
-					<div class="label">
-						<span class="label-text">Fin del periodo para realizar el proyecto</span>
-					</div>
-					<input v-model="periodExecutionEnd" type="datetime-local" autocomplete="off" class="input input-bordered w-full" />
-				</label>
-			</div>
-
-			<label class="form-control w-full">
-				<div class="label">
-					<span class="label-text">Fecha límite para realizar el proyecto</span>
-				</div>
-				<input v-model="periodDeadline" type="datetime-local" autocomplete="off" class="input input-bordered w-full" />
-			</label>
+			<div class="grid md:grid-cols-2 md:gap-4 mb-4">
+                <label class="form-control w-full">
+                  <div class="label">
+                    <span class="label-text">Inicio definición *</span>
+                  </div>
+                  <input
+                    v-model="periodDefinitionStart"
+                    type="date"
+                    class="input input-bordered w-full"
+                  />
+                </label>
+  
+                <label class="form-control w-full">
+                  <div class="label">
+                    <span class="label-text">Fin definición *</span>
+                  </div>
+                  <input
+                    v-model="periodDefinitionEnd"
+                    type="date"
+                    class="input input-bordered w-full"
+                  />
+                </label>
+              </div>
+  
+              <div class="grid md:grid-cols-2 md:gap-4 mb-4">
+                <label class="form-control w-full">
+                  <div class="label">
+                    <span class="label-text">Inicio ejecución</span>
+                  </div>
+                  <input
+                    v-model="periodExecutionStart"
+                    type="date"
+                    class="input input-bordered w-full"
+                  />
+                </label>
+  
+                <label class="form-control w-full">
+                  <div class="label">
+                    <span class="label-text">Fin ejecución</span>
+                  </div>
+                  <input
+                    v-model="periodExecutionEnd"
+                    type="date"
+                    class="input input-bordered w-full"
+                  />
+                </label>
+              </div>
+  
+              <label class="form-control w-full mb-4">
+                <div class="label">
+                  <span class="label-text">Fecha límite</span>
+                </div>
+                <input
+                  v-model="periodDeadline"
+                  type="date"
+                  class="input input-bordered w-full"
+                />
+              </label>
 		</div>
 
 		<button type="submit" class="btn btn-primary mt-8" :disabled="!isCommunityPartnerRole(role)">

@@ -12,11 +12,12 @@ export async function obtenerOfertaServicio(id: number): Promise<ViewServiceOffe
 }
 
 export interface OfertasServicioFilter extends SearchParameters {
-	quarter?: Quarter[];
+	quarter?: number | number[];
 	title?: string;
-	creatorId?: number;
+	creatorId?: number | number[];
 	professorId?: number;
-	tag?: string;
+	tag?: string | string[]; 
+	deadline?: string;
 }
 
 export async function obtenerTodasOfertasServicio(options: OfertasServicioFilter): Promise<ViewServiceOffer.Value[]> {

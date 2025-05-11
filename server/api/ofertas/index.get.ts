@@ -6,11 +6,12 @@ import { SearchQuery } from '~/server/utils/validators/shared';
 
 const schemaQuery = SearchQuery.merge(
 	z.object({
-		quarter: z.nativeEnum(Quarter).array().optional(),
+		quarter: z.union([z.string().transform(Number),z.array(z.string().transform(Number)),z.number().int(),z.array(z.number().int())]).optional(),
 		title: z.string().optional(),
-		creatorId: z.number().int().optional(),
-		professorId: z.number().int().optional(),
-		tag: z.string().optional()
+		creatorId: z.union([z.string().transform(Number),z.array(z.string().transform(Number)),z.number().int(),z.array(z.number().int())]).optional(),
+		professorId: z.union([z.string().transform(Number),z.array(z.string().transform(Number)),z.number().int(),z.array(z.number().int())]).optional(),
+		tag: z.union([z.string(), z.array(z.string())]).optional(),
+		deadline: z.string().optional()
 	})
 );
 export default eventHandler(async (event) => {

@@ -1,426 +1,477 @@
 <template>
 	<h1 class="mb-4 text-3xl font-semibold">Mis Proyectos</h1>
 	<div v-if="auth.loggedIn.value">
-		<span class="truncate font-normal">{{ auth.session.value!.firstName }} {{ auth.session.value!.lastName }} </span>
-		<div></div>
-		<span class="truncate font-bold">{{ UserRoleMapping[auth.session.value!.role] }}</span>
-	
 		<!-- Para el rol de "Socio Comunitario" -->
 		<div v-if="auth.session.value?.role === 'CommunityPartner'">
-			<h2>Bienvenido, Socio Comunitario</h2>
-			<!-- Botón para añadir un nuevo proyecto -->
-			<button @click="showCreateProjectForm = !showCreateProjectForm" class="btn btn-primary mb-4">
-				Añadir Nuevo Proyecto
-			</button>
-			<!-- Formulario para añadir un proyecto -->
-			<div v-if="showCreateProjectForm" class="bg-gray-100 p-4 rounded-md">
-				<h3>Crear un Nuevo Proyecto</h3>
-				<form @submit.prevent="createProject">
-					<!-- Título -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Título</label>
-						<input
-						v-model="title"
-						type="text"
-						class="input grow"
-						placeholder="Título del Proyecto"
-						autocomplete="off"
-						required
-						/>
-					</label>
-
-					<!-- Descripción -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Descripcion</label>
-						<input
-						v-model="description"
-						type="text"
-						class="input grow"
-						placeholder="Descripción"
-						autocomplete="off"
-						required
-						/>
-					</label>
-
-					<!-- Propósito -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Propósito</label>
-						<input
-						v-model="purpose"
-						type="text"
-						class="input grow"
-						placeholder="Propósito"
-						autocomplete="off"
-						required
-						/>
-					</label>
-
-					<!-- Ciudad -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Ciudad</label>
-						<input
-						v-model="city"
-						type="text"
-						class="input grow"
-						placeholder="Ciudad"
-						autocomplete="off"
-						required
-						/>
-					</label>
-
-					<!-- Comunidad Beneficiaria -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Comunidad Beneficiaria</label>
-						<input
-						v-model="beneficiaryCommunity"
-						type="text"
-						class="input grow"
-						placeholder="Comunidad Beneficiaria"
-						autocomplete="off"
-						required
-						/>
-					</label>
-
-					<!-- Fecha de inicio del periodo de definición -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Inicio Definición</label>
-						<input
-						v-model="periodDefinitionStart"
-						type="date"
-						class="input grow"
-						placeholder="Inicio Definición"
-						required
-						/>
-					</label>
-
-					<!-- Fecha de fin del periodo de definición -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Fin Definición</label>
-						<input
-						v-model="periodDefinitionEnd"
-						type="date"
-						class="input grow"
-						placeholder="Fin Definición"
-						required
-						/>
-					</label>
-
-					<!-- Fecha de ejecución -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Inicio Ejecución</label>
-						<input
-						v-model="periodExecutionStart"
-						type="date"
-						class="input grow"
-						placeholder="Inicio Ejecución"
-						required
-						/>
-					</label>
-
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Fin Ejecución</label>
-						<input
-						v-model="periodExecutionEnd"
-						type="date"
-						class="input grow"
-						placeholder="Fin Ejecución"
-						required
-						/>
-					</label>
-
-					<!-- Fecha límite -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Fecha Límite</label>
-						<input
-						v-model="periodDeadline"
-						type="date"
-						class="input grow"
-						placeholder="Fecha Límite"
-						required
-						/>
-					</label>
-
-					<!-- Observaciones -->
-					<label class="input input-bordered flex items-center gap-2">
-						<label class="block">Observaciones temporales (Mañana o tarde)</label>
-						<select
-							v-model="temporaryObservations"
-							class="input grow"
-							required
-						>
-							<option disabled value="">Selecciona horario</option>
-							<option value="Mañana">Mañana</option>
-							<option value="Tarde">Tarde</option>
-						</select>
-					</label>
-					
-					<!-- Necesidad social -->
-					<label class="input input-bordered flex items-center gap-2">
-					<label class="block">Necesidad social</label>
-					<select
-						v-model="socialNeedID"
-						class="input grow"
-						required
-					>
-						<option disabled value="">Selecciona necesidad</option>
-						<option
-						v-for="necesidad in ns?.data"
-						
-						:key="necesidad.id"
-						:value="necesidad.id"  
-						required
-						>
-						{{ necesidad.nombre }} <!-- Y esto es lo que se muestra -->
-						</option>
-					</select>
-					</label>
-
-
-					<!-- Áreas de Servicio -->
-					<div class="mb-4">
-						<p class="font-semibold mb-1">Áreas de Servicio</p>
-						<div class="flex flex-col gap-2">
-							<label
-							v-for="servicio in servicios"
-							:key="servicio.id"
-							class="flex items-center gap-2"
-							>
-							<input
-								type="checkbox"
-								:value="servicio.id"
-								v-model="serviceAreas"
-							/>
-							{{ servicio.nombre }}
-							</label>
+			<!-- Mostrar las demandas obtenidas -->
+			<div v-if="data && data.entries.length > 0">
+				<div class="flex flex-col md:flex-row p-4 gap-6">
+				<!-- Sidebar -->
+				<aside class="w-full md:w-1/4 space-y-6">
+					<!-- Filtros Card -->
+					<div class="rounded-lg shadow p-4 bg-white">
+						<h2 class="text-lg font-semibold mb-4">Filtros</h2>
+					</div>
+						<div class="rounded-lg shadow p-4 bg-white">
+							<h3 class="text-md font-semibold mb-2"><strong>Búsqueda</strong></h3>
+							<!-- Búsqueda -->
+							<div class="mb-4">
+								<input
+								v-model="query"
+								type="text"
+								class="input input-bordered w-full"
+								placeholder="Buscar demandas..."
+								/>
+							</div>
+							<!-- Botones de navegación -->
+							<div class="flex gap-2">
+								<button class="btn btn-outline w-1/2" :disabled="skipPreviousDisabled" @click="skipPrevious">Anterior</button>
+								<button class="btn btn-outline w-1/2" :disabled="skipNextDisabled" @click="skipNext">Siguiente</button>
+							</div>
 						</div>
-					</div>
 
-
-					<!-- Titulaciones requeridas -->
-					<div class="mb-4">
-						<p class="font-semibold mb-1">Titulaciones</p>
-						<div class="flex flex-col gap-2">
-							<label
-							v-for="titulos in t?.data"
-							:key="titulos.id"
-							class="flex items-center gap-2"
-							>
-							<input
-								type="checkbox"
-								:value="titulos.id"
-								v-model="titulaciones"
-							/>
-							{{ titulos.nombre }}
-							</label>
+						<!-- Ciudad -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<h3 class="text-md font-semibold mb-2"><strong>Ciudad</strong></h3>
+							<div class="flex flex-col gap-2">
+								<div v-for="ciudad in allCities" :key="ciudad">
+								<label>
+									<input-select-multiple 
+									v-model="city"
+									:value="ciudad"
+									tooltip="Seleccion la(s) ciudad(es)"
+									/>
+									<!-- {{ciudad}} -->
+								</label>
+								</div>
+							</div>
 						</div>
-					</div>
 
-					<!-- Usuario creador (autocompletado con auth) -->
-					<!-- <input type="hidden" :value="auth.session.value!.firstName" v-model="creatorName" /> -->
+						<!-- Áreas de Servicio -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<div class="mb-4">
+								<h3 class="text-md font-semibold mb-2"><strong>Áreas de servicio</strong></h3>
+								<div class="flex flex-col gap-2">
+									<label
+									v-for="servicio in servicios"
+									:key="servicio.id"
+									class="flex items-center gap-2"
+									>
+									<input
+										v-model="serviceAreas"
+										type="checkbox"
+										:value="servicio.nombre"
+									/>
+									{{ servicio.nombre }}
+									</label>
+								</div>
+							</div>
+						</div>
 
-					<!-- Botón -->
-					<div class="mb-2 mt-2">
-						<button type="submit" class="btn btn-success">Crear Proyecto</button>
+
+						<!-- Titulaciones requeridas -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<div class="mb-4">
+								<h3 class="text-md font-semibold mb-2"><strong>Titulaciones</strong></h3>
+								<div class="flex flex-col gap-2">
+									<label
+									v-for="titulos in t?.data"
+									:key="titulos.id"
+									class="flex items-center gap-2"
+									>
+									<input
+										v-model="degree"
+										type="checkbox"
+										:value="titulos.nombre"	
+									/>
+									{{ titulos.nombre }}
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- Creador -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<div class="mb-4">
+								<h3 class="text-md font-semibold mb-2"><strong>Creador</strong></h3>
+								<div class="flex flex-col gap-2">
+									<label
+									v-for="sc in socio"
+									:key="sc.id"
+									class="flex items-center gap-2"
+									>
+									<input
+										v-model="creatorId"
+										type="checkbox"
+										:value="sc.id"
+									/>
+									{{ sc.firstName  }} {{ sc.lastName }}
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- Periodo de ejecución -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<h3 class="text-md font-semibold mb-2"><strong>Periodo de ejecución</strong></h3>
+							<div class="flex flex-col gap-2">
+								<label class="text-sm font-medium">Desde:</label>
+								<input 
+								v-model="periodExecutionStart"
+								type="date" 
+								class="input input-bordered w-full"
+								/>
+
+								<label class="text-sm font-medium">Hasta:</label>
+								<input 
+								v-model="periodExecutionEnd"
+								type="date" 
+								class="input input-bordered w-full"
+								/>
+							</div>
+						</div>
+
+						<!-- Periodo de definición -->
+						<div class="rounded-lg shadow p-4 bg-white">
+							<h3 class="text-md font-semibold mb-2"><strong>Periodo de definición</strong></h3>
+							<div class="flex flex-col gap-2">
+								<label class="text-sm font-medium">Desde:</label>
+								<input 
+								v-model="periodDefinitionStart"
+								type="date" 
+								class="input input-bordered w-full"
+								/>
+
+								<label class="text-sm font-medium">Hasta:</label>
+								<input 
+								v-model="periodDefinitionEnd"
+								type="date" 
+								class="input input-bordered w-full"
+								/>
+							</div>
+						</div>
+				</aside>
+				<!-- Contenido principal -->
+				<main class="w-full md:w-3/4">
+					<!-- Aquí iría tu tabla y todo lo demás -->
+					<div class="rounded-lg shadow p-4 bg-white">
+						<h2 class="text-lg font-semibold mb-4">Tus demandas</h2>
+						<span class="truncate font-normal">{{ auth.session.value!.firstName }} {{ auth.session.value!.lastName }} </span>
+						<div></div>
+						<span class="truncate font-bold">{{ UserRoleMapping[auth.session.value!.role] }}</span>
+						<!-- Info -->
+						<div class="text-xs text-gray-500 mt-2">
+							{{ data?.entries.length ?? 0 }} resultados / Total {{ data?.count ?? 0 }}
+						</div>
+						<div v-if="filteredEntries" class="w-full overflow-x-auto">
+							<table class="table ">
+								<!-- head -->
+								<thead>
+									<tr>
+										<th>Título</th>
+										<th>Ciudad</th>
+										<th>Comunidad</th>
+										<th>Objetivo</th>
+										<th>Inicio - Definición</th>
+										<th>Inicio - Ejecución</th>
+										<th>Fecha Límite</th>
+										<th>Creador</th>
+										<th>Area servicio</th>
+										<th>Grado</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="entry in filteredEntries" :key="entry.id">
+										<td class="font-medium">{{ entry.title }}</td>
+										<td>{{ entry.city }}</td>
+										<td>{{ entry.beneficiaryCommunity }}</td>
+										<td>{{ entry.purpose }}</td>
+										<td>{{ formatDate(entry.periodDefinitionStart) }}</td>
+										<td>{{ formatDate(entry.periodExecutionStart) }}</td>
+										<td>{{ formatDate(entry.periodDeadline) }}</td>
+										<td>{{ entry.creatorIdName }}</td>
+										<td>{{ JSON.parse(entry.serviceAreas).join(', ') }}</td>
+										<td>{{ JSON.parse(entry.degrees).join(', ') }}</td>
+										
+										<th>
+											<div class="join">
+												<nuxt-link :href="`/demandas/${entry.id}`" class="btn btn-ghost join-item">
+													<Icon name="material-symbols:visibility" aria-label="Ver demanda" class="h-6 w-6" />
+												</nuxt-link>
+												<template v-if="auth.session.value?.role === 'Admin'">
+												<nuxt-link :href="isSelf(entry.id) ? '/@me' : `/gestor/usuarios/${entry.id}`" class="btn btn-ghost join-item">
+													<Icon name="material-symbols:edit-rounded" aria-label="Editar" class="h-6 w-6" />
+												</nuxt-link>
+												<button
+													class="btn btn-ghost join-item text-error disabled:bg-transparent"
+													@click="onDelete(entry as any)"
+												>
+													<Icon name="material-symbols:delete-forever-rounded" aria-label="Borrar" class="h-6 w-6" />
+												</button>
+												</template>
+											</div>
+										</th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div v-if="data" class="join mt-8 w-full justify-center">
+							<button class="btn join-item" :disabled="firstPage">
+								<Icon name="ph:caret-left-bold" />
+								Back
+							</button>
+							<button class="btn join-item btn-active">1</button>
+							<button v-if="pages > 1" class="btn join-item">{{ pages }}</button>
+							<button class="btn join-item" :disabled="lastPage">
+								Next
+								<Icon name="ph:caret-right-bold" />
+							</button>
+						</div>
+						<dialog ref="dialogElement" class="modal" @click="onDialogClick">
+							<div class="modal-box">
+								<h3 class="text-lg font-bold">¡Atención!</h3>
+								<p class="py-4">Esta acción es permanente, ¿desea proceder al borrado del proyecto?</p>
+								<div v-if="deleting" class="rounded-xl bg-base-200 p-4 drop-shadow-lg">
+									<div class="flex items-center gap-4">
+										<div class="mask mask-circle h-12 w-12 shrink-0">
+											<avatar :src="deleting.avatar" :size="64" />
+										</div>
+										<div class="grid gap-1">
+											<span class="font-semibold"> {{ deleting.firstName }} {{ deleting.lastName }} </span>
+											<span class="badge badge-ghost badge-sm">{{ deleting.email }}</span>
+										</div>
+									</div>
+
+									<ul class="mt-4">
+										<li>
+											<span class="font-semibold">Rol</span>:
+											{{ UserRoleMapping[deleting.role] }}
+										</li>
+										<li>
+											<span class="font-semibold">Fecha de Creación</span>:
+											{{ useDateTimeFormat(deleting.createdAt) }}
+										</li>
+										<li>
+											<span class="font-semibold">Teléfono</span>:
+											{{ deleting.phone }}
+										</li>
+									</ul>
+								</div>
+								<div class="modal-action">
+									<form method="dialog">
+										<button class="btn btn-error rounded-r-none" @click="onConfirmDelete">Borrar</button>
+										<button class="btn rounded-l-none" @click="onConfirmCancel">Cerrar</button>
+									</form>
+								</div>
+							</div>
+						</dialog>
 					</div>
-				</form>
-				<alert v-if="error" type="danger" title="Error">
-					{{ error }}
-				</alert>
+				</main>
+				</div>
+	
 			</div>
-	
-		<!-- Mostrar las demandas obtenidas -->
-		<div v-if="demandas && demandas.entries.length > 0">
-			<h3>Tus Demandas de Servicio</h3>
-			<ul>
-				
-				<!-- Iterar sobre las demandas DEL USUARIO ACTUAL -->
-				<li
-				v-for="entry in demandas.entries.filter(entry => entry.creatorId === auth.session.value?.id)"
-				:key="entry.id"
-				class="border-b py-4 flex items-center"
-				>
-					<!-- Imagen del proyecto -->
-					<img :src="`/${entry.image}`" alt="Imagen de la demanda" class="w-20 h-20 mr-4" />
-					<!-- Información del proyecto -->
-					<div class="flex-1">
-						<h4 class="text-xl font-semibold">{{ entry.title }}</h4>
-						<p class="text-gray-600">{{ entry.description }}</p>
-						<p class="text-sm text-gray-500">Beneficiarios: {{ entry.beneficiaryCommunity }}</p>
-						<p class="text-sm text-gray-500">Periodo de Definicion: {{ new Date(entry.periodDefinitionStart).toLocaleDateString() }} - {{ new Date(entry.periodDefinitionEnd).toLocaleDateString() }}</p>
-						<p class="text-sm text-gray-500">Periodo de Ejecución: {{ new Date(entry.periodEjecutionStart).toLocaleDateString() }} - {{ new Date(entry.periodEjecutionEnd).toLocaleDateString() }}</p>
-						<p class="text-sm text-gray-500">Observaciones: {{ entry.temporaryObservations }}</p>
-					</div>
-
-					<!-- Botón para ver más detalles o interactuar con el proyecto -->
-					<div>
-						<button @click="viewProject(entry.id)" class="btn btn-primary">Ver detalles</button>
-					</div>
-				</li>
-
-				<!-- Mostrar mensaje si no hay demandas -->
-				<div v-if="!demandas.entries || !demandas.entries.some(entry => entry.creatorId === auth.session.value?.id)">
-					<p>No tienes demandas activas actualmente.</p>
-				</div>
-			</ul>
-			<!-- Formulario para la necesidad social -->
-			{{ ns }}
-			<form @submit.prevent="checkOrCreateSocialNeed">
-				<!-- Campo para el nombre de la necesidad social -->
-				<div class="input-group">
-					<label for="socialNeedName" class="block"><strong>Necesidad social</strong></label>
-					<input
-						id="socialNeedName"
-						v-model="socialNeedName"
-						class="input grow"
-						type="text"
-						placeholder="Propósito"
-						autocomplete="off"
-						required
-					/>
-				</div>
-				
-				<!-- Botón para comprobar si la necesidad social está registrada -->
-				<div class="mb-2 mt-2">
-					<button type="submit" class="btn btn-success">Añadir necesidad social</button>
-				</div>
-			</form>
-			{{ t }}
-			<!-- Formulario para la Titulacion -->
-			<form @submit.prevent="checkOrTitulacion">
-				<!-- Campo para el nombre de la titulacion -->
-				<div class="input-group">
-					<label for="titulacionID" class="block"> <strong>Nombre titulacion (grado)</strong></label>
-					<input
-						id="titulacionID"
-						v-model="titulacionID"
-						class="input grow"
-						type="text"
-						placeholder="Titulación"
-						autocomplete="off"
-						required
-					/>
-				</div>
-				<!-- Botón para comprobar si la necesidad social está registrada -->
-				<div class="mb-2 mt-2">
-					<button type="submit" class="btn btn-success">Añadir nueva titulacion</button>
-				</div>
-			</form>
-			
 		</div>
-	
-		</div>
-		
 		<div v-if="auth.session.value?.role === 'ExternalProfessor'"> <h2>Bienvenido, Profesor</h2> </div>
 	</div>
-  </template>
+</template>
   
   
-  <script setup lang="ts">
-	const auth = useAuth();
+<script setup lang="ts">
+import type { ViewUser } from '~/server/utils/database/services/types/views/User';
 
-	//Para añadir necesidad social
-	const { data: ns } = await useFetch('/api/necesidad-social', { method: 'GET' });
-	const socialNeedName = ref('');
-	const socialNeedID = ref('');
+useSeoMeta({
+	title: 'Mis Proyectos',
+	description: 'Listado de proyectos de la plataforma.'
+});
 
-	const checkOrCreateSocialNeed = async () => {
-		const { error } = await useFetch('/api/necesidad-social/', {
-			method: 'POST',
-			body: { name: socialNeedName.value },
-		});
 
-		if (error.value) {
-			console.error('Error al comprobar/crear necesidad social', error.value);
-		}
-	};
 
-	const titulacionID = ref('');
-	const titulaciones= ref<number[]>([]);
-	//Para añadir titulacion
-	const { data: t } = await useFetch('/api/titulacion', { method: 'GET' });
-	const checkOrTitulacion = async () => {
-		const { error } = await useFetch('/api/titulacion/', {
-			method: 'POST',
-			body: { name: titulacionID.value },
-		});
+const skip = ref(0);        // Desde qué registro empezar (para paginación)
+const limit = ref(15);      // Cuántos registros mostrar por página
+const query = ref('');      // Cadena de búsqueda ingresada por proyecto
+const creatorId = ref<number[]>([]);  // Filtro por creador de la demanda
+const serviceAreas = ref<string[]>([]); // Filtro por áreas de servicio
+const degree = ref<string[]>([]); // Filtro por titulaciones requeridas
+const city = ref<string[]>([]);
+const periodExecutionStart = ref<string | null>(null);
+const periodExecutionEnd = ref<string | null>(null);
+const periodDefinitionStart = ref<string | null>(null);
+const periodDefinitionEnd = ref<string | null>(null);
 
-		if (error.value) {
-			console.error('Error al comprobar/crear necesidad social', error.value);
-		}
-	};
 
-	// Simulamos que obtenemos los proyectos del servidor.
-	const { data: demandas } = await useFetch('/api/demandas', { method: 'GET' });
-	const { data: servicios } = await useFetch('/api/ofertas/areas-servicio', { method: 'GET' });
-	const showCreateProjectForm = ref(false);
-	const title = ref('');
-	const description = ref('');
-	const purpose = ref('');
-	const city = ref('');
-	const beneficiaryCommunity = ref('');
-	//La de abajo no tiene nada
-	//const { data: socialNeeds } = await useFetch('/api/demandas/necesidad-social'); // ajusta a tu endpoint real
+
+const { data, error } = await useFetch('/api/demandas', {
+  method: 'GET',
+  query: {
+    query: query.value,
+    skip: skip.value,
+    limit: limit.value,
+    city: city.value.length ? city.value : undefined,
+    periodExecutionStart: periodExecutionStart.value,
+    periodExecutionEnd: periodExecutionEnd.value,
+    periodDefinitionStart: periodDefinitionStart.value,
+    periodDefinitionEnd: periodDefinitionEnd.value,
+    creatorId: creatorId.value,
+    degree: degree.value,
+    serviceAreas: serviceAreas.value
+  }
+});
+
+watch(
+  [query, skip, limit, city, creatorId, degree, serviceAreas, periodExecutionStart, periodExecutionEnd, periodDefinitionStart, periodDefinitionEnd],
+  async () => {
+    const res = await $fetch('/api/demandas', {
+      method: 'GET',
+      query: {
+        query: query.value,
+        skip: skip.value,
+        limit: limit.value,
+        city: city.value,
+        periodExecutionStart: periodExecutionStart.value,
+        periodExecutionEnd: periodExecutionEnd.value,
+        periodDefinitionStart: periodDefinitionStart.value,
+        periodDefinitionEnd: periodDefinitionEnd.value,
+		creatorId: creatorId.value,
+        degree: degree.value,
+        serviceAreas: serviceAreas.value
+      }
+    });
+
+    data.value = res;
+
+    if (data.value?.count != null && data.value?.entries.length < 2) {
+      skip.value = 0;
+    }
+  }
+);
+
+
+
+const { data: servicios } = await useFetch('/api/ofertas/areas-servicio', { method: 'GET' });
+const { data: t } = await useFetch('/api/titulacion', { method: 'GET' });
+const { data: socio } = await useFetch('/api/users/socios', { method: 'GET' });
+
+
+const skipPreviousDisabled = computed(() => skip.value === 0);
+const skipNextDisabled = computed(() => (data.value ? data.value.count < limit.value : true));
+
+
+const pages = computed(() => (data.value ? Math.ceil(data.value.count / 10) : 0));
+const page = ref(0);
+
+
+
+function skipPrevious() {
+	if (data.value?.count != null && data.value?.count >= skip.value && limit.value > skip.value) {
+		skip.value -= 10;
+		limit.value -= 10;
+	}
+}
+
+function skipNext() {
 	
-	const periodDefinitionStart = ref('');
-	const periodDefinitionEnd = ref('');
-	const periodExecutionStart = ref('');
-	const periodExecutionEnd = ref('');
-	const periodDeadline = ref('');
-	const temporaryObservations = ref('');
-	const serviceAreas = ref<number[]>([]);
-
-
-	const error = refAutoReset<string>('', 25000);
-	
-	async function createProject() {
-		try{
-			if (serviceAreas.value.length === 0) {
-				error.value = 'Por favor, selecciona al menos una área de servicio.';
-				return;  // Detener la ejecución si no se selecciona ninguna área
-			}
-			if (titulaciones.value.length === 0){
-				error.value = 'Por favor, selecciona al menos una titulación.';
-				return;  // Detener la ejecución si no se selecciona ninguna área
-			}
-			if (!periodDefinitionStart.value || !periodDefinitionEnd.value) {
-				error.value = 'Faltan fechas en la definición del periodo.';
-				return;
-			}
-			console.log("Valores que se envían:");
-			console.log({
-				periodDefinitionStart: periodDefinitionStart.value,
-				periodDefinitionEnd: periodDefinitionEnd.value,
-				periodExecutionStart: periodExecutionStart.value,
-				periodExecutionEnd: periodExecutionEnd.value,
-				periodDeadline: periodDeadline.value,
-			});
-			await $fetch('/api/demandas', {
-				method: 'POST',
-				body: {
-					title: title.value,
-					description: description.value,
-					purpose: purpose.value,
-					city: city.value,
-					socialNeed: socialNeedID.value,
-					beneficiaryCommunity: beneficiaryCommunity.value,
-					periodDefinitionStart: periodDefinitionStart.value,
-					periodDefinitionEnd: periodDefinitionEnd.value,
-					periodExecutionStart: periodExecutionStart.value,
-					periodExecutionEnd: periodExecutionEnd.value,
-					periodDeadline: periodDeadline.value,
-					temporaryObservations: temporaryObservations.value,
-					serviceAreas: serviceAreas.value,
-					degrees: titulaciones.value
-				}	
-			});
-			//location.reload();  // Esto recargará la página completa
-		} catch (e: any){
-			error.value = String(e.statusMessage ?? e.message ?? e);
-		}
+	if (data.value?.count != null && data.value?.count >= limit.value) {
+		skip.value += limit.value;
+		limit.value += limit.value;
 	}
 	
+}
 
-	// Hacemos que esta página sea accesible solo si el usuario está autenticado.
-	definePageMeta({ auth: true });
-  </script>
-  
+const firstPage = computed(() => page.value === 0);
+const lastPage = computed(() => pages.value <= 1 || page.value === pages.value);
+
+
+const role = useAuthRole();
+
+const search = ref('');
+
+const filteredEntries = computed(() => {
+  if (!data?.value?.entries || !auth.session.value) return [];
+
+  const searchText = search.value.toLowerCase();
+  const userId = auth.session.value.id;
+
+  return data.value.entries.filter((entry: any) => {
+    const matchesSearch =
+      entry.title.toLowerCase().includes(searchText) ||
+      entry.city.toLowerCase().includes(searchText) ||
+      entry.creatorIdName.toLowerCase().includes(searchText);
+
+    const isCreatedByUser = entry.creatorId === userId;
+
+    return matchesSearch && isCreatedByUser;
+  });
+});
+
+
+function formatDate(dateStr: string) {
+	if (!dateStr) return 'Sin Definir';
+	return new Date(dateStr).toLocaleDateString('es-ES', {
+		day: '2-digit',
+		month: 'short',
+		year: 'numeric'
+	});
+}
+
+//______________________ACCIONES__________________________//
+const auth = useAuth();
+
+const dialogElement = ref<HTMLDialogElement>(null!);
+const deleting = ref<ViewUser.Value | null>(null);
+
+
+
+function onDelete(user: ViewUser.Value) {
+	deleting.value = user;
+	dialogElement.value.showModal();
+}
+
+function isSelf(id: number) {
+	return auth.session.value?.id === id;
+}
+
+async function onConfirmDelete() {
+	if (!deleting.value) return;
+
+	try {
+		await $fetch(`/api/users/${deleting.value.id}`, { method: 'delete' });
+
+		if (data.value) {
+			data.value = {
+				...data.value,
+				users: data.value.users.filter((user) => user.id !== deleting.value?.id)
+			};
+		}
+	} catch (e) {
+		error.value = e as any;
+	}
+}
+
+function onConfirmCancel() {
+	deleting.value = null;
+}
+
+function onDialogClick(event: MouseEvent) {
+	if (event.target === dialogElement.value) {
+		onConfirmCancel();
+		dialogElement.value.close();
+	}
+}
+
+//__________________Ciudades____________________//
+const allCities = ref<string[]>([]); // lista permanente
+
+watchEffect(() => {
+  if (data.value?.entries) {
+    const currentCities = data.value.entries.map(entry => entry.city);
+    const uniqueCities = Array.from(new Set(currentCities));
+
+    if (allCities.value.length === 0) {
+      allCities.value = uniqueCities;
+    }
+  }
+});
+
+</script>

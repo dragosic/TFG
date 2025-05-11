@@ -1,13 +1,16 @@
 <template>
 	<h1 class="mb-4 text-3xl font-semibold">Proyectos</h1>
+	<!-- <template v-if="auth.session.value?.role === 'CommunityPartner' || auth.session.value?.role === 'Admin'">
+		<nuxt-link href="/proyectos/crear" class="btn btn-neutral">Crear Proyectos</nuxt-link>
+	</template> -->
 	<alert v-if="error" type="danger" title="Error">
 		{{ error.statusMessage ?? error.message ?? error }}
 	</alert>
 	<alert v-else-if="!data?.count" type="warning" title="Advertencia"> No hay proyectos registrados en el sistema. </alert>
 	<div v-else>
-	<div class="flex flex-col md:flex-row p-4 gap-6">
+	<div class="flex flex-col xl:flex-row p-4 gap-6">
 	<!-- Sidebar -->
-	<aside class="w-full md:w-1/4 space-y-6">
+	<aside class="w-full xl:w-1/4 space-y-6">
 		<!-- Filtros Card -->
 		<div class="rounded-lg shadow p-4 bg-white">
 			<h2 class="text-lg font-semibold mb-4">Filtros</h2>
@@ -30,22 +33,20 @@
 				</div>
 			</div>
 
-			<!-- Ciudad -->
+			<!-- Entidad -->
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Entidad</strong></h3>
 				<div class="flex flex-col gap-2">
-					<label
-						v-for="sc in socio"
-						:key="sc.id"
-						class="flex items-center gap-2"
-						>
-						<input
-							v-model="offerCreatorId"
-							type="checkbox"
-							:value="sc.id"
-						/>
-						{{ sc.firstName  }} {{ sc.lastName }}
-						</label>
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="offerCreatorId"
+						:entries="socio?.map(sc => ({ 
+						name: `${sc.firstName} ${sc.lastName}`, 
+						value: sc.id 
+						})) ?? []"
+						tooltip="Seleccione la(s) entidad(es)"
+					/>
+					</label>
 				</div>
 			</div>
 
@@ -53,12 +54,13 @@
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Ciudad</strong></h3>
 				<div class="flex flex-col gap-2">
-					<div v-for="ciudad in allCities" :key="ciudad">
-					<label>
-						<input v-model="city" type="checkbox" :value="ciudad" />
-						{{ ciudad }}
+					<label class="form-control w-full">
+					<input-select-multiple 
+						v-model="city"
+						:entries="allCities?.map(ciudad => ({ name: ciudad, value: ciudad })) ?? []"
+						tooltip="Seleccione la(s) ciudad(es)"
+					/>
 					</label>
-					</div>
 				</div>
 			</div>
 
@@ -93,55 +95,24 @@
 
 
 			<!-- Estado -->
-			<div class="rounded-lg shadow p-4 bg-white">
-				<h3 class="text-md font-semibold mb-2"><strong>Estado</strong></h3>
-				<div class="flex flex-col gap-2">
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.AbiertoProfesores" 
-						>
-						{{'Abierto Profesores'}}
-					</label>
-					
-					<label>
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.AbiertoEstudiantes" 
-						>
-						{{ 'Abierto Estudiantes' }}
-					</label>
-
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.EnCreacion" 
-						>
-						{{'En creacion'}}
-					</label>
-
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.EnCurso" 
-						>
-						{{ 'En curso' }}
-					</label>
-					
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.Cerrado" 
-						>
-						{{ 'Cerrado' }}
-					</label>
-				</div>
-			</div>
+<div class="rounded-lg shadow p-4 bg-white">
+  <h3 class="text-md font-semibold mb-2"><strong>Estado</strong></h3>
+  <div class="flex flex-col gap-2">
+    <label class="form-control w-full">
+      <input-select-multiple
+        v-model="status"
+        :entries="[
+          { name: 'Abierto Profesores', value: ProyectoEstado.AbiertoProfesores },
+          { name: 'Abierto Estudiantes', value: ProyectoEstado.AbiertoEstudiantes },
+          { name: 'En creacion', value: ProyectoEstado.EnCreacion },
+          { name: 'En curso', value: ProyectoEstado.EnCurso },
+          { name: 'Cerrado', value: ProyectoEstado.Cerrado }
+        ]"
+        tooltip="Seleccione el/los estado(s)"
+      />
+    </label>
+  </div>
+</div>
 
 			<!-- Periodo de ejecución -->
 			<div class="rounded-lg shadow p-4 bg-white">
@@ -197,7 +168,7 @@
 			</div>
 	</aside>
 	<!-- Contenido principal -->
-	<main class="w-full md:w-3/4">
+	<main class="w-full xl:w-3/4">
 		<!-- Aquí iría tu tabla y todo lo demás -->
 		<div class="rounded-lg shadow p-4 bg-white">
 		<h2 class="text-lg font-semibold mb-4">Listado de proyectos</h2>
@@ -213,15 +184,15 @@
 							<th>Imagen</th>
 							<th>Entidad</th>
 							<th>Título</th>
-							<th>Descripción</th>
+							<th class="hidden md:table-cell">Descripción</th>
 							<th>Ciudad</th>
-							<th>Propósito</th>
+							<th class="hidden md:table-cell">Propósito</th>
 							<th>Estado</th>
-							<th>Periodo de Definición</th>
-							<th>Periodo de Ejecución</th>
+							<th class="hidden md:table-cell">Periodo de Definición</th>
+							<th class="hidden md:table-cell">Periodo de Ejecución</th>
 							<th>Fecha de Fin</th>
-							<th>Estudiantes</th>
-							<th>Profesores</th>
+							<th class="hidden md:table-cell">Estudiantes</th>
+							<th class="hidden md:table-cell">Profesores</th>
 							<th v-if="auth.session.value?.role === 'Admin'">Acciones</th>
 						</tr>
 					</thead>
@@ -237,27 +208,27 @@
 							<td>{{ entry.offerCreatorName }}</td>
 							
 							<td>{{ entry.title }}</td>
-							<td>{{ entry.description }}</td>
+							<td class="hidden md:table-cell">{{ entry.description }}</td>
 								<!-- <div><strong>Observaciones:</strong> {{ entry.offerTemporaryObservations || 'Ninguna' }}</div> -->
 							<td>{{ entry.demandCity }}</td>
-							<td>{{ entry.demandPurpose }}</td>
+							<td class="hidden md:table-cell">{{ entry.demandPurpose }}</td>
 							<td>{{ entry.status }}</td>
 								<!-- <div><strong>Comunidad Beneficiaria:</strong> {{ entry.demandBeneficiaryCommunity }}</div> -->
-							<td>
+							<td class="hidden md:table-cell">
 								{{ new Date(entry.demandDefinitionPeriodStart).toLocaleDateString() }} -
 								{{ new Date(entry.demandDefinitionPeriodEnd).toLocaleDateString() }}
 							</td>
-							<td>
+							<td class="hidden md:table-cell">
 								{{ new Date(entry.demandExecutionPeriodStart).toLocaleDateString() }} -
 								{{ new Date(entry.demandExecutionPeriodEnd).toLocaleDateString() }}
 							</td>
 							<td>{{ new Date(entry.demandEndDate).toLocaleDateString() }}</td>
-							<td>
+							<td class="hidden md:table-cell">
 								<template v-for="student in JSON.parse(entry.students)" :key="student.id" >
 									{{ student.firstName }} {{ student.lastName }}
 								</template>
 							</td>
-							<td>
+							<td class="hidden md:table-cell">
 								<template v-for="professor of JSON.parse(entry.professors)" :key="professor.id">
 									{{ professor.firstName }} {{ professor.lastName }}
 								</template>
@@ -293,8 +264,6 @@
 					<Icon name="ph:caret-right-bold" />
 				</button>
 			</div>
-			<!-- _________________________________________________ -->
-			{{ data }}
 			<dialog ref="dialogElement" class="modal" @click="onDialogClick">
 				<div class="modal-box">
 					<h3 class="text-lg font-bold">¡Atención!</h3>
@@ -417,9 +386,6 @@ watch(
 	
 	
 	data.value = res;
-	console.log("accepetd:", acceptsExternals.value);
-	console.log("demandExecutionPeriodStart.value:", demandExecutionPeriodStart.value);
-	console.log("demandEndDate.value:", demandEndDate.value);
 	if (data.value?.count != null && data.value?.entries.length < 2) {
 		skip.value = 0;
 	}
@@ -460,6 +426,7 @@ const lastPage = computed(() => pages.value <= 1 || page.value === pages.value);
 
 //______________________ACCIONES__________________________//
 const auth = useAuth();
+const role = useAuthRole();
 
 const dialogElement = ref<HTMLDialogElement>(null!);
 const deleting = ref<ViewUser.Value | null>(null);

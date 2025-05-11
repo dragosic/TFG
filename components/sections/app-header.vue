@@ -9,6 +9,9 @@
 				</div>
 				<ul tabindex="0" class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
 					<li><nuxt-link to="/info/que-es">¿Qué es el ApS?</nuxt-link></li>
+					<template v-if="auth.loggedIn.value">
+						<li v-if="auth.session!.value.role === 'CommunityPartner' || auth.session.value?.role === 'Admin'"><nuxt-link to="/demandas">Demandas</nuxt-link></li>
+					</template>
 					<li><nuxt-link to="/proyectos">Proyectos</nuxt-link></li>
 					
 					<li>

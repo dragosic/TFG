@@ -93,8 +93,6 @@
 									</div>
 								</td>
 								<td>
-									
-									{{ entry.id }}
 									{{ UserRoleMapping[entry.role] }}
 								</td>
 								<th>

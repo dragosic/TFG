@@ -48,76 +48,65 @@
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Ciudad</strong></h3>
 				<div class="flex flex-col gap-2">
-					<div v-for="ciudad in allCities" :key="ciudad">
-					<label>
-						<input v-model="city" type="checkbox" :value="ciudad"   />
-						{{ciudad}}
+					<label class="form-control w-full">
+					<input-select-multiple 
+						v-model="city"
+						:entries="allCities?.map(ciudad => ({ name: ciudad, value: ciudad })) ?? []"
+						tooltip="Seleccione la(s) ciudad(es)"
+					/>
 					</label>
-					</div>
 				</div>
 			</div>
 
 			<!-- Áreas de Servicio -->
 			<div class="rounded-lg shadow p-4 bg-white">
-				<div class="mb-4">
-					<h3 class="text-md font-semibold mb-2"><strong>Áreas de servicio</strong></h3>
-					<div class="flex flex-col gap-2">
-						<label
-						v-for="servicio in servicios"
-						:key="servicio.id"
-						class="flex items-center gap-2"
-						>
-						<input
-							v-model="serviceAreas"
-							type="checkbox"
-							:value="servicio.nombre"
-						/>
-						{{ servicio.nombre }}
-						</label>
-					</div>
+				<h3 class="text-md font-semibold mb-2"><strong>Áreas de servicio</strong></h3>
+				<div class="flex flex-col gap-2">
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="serviceAreas"
+						:entries="servicios?.map(servicio => ({
+						name: servicio.nombre,
+						value: servicio.nombre
+						})) ?? []"
+						tooltip="Seleccione las áreas de servicio"
+					/>
+					</label>
 				</div>
 			</div>
 
 
 			<!-- Titulaciones requeridas -->
 			<div class="rounded-lg shadow p-4 bg-white">
-				<div class="mb-4">
-					<h3 class="text-md font-semibold mb-2"><strong>Titulaciones</strong></h3>
-					<div class="flex flex-col gap-2">
-						<label
-						v-for="titulos in t?.data"
-						:key="titulos.id"
-						class="flex items-center gap-2"
-						>
-						<input
-							v-model="degree"
-							type="checkbox"
-							:value="titulos.nombre"	
-						/>
-						{{ titulos.nombre }}
-						</label>
-					</div>
+				<h3 class="text-md font-semibold mb-2"><strong>Titulaciones</strong></h3>
+				<div class="flex flex-col gap-2">
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="degree"
+						:entries="t?.data?.map(titulos => ({
+						name: titulos.nombre,
+						value: titulos.nombre
+						})) ?? []"
+						tooltip="Seleccione las titulaciones requeridas"
+					/>
+					</label>
 				</div>
 			</div>
 
 			<!-- Creador -->
 			<div class="rounded-lg shadow p-4 bg-white">
-				<div class="mb-4">
-					<h3 class="text-md font-semibold mb-2"><strong>Creador</strong></h3>
-					<div class="flex flex-col gap-2">
-						<label
-						v-for="sc in socio"
-						:key="sc.id"
-						class="flex items-center gap-2"
-						>
-						<input
-							v-model="creatorId"
-							type="checkbox"
-							:value="sc.id"
-						/>
-						{{ sc.firstName  }} {{ sc.lastName }}
-						</label>
-					</div>
+				<h3 class="text-md font-semibold mb-2"><strong>Creador</strong></h3>
+				<div class="flex flex-col gap-2">
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="creatorId"
+						:entries="socio?.map(sc => ({
+						name: `${sc.firstName} ${sc.lastName}`,
+						value: sc.id
+						})) ?? []"
+						tooltip="Seleccione el/los creador(es)"
+					/>
+					</label>
 				</div>
 			</div>
 
