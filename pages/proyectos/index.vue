@@ -1,3 +1,4 @@
+<!-- proyectos/index.vue -->
 <template>
 	<h1 class="mb-4 text-3xl font-semibold">Proyectos</h1>
 	<!-- <template v-if="auth.session.value?.role === 'CommunityPartner' || auth.session.value?.role === 'Admin'">
@@ -76,6 +77,10 @@
 						<input v-model="offerQuarter" type="checkbox" :value="2" />
 						{{ 'Segundo Cuatrimestre' }}
 					</label>
+					<label>
+						<input v-model="offerQuarter" type="checkbox" :value="3" />
+						{{ 'Anual' }}
+					</label>
 				</div>
 			</div>
 
@@ -95,24 +100,24 @@
 
 
 			<!-- Estado -->
-<div class="rounded-lg shadow p-4 bg-white">
-  <h3 class="text-md font-semibold mb-2"><strong>Estado</strong></h3>
-  <div class="flex flex-col gap-2">
-    <label class="form-control w-full">
-      <input-select-multiple
-        v-model="status"
-        :entries="[
-          { name: 'Abierto Profesores', value: ProyectoEstado.AbiertoProfesores },
-          { name: 'Abierto Estudiantes', value: ProyectoEstado.AbiertoEstudiantes },
-          { name: 'En creacion', value: ProyectoEstado.EnCreacion },
-          { name: 'En curso', value: ProyectoEstado.EnCurso },
-          { name: 'Cerrado', value: ProyectoEstado.Cerrado }
-        ]"
-        tooltip="Seleccione el/los estado(s)"
-      />
-    </label>
-  </div>
-</div>
+			<div class="rounded-lg shadow p-4 bg-white">
+				<h3 class="text-md font-semibold mb-2"><strong>Estado</strong></h3>
+				<div class="flex flex-col gap-2">
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="status"
+						:entries="[
+						{ name: 'Abierto Profesores', value: ProyectoEstado.AbiertoProfesores },
+						{ name: 'Abierto Estudiantes', value: ProyectoEstado.AbiertoEstudiantes },
+						{ name: 'En creacion', value: ProyectoEstado.EnCreacion },
+						{ name: 'En curso', value: ProyectoEstado.EnCurso },
+						{ name: 'Cerrado', value: ProyectoEstado.Cerrado }
+						]"
+						tooltip="Seleccione el/los estado(s)"
+					/>
+					</label>
+				</div>
+			</div>
 
 			<!-- Periodo de ejecución -->
 			<div class="rounded-lg shadow p-4 bg-white">

@@ -106,7 +106,6 @@ export async function searchUsers(options: SearchUsersOptions): Promise<ViewUser
 					.orWhere('email', 'like', `%${options.query}%`);
 			}
 			
-			console.log("roles:", options.roles);
 			if (!isNullishOrEmpty(options.roles)) {
 				const roles = Array.isArray(options.roles)
 					? options.roles
@@ -120,20 +119,6 @@ export async function searchUsers(options: SearchUsersOptions): Promise<ViewUser
 					}
 				});
 			}
-			// if (!isNullishOrEmpty(options.roles)) {
-			// 	queryBuilder
-			// 	.where('city', options.roles);
-			// }
-			// if (options.roles && options.roles.length > 0) {
-			// 	queryBuilder.andWhere((builder) => {
-			// 		if(options.roles!.length === 1) {
-			// 			builder.orWhereRaw(`JSON_EXTRACT(data, '$.role') = ?`, [options.roles![0]]);
-			// 		}
-			// 		for (const role of options.roles!) {
-			// 			builder.orWhereRaw(`JSON_UNQUOTE(JSON_EXTRACT(data, '$.role')) = ?`, [role]);
-			// 		}
-			// 	});
-			// }
 		})
 		.limit(options.limit ?? 100)
 		.offset(options.offset ?? 0)

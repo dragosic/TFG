@@ -1073,7 +1073,7 @@ export async function seed(knex) {
           id: 1,
           titulo: 'Ingenieria informatica',
           descripcion: 'Descripcion1',
-          id_estudiante: 1,
+          id_estudiante: 155,
           id_demanda: 1,
           necesidad_social: 1
         },
@@ -1081,7 +1081,7 @@ export async function seed(knex) {
           id: 2,
           titulo: 'Ingenieria quimica',
           descripcion: 'Descripcion2',
-          id_estudiante: 2,
+          id_estudiante: 156,
           id_demanda: 2,
           necesidad_social: 2
         },
@@ -1089,7 +1089,7 @@ export async function seed(knex) {
           id: 3,
           titulo: 'ADE',
           descripcion: 'Descripcion3',
-          id_estudiante: 3,
+          id_estudiante: 157,
           id_demanda: 3,
           necesidad_social: 3
         }
@@ -1109,21 +1109,36 @@ export async function seed(knex) {
  */
 
 
-      await knex('area_servicio').insert([
-        {
-          id: 1,
-          nombre: 'Programacion'
-        },
-        {
-          id: 2,
-          nombre: 'Calculo'
-        },
-        {
-          id: 3,
-          nombre: 'Algebra'
-        }
-      ]).onConflict('id') // Si el 'id' ya existe...
-      .merge();         // ...actualiza el registro
+await knex('area_servicio').insert([
+  { id: 623, nombre: 'Affordable and clean energy' },
+  { id: 622, nombre: 'Clear water and sanitation' },
+  { id: 629, nombre: 'Climate action' },
+  { id: 971, nombre: 'Cultural' },
+  { id: 733, nombre: 'Cultural diversity' },
+  { id: 624, nombre: 'Decent work and economic growth' },
+  { id: 635, nombre: 'Diversity' },
+  { id: 576, nombre: 'Gender equality' },
+  { id: 621, nombre: 'Good health and well-being' },
+  { id: 634, nombre: 'Historic /Cultural preservation' },
+  { id: 3, nombre: 'Industry' },
+  { id: 625, nombre: 'Industry, innovation and infraestructure' },
+  { id: 806, nombre: 'innovation and infraestructure' },
+  { id: 732, nombre: 'Justice and strong institutions' },
+  { id: 630, nombre: 'Life below water' },
+  { id: 631, nombre: 'Life on land' },
+  { id: 573, nombre: 'No poverty' },
+  { id: 636, nombre: 'Not Apply' },
+  { id: 633, nombre: 'Partnership for the goals' },
+  { id: 1, nombre: 'Peace' },
+  { id: 632, nombre: 'Peace, justice and strong institutions' },
+  { id: 571, nombre: 'Quality education' },
+  { id: 626, nombre: 'Reducing inequalities' },
+  { id: 628, nombre: 'Responsible consumption and production' },
+  { id: 730, nombre: 'Social justice' },
+  { id: 627, nombre: 'Sustainable cities and communities' },
+  { id: 2, nombre: 'Zero hunger' }
+]).onConflict('id').merge();
+
     
 
 

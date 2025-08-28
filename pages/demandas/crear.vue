@@ -1,3 +1,4 @@
+<!-- //pages/demandas/crear.vue -->
 <template>
 	<h1 class="mb-4 text-3xl font-semibold">Crear Demanda</h1>
 	<nuxt-link href="/demandas" class="btn btn-ghost self-start">
