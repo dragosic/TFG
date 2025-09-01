@@ -12,7 +12,6 @@ CREATE TABLE `aceptacionaceptada` (
   `idNotificacionAceptada` int(11) NOT NULL,
   PRIMARY KEY (`idNotificacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idDestino` int(11) NOT NULL,

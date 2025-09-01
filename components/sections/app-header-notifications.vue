@@ -5,12 +5,11 @@
 		</div>
 		<div v-else-if="data" class="indicator">
 			<span
-				v-show="data.length > 0"
+				v-show="unreadCount > 0"
 				role="alert"
 				class="badge indicator-item badge-info badge-xs m-1"
-				:aria-label="`${data.length} notifications`"
-				>{{ data.length }}</span
-			>
+				:aria-label="`${unreadCount} notifications`">
+				{{ unreadCount }}</span>
 			<Icon name="ph:bell-bold" class="h-6 w-6" />
 		</div>
 	</nuxt-link>
@@ -18,4 +17,8 @@
 
 <script setup lang="ts">
 const { data, error } = await useFetch('/api/notificaciones', { method: 'GET' });
+
+const unreadCount = computed(() => {
+  return data.value?.filter(notification => !notification.read ).length ?? 0;
+});
 </script>

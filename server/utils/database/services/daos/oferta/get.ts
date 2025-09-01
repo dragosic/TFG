@@ -11,6 +11,7 @@ export async function obtenerOfertaServicio(id: number): Promise<ViewServiceOffe
 	return parseViewServiceOfferJsonStringProperties(entry);
 }
 
+
 export interface OfertasServicioFilter extends SearchParameters {
 	quarter?: number | number[];
 	title?: string;
