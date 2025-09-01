@@ -8,7 +8,7 @@
 			<form @submit.prevent="performLogin">
 				<label class="input input-bordered flex items-center gap-2">
 					<Icon name="ph:envelope-simple-fill" />
-					<input v-model="email" type="text" class="input grow" placeholder="Correo electrónico" autocomplete="email" required />
+					<input v-model="email" type="email" class="input grow" placeholder="Correo electrónico" autocomplete="email" required />
 				</label>
 
 				<label class="input input-bordered flex items-center gap-2">
@@ -31,8 +31,10 @@
 </template>
 
 <script setup lang="ts">
-	const { organization } = useRuntimeConfig().public;
+	import { ref } from 'vue' 
 
+
+	const { organization } = useRuntimeConfig().public;
 	const email = ref('');
 	const password = ref('');
 	const remember = ref(false);

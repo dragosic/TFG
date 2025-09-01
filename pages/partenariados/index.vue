@@ -29,23 +29,20 @@
 					<button class="btn btn-outline w-1/2" :disabled="skipNextDisabled" @click="skipNext">Siguiente</button>
 				</div>
 			</div>
-
-			<!-- Ciudad -->
-			<div class="rounded-lg shadow p-4 bg-white">
+<!-- Entidad -->
+<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Entidad</strong></h3>
 				<div class="flex flex-col gap-2">
-					<label
-						v-for="sc in socio"
-						:key="sc.id"
-						class="flex items-center gap-2"
-						>
-						<input
-							v-model="offerCreatorId"
-							type="checkbox"
-							:value="sc.id"
-						/>
-						{{ sc.firstName  }} {{ sc.lastName }}
-						</label>
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="offerCreatorId"
+						:entries="socio?.map(sc => ({ 
+						name: `${sc.firstName} ${sc.lastName}`, 
+						value: sc.id 
+						})) ?? []"
+						tooltip="Seleccione la(s) entidad(es)"
+					/>
+					</label>
 				</div>
 			</div>
 
@@ -53,12 +50,13 @@
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Ciudad</strong></h3>
 				<div class="flex flex-col gap-2">
-					<div v-for="ciudad in allCities" :key="ciudad">
-					<label>
-						<input v-model="city" type="checkbox" :value="ciudad" />
-						{{ ciudad }}
+					<label class="form-control w-full">
+					<input-select-multiple 
+						v-model="city"
+						:entries="allCities?.map(ciudad => ({ name: ciudad, value: ciudad })) ?? []"
+						tooltip="Seleccione la(s) ciudad(es)"
+					/>
 					</label>
-					</div>
 				</div>
 			</div>
 
@@ -73,6 +71,10 @@
 					<label>
 						<input v-model="offerQuarter" type="checkbox" :value="2" />
 						{{ 'Segundo Cuatrimestre' }}
+					</label>
+					<label>
+						<input v-model="offerQuarter" type="checkbox" :value="3" />
+						{{ 'Anual' }}
 					</label>
 				</div>
 			</div>
@@ -96,49 +98,18 @@
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Estado</strong></h3>
 				<div class="flex flex-col gap-2">
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.AbiertoProfesores" 
-						>
-						{{'Abierto Profesores'}}
-					</label>
-					
-					<label>
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.AbiertoEstudiantes" 
-						>
-						{{ 'Abierto Estudiantes' }}
-					</label>
-
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.EnCreacion" 
-						>
-						{{'En creacion'}}
-					</label>
-
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.EnCurso" 
-						>
-						{{ 'En curso' }}
-					</label>
-					
-					<label >
-						<input 
-							v-model="status" 
-							type="checkbox"
-							:value="ProyectoEstado.Cerrado" 
-						>
-						{{ 'Cerrado' }}
+					<label class="form-control w-full">
+					<input-select-multiple
+						v-model="status"
+						:entries="[
+						{ name: 'Abierto Profesores', value: ProyectoEstado.AbiertoProfesores },
+						{ name: 'Abierto Estudiantes', value: ProyectoEstado.AbiertoEstudiantes },
+						{ name: 'En creacion', value: ProyectoEstado.EnCreacion },
+						{ name: 'En curso', value: ProyectoEstado.EnCurso },
+						{ name: 'Cerrado', value: ProyectoEstado.Cerrado }
+						]"
+						tooltip="Seleccione el/los estado(s)"
+					/>
 					</label>
 				</div>
 			</div>

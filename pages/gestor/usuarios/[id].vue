@@ -71,7 +71,6 @@
 		<!-- Campos dinámicos según tipo -->
 		<!-- Estudiante Interno -->
 		<template v-if="form.type === 'InternalStudent'">
-			{{ user }}
 			<label class="form-control w-full">
 				<div class="label">
 					<span class="label-text">Carrera</span>
@@ -142,7 +141,6 @@
 
 		<!-- Profesor Externo -->
 		<template v-else-if="form.type === 'ExternalProfessor'">
-			{{ profesoresExt }}
 			<template v-for="profe in profesoresExt" :key="profe.id">
 				<template v-if="profe.id === form.id">
 					<label class="form-control w-full">

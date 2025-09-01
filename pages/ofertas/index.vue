@@ -57,6 +57,10 @@
 					<input v-model="offerQuarter" type="checkbox" :value="2" />
 					{{ 'Segundo Cuatrimestre' }}
 				</label>
+				<label>
+				<input v-model="offerQuarter" type="checkbox" :value="3" />
+					{{ 'Anual' }}
+				</label>
 			</div>
 		</div>
 

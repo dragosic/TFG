@@ -29,5 +29,4 @@ logs
 
 # Ignore package locks
 package-lock.json
-server/utils/database/migrations/backup.sql
-knexfile.js
+

@@ -13,6 +13,7 @@
 					<li>Sugiere una iniciativa ApS para una comunidad, ONG, etc.</li>
 				</ul>
 				<NuxtLink
+					data-testid="verEstudiantes"
 					href="/como-participar/estudiantes"
 					class="mt-2 inline-block w-fit rounded-md bg-gray-500 px-4 py-1 uppercase text-white hover:bg-gray-600"
 				>

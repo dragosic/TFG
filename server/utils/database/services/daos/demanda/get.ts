@@ -67,8 +67,6 @@ export interface GetAllDemandasServicioResult extends ViewDemand.Value {}
 export async function obtenerTodasDemandasServicio(options: DemandasFiltro): Promise<GetAllDemandasServicioResult[]> {
 	return await qb(ViewDemand.Name)
 		.modify((queryBuilder) => {
-			console.log("ciudades:", options.creatorId);
-			console.log("Opciones:", options);
 			if (!isNullishOrEmpty(options.query)) {
 				queryBuilder
 					.where('title', 'like', `%${options.query}%`)

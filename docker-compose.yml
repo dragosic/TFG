@@ -38,3 +38,4 @@ services:
             interval: 1m
             timeout: 5s
             retries: 3
+    

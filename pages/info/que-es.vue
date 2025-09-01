@@ -1,3 +1,4 @@
+<!-- que-es.vue -->
 <template>
 	<article v-once class="prose max-w-none">
 		<h1>Preguntas más frecuentes</h1>
