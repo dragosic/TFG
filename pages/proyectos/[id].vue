@@ -214,11 +214,6 @@
 				</template>
 			</template>
 		</template>
-
-		<!-- Tutor -->
-
-		<!-- Colaborador -->
-
 		
 
 		<!-- Avatar -->
@@ -354,8 +349,7 @@
 		  mission: form.mission,
 		}
 	  };
-	//   await $fetch(endpoint, { method: 'PUT', body });
-	//   alert('Cambios guardados correctamente.');
+	
 	} catch (e) {
 	  console.error(e);
 	  alert('Error al guardar los cambios.');

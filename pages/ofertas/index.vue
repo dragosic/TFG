@@ -110,7 +110,7 @@
 							<th>Tutor</th>
 							<th>Servicios</th><!--  //services -->
 							<th>Asignaturas</th> <!-- //subjects -->
-							<th>Tags 🏷️</th> <!-- //tags -->
+							<th>Tags 🏷️</th> 
 							<th>Creador</th>
 							<th>Fecha limite</th>
 							<th>Acciones</th>
@@ -152,18 +152,7 @@
 							<td>{{ JSON.parse(oferta.creator).firstName }} {{ JSON.parse(oferta.creator).lastName }}</td>
 							<td>{{ new Date(oferta.deadline).toLocaleDateString() }}</td>
 							<th>
-								<!-- <div v-if="auth.session.value?.role === 'Admin'" class="join">
-									<nuxt-link :href="isSelf(entry.id) ? '/@me' : `/gestor/usuarios/${entry.id}`" class="btn btn-ghost join-item">
-										<Icon name="material-symbols:edit-rounded" aria-label="Editar" class="h-6 w-6" />
-									</nuxt-link>
-									<button
-										class="btn btn-ghost join-item text-error disabled:bg-transparent"
-										:disabled="isSelf(entry.id)"
-										@click="onDelete(entry as any)"
-									>
-										<Icon name="material-symbols:delete-forever-rounded" aria-label="Borrar" class="h-6 w-6" />
-									</button>
-								</div> -->
+								
 							</th>
 							
 						</tr>

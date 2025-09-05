@@ -174,7 +174,6 @@
 	</aside>
 	<!-- Contenido principal -->
 	<main class="w-full xl:w-3/4">
-		<!-- Aquí iría tu tabla y todo lo demás -->
 		<div class="rounded-lg shadow p-4 bg-white">
 		<h2 class="text-lg font-semibold mb-4">Listado de proyectos</h2>
 		<!-- Info -->
@@ -321,9 +320,9 @@ useSeoMeta({
 	description: 'Listado de proyectos de la plataforma.'
 });
 
-const skip = ref(0);        // Desde qué registro empezar (para paginación)
-const limit = ref(2);      // Cuántos registros mostrar por página
-const query = ref('');      // Cadena de búsqueda ingresada por proyecto
+const skip = ref(0);        
+const limit = ref(2);      
+const query = ref('');      
 const city = ref<string[]>([]);
 const offerQuarter = ref<number[]>([]);
 const offerCreatorId = ref<string[]>([]);
@@ -334,10 +333,10 @@ const demandDefinitionPeriodEnd = ref<string | null>(null);
 const demandEndDate = ref<string | null>(null);
 const acceptsExternals = ref<number[]>([]);
 
-// Cambia el ref para que sea un string simple, no un array
+
 const status = ref<ProyectoEstado[]>([]); // Inicializado como array vacío
 
-// Asegúrate de importar el enum ProyectoEstado
+
 enum ProyectoEstado {
     EnCreacion = "EN_CREACION",
     AbiertoProfesores = "ABIERTO_PROFESORES",

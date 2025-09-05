@@ -29,8 +29,8 @@
 					<button class="btn btn-outline w-1/2" :disabled="skipNextDisabled" @click="skipNext">Siguiente</button>
 				</div>
 			</div>
-<!-- Entidad -->
-<div class="rounded-lg shadow p-4 bg-white">
+			<!-- Entidad -->
+			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Entidad</strong></h3>
 				<div class="flex flex-col gap-2">
 					<label class="form-control w-full">
@@ -316,9 +316,9 @@ useSeoMeta({
 	description: 'Listado de partenariados de la plataforma.'
 });
 
-const skip = ref(0);        // Desde qué registro empezar (para paginación)
-const limit = ref(2);      // Cuántos registros mostrar por página
-const query = ref('');      // Cadena de búsqueda ingresada por partenariado
+const skip = ref(0);        
+const limit = ref(2);      
+const query = ref('');      
 const city = ref<string[]>([]);
 const offerQuarter = ref<number[]>([]);
 const offerCreatorId = ref<string[]>([]);

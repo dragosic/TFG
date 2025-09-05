@@ -211,13 +211,7 @@
 				</div>
 				</template>
 			</template>
-		</template>
-
-		<!-- Tutor -->
-
-		<!-- Colaborador -->
-
-		
+		</template>		
 
 		<!-- Avatar -->
 		<div ref="avatarContainerElement" class="relative h-48 w-48 shrink-0">
@@ -352,8 +346,6 @@
 		  mission: form.mission,
 		}
 	  };
-	//   await $fetch(endpoint, { method: 'PUT', body });
-	//   alert('Cambios guardados correctamente.');
 	} catch (e) {
 	  console.error(e);
 	  alert('Error al guardar los cambios.');

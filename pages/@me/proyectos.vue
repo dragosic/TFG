@@ -138,7 +138,6 @@
 				</aside>
 				<!-- Contenido principal -->
 				<main class="w-full md:w-3/4">
-					<!-- Aquí iría tu tabla y todo lo demás -->
 					<div class="rounded-lg shadow p-4 bg-white">
 						<h2 class="text-lg font-semibold mb-4">Tus demandas</h2>
 						<span class="truncate font-normal">{{ auth.session.value!.firstName }} {{ auth.session.value!.lastName }} </span>

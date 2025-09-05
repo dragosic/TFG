@@ -152,7 +152,6 @@
 	</aside>
 	<!-- Contenido principal -->
 	<main class="w-full md:w-3/4">
-		<!-- Aquí iría tu tabla y todo lo demás -->
 		<div class="rounded-lg shadow p-4 bg-white">
 			<h2 class="text-lg font-semibold mb-4">Listado de demandas</h2>
 			<!-- Info -->

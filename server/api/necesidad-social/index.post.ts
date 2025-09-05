@@ -1,14 +1,16 @@
-import { readBody } from 'h3';
+import { z } from 'zod';
 import { crearNecesidadSocial } from '~/server/utils/database/services/daos/necesidad-social/insert';
 import { obtenerListaNecesidadSocial } from '~/server/utils/database/services/daos/necesidad-social/get';
 
-export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const name = body.name?.trim();
+// Definimos el esquema de validación
+const schema = z.object({
+  name: z.string().min(1, 'El nombre es obligatorio').trim(),
+});
 
-  if (!name) {
-    return { error: 'El nombre es obligatorio' };
-  }
+export default defineEventHandler(async (event) => {
+  // Valida y obtiene el body
+  const body = await readValidatedBody(event, schema.parse);
+  const name = body.name;
 
   // Llamar a la función para obtener todas las necesidades sociales
   const listaNecesidadesSociales = await obtenerListaNecesidadSocial();
@@ -18,9 +20,9 @@ export default defineEventHandler(async (event) => {
 
   if (existente) {
     return { exists: true, data: existente };
-  } else {
-    // Si no existe, crear la nueva necesidad social
-    const nueva = await crearNecesidadSocial(name);
-    return { created: true, data: nueva };
   }
+
+  // Si no existe, crear la nueva necesidad social
+  const nueva = await crearNecesidadSocial(name);
+  return { created: true, data: nueva };
 });
