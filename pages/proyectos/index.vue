@@ -34,7 +34,7 @@
 				</div>
 			</div>
 
-			<!-- Entidad -->
+			<!-- Entidad
 			<div class="rounded-lg shadow p-4 bg-white">
 				<h3 class="text-md font-semibold mb-2"><strong>Entidad</strong></h3>
 				<div class="flex flex-col gap-2">
@@ -49,7 +49,7 @@
 					/>
 					</label>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Ciudad -->
 			<div class="rounded-lg shadow p-4 bg-white">
@@ -186,7 +186,6 @@
 					<thead>
 						<tr>
 							<th>Imagen</th>
-							<th>Entidad</th>
 							<th>Título</th>
 							<th class="hidden md:table-cell">Descripción</th>
 							<th>Ciudad</th>
@@ -209,7 +208,7 @@
 							</td>
 							
 
-							<td>{{ entry.offerCreatorName }}</td>
+							
 							
 							<td>{{ entry.title }}</td>
 							<td class="hidden md:table-cell">{{ entry.description }}</td>
